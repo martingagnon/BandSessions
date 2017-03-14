@@ -1,22 +1,29 @@
 {
-	"name": "BandSessions",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"react": "~15.4.0",
-		"react-native": "0.41.2"
-	},
-	"devDependencies": {
-		"babel-jest": "19.0.0",
-		"babel-preset-react-native": "1.9.1",
-		"jest": "19.0.2",
-		"react-test-renderer": "~15.4.0"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "BandSessions",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "lint": "eslint . --fix",
+    "test": "jest"
+  },
+  "dependencies": {
+    "eslint": "^3.17.1",
+    "eslint-plugin-react": "^6.10.0",
+    "eslint-plugin-react-native": "^2.3.1",
+    "firebase": "^3.7.1",
+    "install": "^0.8.7",
+    "npm": "^4.4.1",
+    "react": "~15.4.0",
+    "react-native": "0.41.2"
+  },
+  "devDependencies": {
+    "babel-jest": "19.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "19.0.2",
+    "react-test-renderer": "~15.4.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }

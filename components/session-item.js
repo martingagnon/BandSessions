@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import {
   Text
 } from 'react-native';
-
 
 export default class SessionItem extends Component {
   constructor(props) {
@@ -14,6 +13,6 @@ export default class SessionItem extends Component {
   render() {
     return (
       <Text style={this.props.styles}>{this.props.sessionItem.name}</Text>
-    );    
+    );
   }
 }
