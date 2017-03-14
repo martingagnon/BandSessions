@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
-import firebase from '../services/firebase'
+import React, {Component} from 'react';
+import firebase from '../services/firebase';
 
 import styles from '../constants/styles.js';
 import ListItem from './list-item';
 import ActionButton from './buttons/button';
 
 import {
-  AppRegistry,
-  StyleSheet,
   ListView,
   AlertIOS,
-  Text,
   View
 } from 'react-native';
 
@@ -19,14 +16,14 @@ export default class ItemsScene extends Component {
     super(props);
 
     let dataSource = new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      });
+      rowHasChanged: (row1, row2) => row1 !== row2
+    });
     dataSource = dataSource.cloneWithRows([]);
-    this.state = {dataSource};    
+    this.state = {dataSource};
   }
 
   componentDidMount() {
-    var self = this;
+    const self = this;
     firebase.observeItems((items) => {
       self.setState({dataSource: self.state.dataSource.cloneWithRows(items)});
     });
@@ -59,9 +56,9 @@ export default class ItemsScene extends Component {
           onPress: (text) => {
             firebase.addItem({title: text});
           }
-        },
+        }
       ],
       'plain-text'
     );
-  }  
+  }
 }
