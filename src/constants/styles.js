@@ -6,14 +6,14 @@ const constants = {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#222222',
+    backgroundColor: '#f2f2f2',
     flex: 1
   },
   listview: {
     flex: 1
   },
   li: {
-    backgroundColor: '#999',
+    backgroundColor: '#fff',
     borderBottomColor: '#eee',
     borderColor: 'transparent',
     borderWidth: 1,
