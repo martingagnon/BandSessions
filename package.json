@@ -15,7 +15,9 @@
     "install": "^0.8.7",
     "npm": "^4.4.1",
     "react": "~15.4.0",
-    "react-native": "0.41.2"
+    "react-native": "0.41.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",

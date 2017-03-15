@@ -3,7 +3,7 @@ import ReactNative from 'react-native';
 
 const styles = require('../../constants/styles.js');
 const constants = styles.constants;
-const {StyleSheet, Text, View, TouchableHighlight} = ReactNative;
+const {Text, View, TouchableHighlight} = ReactNative;
 
 export default class ActionButton extends Component {
   render() {
