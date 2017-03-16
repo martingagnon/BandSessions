@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ReactNative from 'react-native';
 
-const styles = require('../../constants/styles.js');
-const constants = styles.constants;
+import {styles, constants} from './styles';
+
 const {Text, View, TouchableHighlight} = ReactNative;
 
 export default class ActionButton extends Component {
@@ -10,9 +10,9 @@ export default class ActionButton extends Component {
     return (
       <View style={styles.action}>
         <TouchableHighlight
-          underlayColor={constants.actionColor}
+          underlayColor={constants.underlayColor}
           onPress={this.props.onPress}>
-          <Text style={styles.actionText}>{this.props.title}</Text>
+          <Text style={styles.text}>{this.props.title}</Text>
         </TouchableHighlight>
       </View>
     );

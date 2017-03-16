@@ -1,6 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {Modal, View, Text, TouchableHighlight, TextInput} from 'react-native';
 
+import {styles} from './styles'
+import ActionButton from '../buttons/button';
+
 export default class AddSessionModal extends Component {
   constructor(props) {
     super(props);
@@ -18,17 +21,13 @@ export default class AddSessionModal extends Component {
 
     return (
       <Modal animationType={'slide'} transparent={false} visible={visible} >
-       <View style={{marginTop: 22}}>
+       <View style={styles.container}>
         <View>
-          <Text>Add Session</Text>
-          <TextInput
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={(text) => this.setSessionName(text)}
-              value={this.state.sessionName}
-            />
-          <TouchableHighlight onPress={() => onAdd(this.state.sessionName)}>
-            <Text>Add item</Text>
-          </TouchableHighlight>
+          <Text style={styles.title}>Add Session</Text>
+          <TextInput style={styles.input} onChangeText={(text) => this.setSessionName(text)}
+              value={this.state.sessionName}/>
+          <ActionButton onPress={() => onAdd(this.state.sessionName)} title="Submit">
+          </ActionButton>
         </View>
        </View>
       </Modal>
