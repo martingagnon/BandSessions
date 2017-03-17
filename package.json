@@ -17,6 +17,7 @@
     "react": "~15.4.0",
     "react-native": "0.41.2",
     "react-native-audio": "^3.2.1",
+    "react-native-fetch-blob": "^0.10.2",
     "react-native-player": "^0.0.9",
     "react-native-sound": "^0.9.1",
     "react-redux": "^5.0.3",

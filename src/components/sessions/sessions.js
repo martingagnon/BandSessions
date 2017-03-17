@@ -4,6 +4,7 @@ import {View} from 'react-native';
 import SessionList from './session-list';
 import ActionButton from '../buttons/button';
 import AddSessionModal from '../add-session/add-session-modal';
+import Player from '../player/player';
 import {styles} from './styles';
 
 export default class Sessions extends Component {
@@ -20,6 +21,9 @@ export default class Sessions extends Component {
 
   render() {
     const {dataSource, addSession} = this.props;
+    const session = this.state.session;
+
+    const player = (!!session) ? <Player session={session}></Player> : null;  
 
     return (
       <View style={styles.container}>
@@ -27,7 +31,11 @@ export default class Sessions extends Component {
           this.setModalVisible(false);
           addSession(sessionName);
         }} />
-        <SessionList dataSource={dataSource}/>
+        <SessionList dataSource={dataSource} onPress={(sessionItem) => {
+          this.setState({session: sessionItem})
+        }}/>
+
+        {player}
 
         <ActionButton title="Add Session" onPress={() => {
           this.setModalVisible(true);

@@ -2,18 +2,12 @@ import React, {Component, PropTypes} from 'react';
 import {Modal, View} from 'react-native';
 
 import {styles} from './styles';
-import RecordSession from '../record-session/container.js';
 
-export default class AddSessionModal extends Component {
+import Player from '../player/player'
+
+export default class ShowSessionModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {sessionName: ''};
-  }
-
-  setSessionName(text) {
-    const newState = this.state;
-    newState.sessionName = text;
-    this.setState(newState);
   }
 
   render() {
@@ -22,13 +16,13 @@ export default class AddSessionModal extends Component {
     return (
       <Modal animationType={'slide'} transparent={false} visible={visible} >
        <View style={styles.container}>
-         <RecordSession></RecordSession>
+        <Player></Player>         
        </View>
       </Modal>
     );
   }
 }
 
-AddSessionModal.propTypes = {
-  visible: PropTypes.bool.isRequired
+ShowSessionModal.propTypes = {
+  session: PropTypes.object.isRequired
 };

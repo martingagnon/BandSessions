@@ -8,7 +8,7 @@ const {View, TouchableHighlight, Text} = ReactNative;
 export default class ListItem extends Component {
   render() {
     return (
-      <TouchableHighlight onPress={this.props.onPress}>
+      <TouchableHighlight onPress={() => this.props.onPress(this.props.item)}>
         <View style={styles.item}>
           <Text style={styles.itemText}>{this.props.item.name}</Text>
         </View>
