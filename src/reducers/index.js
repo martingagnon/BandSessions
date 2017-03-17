@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import sessions from './sessions';
+import recordSession from './record-session';
 
 const rootReducer = combineReducers({
-  sessions
+  sessions, recordSession
 });
 
 export default rootReducer;

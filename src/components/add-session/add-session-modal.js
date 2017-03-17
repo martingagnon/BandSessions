@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import {Modal, View, Text, TouchableHighlight, TextInput} from 'react-native';
+import {Modal, View} from 'react-native';
 
-import {styles} from './styles'
-import ActionButton from '../buttons/button';
+import {styles} from './styles';
+import RecordSession from '../record-session/container.js';
 
 export default class AddSessionModal extends Component {
   constructor(props) {
@@ -17,18 +17,12 @@ export default class AddSessionModal extends Component {
   }
 
   render() {
-    const {visible, onAdd} = this.props;
+    const {visible} = this.props;
 
     return (
       <Modal animationType={'slide'} transparent={false} visible={visible} >
        <View style={styles.container}>
-        <View>
-          <Text style={styles.title}>Add Session</Text>
-          <TextInput style={styles.input} onChangeText={(text) => this.setSessionName(text)}
-              value={this.state.sessionName}/>
-          <ActionButton onPress={() => onAdd(this.state.sessionName)} title="Submit">
-          </ActionButton>
-        </View>
+         <RecordSession></RecordSession>
        </View>
       </Modal>
     );
@@ -36,7 +30,6 @@ export default class AddSessionModal extends Component {
 }
 
 AddSessionModal.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onAdd: PropTypes.func.isRequired
+  visible: PropTypes.bool.isRequired
 };
 

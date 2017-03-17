@@ -15,10 +15,10 @@ export const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 16,
     textAlign: 'center'
-  }  
+  }
 });
 
 export const constants = {
-  underlayColor: colors.action 
+  underlayColor: colors.action
 };
 

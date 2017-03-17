@@ -3,7 +3,7 @@ import {
   AppRegistry
 } from 'react-native';
 import { Provider } from 'react-redux';
-import Sessions from './src/containers/sessions';
+import Sessions from './src/components/sessions/container';
 import configureStore from './src/store/configure-store';
 
 const store = configureStore();

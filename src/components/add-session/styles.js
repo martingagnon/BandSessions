@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   input: {
-    height: 40, 
-    borderBottomColor: colors.border, 
+    height: 40,
+    borderBottomColor: colors.border,
     borderWidth: 1,
     paddingLeft: 10
   }

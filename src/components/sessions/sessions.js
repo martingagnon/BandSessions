@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import SessionList from './session-list';
 import ActionButton from '../buttons/button';
 import AddSessionModal from '../add-session/add-session-modal';
-import {styles} from './styles'
+import {styles} from './styles';
 
 export default class Sessions extends Component {
   constructor(props) {
