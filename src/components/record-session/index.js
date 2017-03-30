@@ -1,14 +1,24 @@
 import React, {Component, PropTypes} from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as RecordSessionActions from './actions';
+
 import {View, Text} from 'react-native';
 import {AudioRecorder, AudioUtils} from 'react-native-audio';
-import Sound from 'react-native-sound';
 
 import ActionButton from '../buttons/button';
 
-import {recordingStates} from '../../actions/record-session';
 import {styles} from './styles';
+import {upload} from '../../services/sessions.js';
 
-export default class RecordSession extends Component {
+const {recordingStates} = RecordSessionActions;
+
+class RecordSession extends Component {
+  static navigationOptions = {
+    title: 'Record'
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -46,6 +56,8 @@ export default class RecordSession extends Component {
   async _stop() {
     const filePath = await AudioRecorder.stopRecording();
     this.props.setRecordingState(recordingStates.stopped);
+    upload(this.state.audioPath);
+    this.props.navigation.goBack();
     return filePath;
   }
 
@@ -55,17 +67,6 @@ export default class RecordSession extends Component {
     }
     await AudioRecorder.startRecording();
     this.props.setRecordingState(recordingStates.recording);
-  }
-
-  async _play() {
-      // These timeouts are a hacky workaround for some issues with react-native-sound.
-      // See https://github.com/zmxv/react-native-sound/issues/89.
-    setTimeout(() => {
-      const sound = new Sound(this.state.audioPath, '');
-      setTimeout(() => {
-        sound.play();
-      }, 100);
-    }, 100);
   }
 
   render() {
@@ -80,11 +81,8 @@ export default class RecordSession extends Component {
         <ActionButton title="pause" onPress={() => {
           this._pause();
         }}></ActionButton>
-        <ActionButton title="stop" onPress={() => {
+        <ActionButton title="complete" onPress={() => {
           this._stop();
-        }}></ActionButton>
-        <ActionButton title="play" onPress={() => {
-          this._play();
         }}></ActionButton>
       </View>
     );
@@ -97,3 +95,7 @@ RecordSession.propTypes = {
   setRecordingState: PropTypes.func.isRequired,
   setRecordingTime: PropTypes.func.isRequired
 };
+
+export default connect(
+    state => (state.recordSession),
+    dispatch => bindActionCreators(RecordSessionActions, dispatch))(RecordSession);

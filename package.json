@@ -8,6 +8,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "babel-eslint": "^7.2.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "eslint": "^3.17.1",
     "eslint-plugin-react": "^6.10.0",
     "eslint-plugin-react-native": "^2.3.1",
@@ -17,10 +19,13 @@
     "react": "~15.4.0",
     "react-native": "0.41.2",
     "react-native-audio": "^3.2.1",
+    "react-native-fetch-blob": "^0.10.2",
     "react-native-player": "^0.0.9",
     "react-native-sound": "^0.9.1",
+    "react-navigation": "^1.0.0-beta.7",
     "react-redux": "^5.0.3",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",

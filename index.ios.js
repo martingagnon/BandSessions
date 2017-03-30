@@ -1,21 +1,4 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry
-} from 'react-native';
-import { Provider } from 'react-redux';
-import Sessions from './src/components/sessions/container';
-import configureStore from './src/store/configure-store';
-
-const store = configureStore();
-
-export default class BandSessions extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Sessions />
-      </Provider>
-    );
-  }
-}
+import { AppRegistry } from 'react-native';
+import BandSessions from './src';
 
 AppRegistry.registerComponent('BandSessions', () => BandSessions);

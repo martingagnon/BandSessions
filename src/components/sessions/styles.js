@@ -6,19 +6,5 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     flex: 1
-  },
-  item: {
-    backgroundColor: colors.white,
-    borderBottomColor: colors.separator,
-    borderColor: colors.clear,
-    borderWidth: 1,
-    paddingLeft: 16,
-    paddingTop: 14,
-    paddingBottom: 16
-  },
-  itemText: {
-    color: colors.text,
-    fontSize: 16
   }
 });
-
