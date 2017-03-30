@@ -1,6 +1,6 @@
 import {ListView} from 'react-native';
-import { ADD_SESSION, UPDATE_SESSIONS } from '../actions/sessions';
-import * as sessionsService from '../services/sessions';
+import { ADD_SESSION, UPDATE_SESSIONS } from './actions';
+import * as sessionsService from '../../services/sessions';
 
 const validateState = (state) => {
   if (!!state.dataSource) {

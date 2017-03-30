@@ -12,3 +12,7 @@ const firebaseApp = firebaseLib.initializeApp(firebaseConfig);
 export const ref = (path) => {
   return firebaseApp.database().ref(path);
 };
+
+export const storageFile = (filePath) => {
+  return firebaseApp.storage().ref().child(filePath);
+};
