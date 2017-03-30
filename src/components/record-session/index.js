@@ -1,14 +1,24 @@
 import React, {Component, PropTypes} from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as RecordSessionActions from './actions';
+
 import {View, Text} from 'react-native';
 import {AudioRecorder, AudioUtils} from 'react-native-audio';
 
 import ActionButton from '../buttons/button';
 
-import {recordingStates} from '../../actions/record-session';
 import {styles} from './styles';
-import {upload} from '../../services/sessions.js'
+import {upload} from '../../services/sessions.js';
 
-export default class RecordSession extends Component {
+const {recordingStates} = RecordSessionActions;
+
+class RecordSession extends Component {
+  static navigationOptions = {
+    title: 'Record'
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -47,6 +57,7 @@ export default class RecordSession extends Component {
     const filePath = await AudioRecorder.stopRecording();
     this.props.setRecordingState(recordingStates.stopped);
     upload(this.state.audioPath);
+    this.props.navigation.goBack();
     return filePath;
   }
 
@@ -84,3 +95,7 @@ RecordSession.propTypes = {
   setRecordingState: PropTypes.func.isRequired,
   setRecordingTime: PropTypes.func.isRequired
 };
+
+export default connect(
+    state => (state.recordSession),
+    dispatch => bindActionCreators(RecordSessionActions, dispatch))(RecordSession);

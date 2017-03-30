@@ -9,15 +9,14 @@ export default class Player extends Component {
 
     this._play();
 
-    this.state = {audioPath: this.props.session.audio};
+    this.state = {audioPath: 'http://cdn.online-convert.com/example-file/audio/example.aac'};
   }
 
   async _play() {
       // These timeouts are a hacky workaround for some issues with react-native-sound.
       // See https://github.com/zmxv/react-native-sound/issues/89.
     setTimeout(() => {
-      console.log(this.state.audioPath);
-      const sound = new Sound(this.state.audioPath, '', (error) => {console.log(error)});
+      const sound = new Sound(this.state.audioPath, '', () => {});
       setTimeout(() => {
         sound.play();
       }, 100);

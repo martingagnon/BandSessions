@@ -1,4 +1,4 @@
-import { RECORDING_STATE, RECORDING_TIME, recordingStates} from '../actions/record-session';
+import { RECORDING_STATE, RECORDING_TIME, recordingStates} from './actions';
 
 const initialState = {
   recordingState: recordingStates.stopped,
@@ -8,9 +8,9 @@ const initialState = {
 export default function sessions(state = initialState, action) {
   switch (action.type) {
     case RECORDING_STATE:
-      return Object.assign({}, state, {recordingState: action.recordingState});
+      return {...state, recordingState: action.recordingState};
     case RECORDING_TIME:
-      return Object.assign({}, state, {time: action.time});
+      return {...state, time: action.time};
     default:
       return state;
   }
