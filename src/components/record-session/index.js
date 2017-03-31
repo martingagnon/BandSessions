@@ -54,12 +54,15 @@ class RecordSession extends Component {
   async _stop() {
     const filePath = await AudioRecorder.stopRecording();
     this.props.setRecordingState(recordingStates.stopped);
-    this.props.saveSession(this.state.audioPath);
-    this.props.navigation.goBack();
-    return filePath;
+    //this.props.saveSession(this.state.audioPath);
+    //this.props.navigation.goBack();
+
+    const navigate = this.props.navigation.navigate;
+    navigate('SaveSession', {filePath});
   }
 
   async _record() {
+
     if (this.shouldPrepareRecording()) {
       this.prepareRecordingPath(this.state.audioPath);
     }
