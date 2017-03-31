@@ -1,5 +1,4 @@
 import * as database from './firebase';
-import RNFetchBlob from 'react-native-fetch-blob';
 
 const sessionsRef = database.ref('sessions');
 
@@ -22,9 +21,4 @@ export const observe = (callback) => {
       callback(items);
     }, 1);
   });
-};
-
-export const download = async (url) => {
-  const downloadResult = await RNFetchBlob.config({fileCache: true}).fetch('GET', url);
-  return downloadResult.path();
 };

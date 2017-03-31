@@ -16,9 +16,3 @@ export const setRecordingTime = (time) => {
     time
   };
 };
-
-export const saveSession = (path) => {
-  return () => {
-    sessionsService.saveSession(path);
-  };
-};

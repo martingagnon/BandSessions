@@ -6,7 +6,7 @@ const initialState = {
   time: 0
 };
 
-export default function sessions(state = initialState, action) {
+export default function recordSession(state = initialState, action) {
   switch (action.type) {
     case RECORDING_STATE:
       return {...state, recordingState: action.recordingState};

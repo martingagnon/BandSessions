@@ -15,7 +15,7 @@ export const SESSION_UPLOAD_ERROR = 'SESSION_UPLOAD_PENDING';
 
 const uploadPending = () => ({type: SESSION_UPLOAD_PENDING});
 const uploadCompleted = (session) => ({type: SESSION_UPLOAD_COMPLETED, session});
-const uploadProgress = (progress) => ({type: SESSION_UPLOAD_COMPLETED, progress});
+const uploadProgress = (progress) => ({type: SESSION_UPLOAD_PROGRESS, progress});
 const uploadError = (error) => ({type: SESSION_UPLOAD_ERROR, error});
 
 export const saveSession = (file, session) => {

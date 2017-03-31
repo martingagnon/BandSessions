@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 
 import * as Actions from 'actions/session';
 import Player from './components/player';
@@ -14,18 +14,23 @@ class Session extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {session: props.navigation.state.params.session};
+    props.downloadSession(this.state.session);
   }
 
   render() {
+    const {transferState, progress} = this.props;
+
     return (
       <View style={styles.container}>
-
+        <Text>{transferState} {progress}</Text>
       </View>
     );
   }
 }
 
 Session.propTypes = {
+  downloadSession: PropTypes.func.isRequired
 };
 
 export default connect(

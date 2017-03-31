@@ -5,23 +5,23 @@ import {
   SESSION_UPLOAD_ERROR
 } from 'actions/save-session';
 
-import saveSessionStates from 'constants/save-session-states';
+import fileTransferStates from 'constants/file-transfer-states';
 
 const initialState = {
-  saveState: saveSessionStates.unstarted,
+  saveState: fileTransferStates.unstarted,
   progress: 0
 };
 
 export default function sessions(state = initialState, action) {
   switch (action.type) {
     case SESSION_UPLOAD_PENDING:
-      return {...state, saveState: saveSessionStates.pending};
+      return {...state, transferState: fileTransferStates.pending};
     case SESSION_UPLOAD_PROGRESS:
       return {...state, progress: action.progress};
     case SESSION_UPLOAD_COMPLETED:
-      return {...state, progress: 100, saveState: saveSessionStates.completed};
+      return {...state, progress: 100, transferState: fileTransferStates.completed};
     case SESSION_UPLOAD_ERROR:
-      return {...state, saveState: saveSessionStates.error, error: action.error};
+      return {...state, transferState: fileTransferStates.error, error: action.error};
     default:
       return state;
   }
