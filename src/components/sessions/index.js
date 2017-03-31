@@ -3,7 +3,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {View} from 'react-native';
 
-import * as SessionsActions from './actions';
+import * as Actions from 'actions/sessions';
+import * as sessionsService from 'services/sessions';
+
 import SessionList from './components/session-list';
 import ActionButton from '../buttons/button';
 import {styles} from './styles';
@@ -13,9 +15,14 @@ class Sessions extends Component {
     title: 'Sessions'
   };
 
+  constructor(props) {
+    super(props);
+    sessionsService.observe((items) => props.updateSessions(items));
+  }
+
   onAddSessionPress = () => {
     const navigate = this.props.navigation.navigate;
-    navigate('RecordSession', {onAdd: (sessionName) => this.props.addSession(sessionName)});
+    navigate('RecordSession');
   };
 
   onSessionPressed = (session) => {
@@ -41,9 +48,9 @@ class Sessions extends Component {
 
 Sessions.propTypes = {
   dataSource: PropTypes.object.isRequired,
-  addSession: PropTypes.func.isRequired
+  updateSessions: PropTypes.func.isRequired
 };
 
 export default connect(
   state => (state.sessions),
-  dispatch => bindActionCreators(SessionsActions, dispatch))(Sessions);
+  dispatch => bindActionCreators(Actions, dispatch))(Sessions);

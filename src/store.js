@@ -3,9 +3,6 @@ import thunk from 'redux-thunk';
 
 import reducer from './reducers';
 
-import * as sessionsService from './services/sessions';
-import {updateSessions} from './components/sessions/actions';
-
 export default function configureStore(navReducer) {
 
   const store = createStore(
@@ -19,8 +16,6 @@ export default function configureStore(navReducer) {
       store.replaceReducer(reducer.default);
     });
   }
-
-  sessionsService.observe((items) => store.dispatch(updateSessions(items)));
 
   return store;
 }
