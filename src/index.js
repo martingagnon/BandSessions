@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Provider, connect } from 'react-redux';
-import { addNavigationHelpers } from 'react-navigation';
-import {AppNavigator} from './components/navigation';
+import React, {Component} from 'react';
+import {Provider, connect} from 'react-redux';
+import {addNavigationHelpers} from 'react-navigation';
+import {AppNavigator} from 'components/navigation';
 
 import configureStore from './store';
 
