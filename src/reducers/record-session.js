@@ -1,4 +1,5 @@
-import { RECORDING_STATE, RECORDING_TIME, recordingStates} from 'actions/record-session';
+import { RECORDING_STATE, RECORDING_TIME} from 'actions/record-session';
+import recordingStates from 'constants/recording-states';
 
 const initialState = {
   recordingState: recordingStates.stopped,
