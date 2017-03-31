@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as Actions from 'actions/record-session';
-const {recordingStates} = Actions;
+import recordingStates from 'constants/recording-states';
 
 import {View, Text} from 'react-native';
 import {AudioRecorder, AudioUtils} from 'react-native-audio';
