@@ -1,20 +1,16 @@
 import React, {Component, PropTypes} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 
 import Sound from 'react-native-sound';
 
 export default class Player extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {audioPath: props.audioPath};
     this._play();
-
-    this.state = {audioPath: 'http://cdn.online-convert.com/example-file/audio/example.aac'};
   }
 
   async _play() {
-      // These timeouts are a hacky workaround for some issues with react-native-sound.
-      // See https://github.com/zmxv/react-native-sound/issues/89.
     setTimeout(() => {
       const sound = new Sound(this.state.audioPath, '', () => {});
       setTimeout(() => {
@@ -24,10 +20,14 @@ export default class Player extends Component {
   }
 
   render() {
-    return (<View></View>);
+    return (
+      <View>
+        <Text>Player</Text>
+      </View>
+    );
   }
 }
 
 Player.propTypes = {
-  session: PropTypes.object.isRequired
+  audioPath: PropTypes.string.isRequired
 };
