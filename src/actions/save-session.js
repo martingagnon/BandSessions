@@ -9,9 +9,9 @@ const Blob = RNFetchBlob.polyfill.Blob;
 // window.Blob = Blob;
 
 export const SESSION_UPLOAD_PENDING = 'SESSION_UPLOAD_PENDING';
-export const SESSION_UPLOAD_PROGRESS = 'SESSION_UPLOAD_PENDING';
-export const SESSION_UPLOAD_COMPLETED = 'SESSION_UPLOAD_PENDING';
-export const SESSION_UPLOAD_ERROR = 'SESSION_UPLOAD_PENDING';
+export const SESSION_UPLOAD_PROGRESS = 'SESSION_UPLOAD_PROGRESS';
+export const SESSION_UPLOAD_COMPLETED = 'SESSION_UPLOAD_COMPLETED';
+export const SESSION_UPLOAD_ERROR = 'SESSION_UPLOAD_ERROR';
 
 const uploadPending = () => ({type: SESSION_UPLOAD_PENDING});
 const uploadCompleted = (session) => ({type: SESSION_UPLOAD_COMPLETED, session});
