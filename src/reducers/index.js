@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import sessions from 'src/components/sessions/reducer';
-import session from 'src/components/session/reducer';
-import recordSession from 'src/components/record-session/reducer';
+import sessions from './sessions';
+import session from './session';
+import recordSession from './record-session';
 
 const rootReducer = (nav) => {
   return combineReducers({

@@ -28,7 +28,7 @@ export const observe = (callback) => {
   });
 };
 
-export const upload = async (fileName) => {
+export const saveSession = async (fileName) => {
   const mime = 'audio/aac';
   const time = new Date().getTime();
   const storageFileRef = database.storageFile(`sessions/${time}.aac`);

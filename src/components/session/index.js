@@ -3,9 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {View} from 'react-native';
 
-import {download} from 'src/services/sessions.js';
-
-import * as Actions from './actions';
+import * as Actions from 'actions/session';
 import Player from './components/player';
 import {styles} from './styles';
 
