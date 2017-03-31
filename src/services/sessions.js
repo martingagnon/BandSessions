@@ -40,3 +40,8 @@ export const upload = async (fileName) => {
   add({name: time, audio: url});
   return url;
 };
+
+export const download = async (url) => {
+  const downloadResult = await RNFetchBlob.config({fileCache: true}).fetch('GET', url);
+  return downloadResult.path();
+};

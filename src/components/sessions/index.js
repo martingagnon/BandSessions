@@ -6,10 +6,8 @@ import {View} from 'react-native';
 import * as SessionsActions from './actions';
 import SessionList from './components/session-list';
 import ActionButton from '../buttons/button';
-import Player from '../player/player';
 import {styles} from './styles';
 
-@connect(state => (state.sessions), (dispatch) => bindActionCreators(SessionsActions, dispatch))
 class Sessions extends Component {
   static navigationOptions = {
     title: 'Sessions'
@@ -20,11 +18,16 @@ class Sessions extends Component {
     navigate('RecordSession', {onAdd: (sessionName) => this.props.addSession(sessionName)});
   };
 
+  onSessionPressed = (session) => {
+    const navigate = this.props.navigation.navigate;
+    navigate('Session', {session});
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <SessionList dataSource={this.props.dataSource} onPress={() => {
-
+        <SessionList dataSource={this.props.dataSource} onPress={(session) => {
+          this.onSessionPressed(session);
         }}/>
 
         <ActionButton title="Add Session" onPress={() => {
