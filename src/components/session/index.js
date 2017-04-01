@@ -19,11 +19,12 @@ class Session extends Component {
   }
 
   render() {
-    const {transferState, progress} = this.props;
+    const {transferState, progress, audioPath} = this.props;
 
     return (
       <View style={styles.container}>
         <Text>{transferState} {progress}</Text>
+        {!!audioPath ? (<Player audioPath={audioPath}></Player>) : null }
       </View>
     );
   }
