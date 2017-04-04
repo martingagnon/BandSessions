@@ -1,5 +1,3 @@
-import * as sessionsService from 'services/sessions';
-
 export const RECORDING_STATE = 'RECORDING_STATE';
 export const RECORDING_TIME = 'RECORDING_TIME';
 
