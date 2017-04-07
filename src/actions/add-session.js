@@ -1,11 +1,11 @@
 import RNFetchBlob from 'react-native-fetch-blob';
-
+import * as database from 'services/firebase';
 import {sessionService} from 'services/sessions';
 
 const fs = RNFetchBlob.fs;
 const Blob = RNFetchBlob.polyfill.Blob;
-// window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-// window.Blob = Blob;
+window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+window.Blob = Blob;
 
 export const SESSION_UPLOAD_PENDING = 'SESSION_UPLOAD_PENDING';
 export const SESSION_UPLOAD_PROGRESS = 'SESSION_UPLOAD_PROGRESS';
@@ -17,7 +17,7 @@ const uploadCompleted = (session) => ({type: SESSION_UPLOAD_COMPLETED, session})
 const uploadProgress = (progress) => ({type: SESSION_UPLOAD_PROGRESS, progress});
 const uploadError = (error) => ({type: SESSION_UPLOAD_ERROR, error});
 
-export const saveSession = (file, session) => {
+export const addSession = (file, session) => {
   return async (dispatch) => {
     dispatch(uploadPending());
 
