@@ -3,7 +3,7 @@ import {
   SESSION_UPLOAD_PROGRESS,
   SESSION_UPLOAD_COMPLETED,
   SESSION_UPLOAD_ERROR
-} from 'actions/save-session';
+} from 'actions/add-session';
 
 import fileTransferStates from 'constants/file-transfer-states';
 
@@ -12,7 +12,7 @@ const initialState = {
   progress: 0
 };
 
-export default function sessions(state = initialState, action) {
+export default function addSession(state = initialState, action) {
   switch (action.type) {
     case SESSION_UPLOAD_PENDING:
       return {...state, transferState: fileTransferStates.pending};

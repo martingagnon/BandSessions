@@ -5,6 +5,7 @@ import AddComment from 'components/add-comment';
 import Login from 'components/login';
 import Bands from 'components/bands';
 import AddBand from 'components/add-band';
+import AddSession from 'components/add-session';
 
 const Routes = {
   Login: { screen: Login },
@@ -13,7 +14,8 @@ const Routes = {
   Sessions: { screen: Sessions },
   RecordSession: {screen: RecordSession},
   Session: {screen: Session},
-  AddComment: {screen: AddComment}
+  AddComment: {screen: AddComment},
+  AddSession: {screen: AddSession}
 };
 
 export default Routes;

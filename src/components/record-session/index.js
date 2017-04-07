@@ -52,14 +52,15 @@ class RecordSession extends Component {
   }
 
   async _stop() {
-    const filePath = await AudioRecorder.stopRecording();
+    await AudioRecorder.stopRecording();
     this.props.setRecordingState(recordingStates.stopped);
-    this.props.saveSession(this.state.audioPath);
-    this.props.navigation.goBack();
-    return filePath;
+
+    const navigate = this.props.navigation.navigate;
+    navigate('AddSession', {filePath: this.state.audioPath});
   }
 
   async _record() {
+
     if (this.shouldPrepareRecording()) {
       this.prepareRecordingPath(this.state.audioPath);
     }
@@ -76,9 +77,6 @@ class RecordSession extends Component {
         <ActionButton title="record" onPress={() => {
           this._record();
         }}></ActionButton>
-        <ActionButton title="pause" onPress={() => {
-          this._pause();
-        }}></ActionButton>
         <ActionButton title="complete" onPress={() => {
           this._stop();
         }}></ActionButton>
@@ -91,8 +89,7 @@ RecordSession.propTypes = {
   recordingState: PropTypes.number.isRequired,
   time: PropTypes.number.isRequired,
   setRecordingState: PropTypes.func.isRequired,
-  setRecordingTime: PropTypes.func.isRequired,
-  saveSession: PropTypes.func.isRequired
+  setRecordingTime: PropTypes.func.isRequired
 };
 
 export default connect(
