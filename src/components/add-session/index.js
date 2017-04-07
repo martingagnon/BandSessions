@@ -1,12 +1,11 @@
 import React, {Component, PropTypes} from 'react';
-import {TextInput, View, Text} from 'react-native';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import {styles} from './styles';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 import * as Actions from 'actions/add-session';
-import ActionButton from 'components/tools/buttons/button';
 import fileTransferStates from 'constants/file-transfer-states';
+import Container from 'ui/container';
+import {Input, Button} from 'nachos-ui';
 
 class AddSession extends Component {
   static navigationOptions = {
@@ -15,37 +14,34 @@ class AddSession extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {session: props.navigation.state.params.session};
     this.state = {
-      filePath: props.navigation.state.params.filePath
+      filePath: props.navigation.state.params.filePath,
+      recordingName: ''
     };
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.transferState === fileTransferStates.completed) {
+    if (nextProps.transferState === fileTransferStates.completed
+      && this.props.transferState !== fileTransferStates.completed) {
       this.props.navigation.goBack();
     }
   }
 
   onSaveSessionPress = () => {
-    this.props.addSession(this.state.filePath, {name: this.state.text});
+    this.props.addSession(this.state.filePath, {name: this.state.recordingName});
   };
 
   render() {
     const {transferState, progress} = this.props;
 
     return (
-      <View style={styles.container}>
-        <Text>Recording name : {this.state.filePath}</Text>
-        <TextInput style={styles.defaultInputText}
-          onChangeText={(text) => this.setState({...this.state, text})} />
-
-          <ActionButton title="Save Session" onPress={() => {
-            this.onSaveSessionPress();
-          }}>
-          </ActionButton>
-        <Text>UploadStatus: {progress}% {transferState}</Text>
-      </View>
+      <Container>
+        <Input status="normal" placeholder="Recording name"
+          value={this.state.recordingName}
+          onChangeText={recordingName => this.setState({...this.state, recordingName })}
+        />
+        <Button kind="squared" onPress={() => this.onSaveSessionPress()} disabled={this.state.recordingName.length <= 2}>Add</Button>
+      </Container>
     );
   }
 }
