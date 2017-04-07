@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {colors} from '../constants.js';
+import {colors} from 'components/constants.js';
 
 export const styles = StyleSheet.create({
   action: {
@@ -21,4 +21,3 @@ export const styles = StyleSheet.create({
 export const constants = {
   underlayColor: colors.action
 };
-
