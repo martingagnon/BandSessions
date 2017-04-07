@@ -8,7 +8,7 @@ import recordingStates from 'constants/recording-states';
 import {View, Text} from 'react-native';
 import {AudioRecorder, AudioUtils} from 'react-native-audio';
 
-import ActionButton from '../buttons/button';
+import ActionButton from '../tools/buttons/button';
 
 import {styles} from './styles';
 

@@ -1,7 +1,6 @@
-import * as database from './firebase';
 import RNFetchBlob from 'react-native-fetch-blob';
 
-const sessionsRef = database.ref('sessions');
+import {sessionService} from 'services/sessions';
 
 const fs = RNFetchBlob.fs;
 const Blob = RNFetchBlob.polyfill.Blob;
@@ -39,7 +38,7 @@ export const saveSession = (file, session) => {
       dispatch(uploadCompleted());
       uploadBlob.close();
       const audio = await storageFileRef.getDownloadURL();
-      sessionsRef.push({...session, audio});
+      sessionService.add({...session, audio});
     });
   };
 };

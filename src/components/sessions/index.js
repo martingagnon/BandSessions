@@ -4,21 +4,15 @@ import {connect} from 'react-redux';
 import {View} from 'react-native';
 
 import * as Actions from 'actions/sessions';
-import * as sessionsService from 'services/sessions';
 
 import SessionList from './components/session-list';
-import ActionButton from '../buttons/button';
+import ActionButton from '../tools/buttons/button';
 import {styles} from './styles';
 
 class Sessions extends Component {
   static navigationOptions = {
     title: 'Sessions'
   };
-
-  constructor(props) {
-    super(props);
-    sessionsService.observe((items) => props.updateSessions(items));
-  }
 
   onAddSessionPress = () => {
     const navigate = this.props.navigation.navigate;
@@ -47,8 +41,7 @@ class Sessions extends Component {
 }
 
 Sessions.propTypes = {
-  dataSource: PropTypes.object.isRequired,
-  updateSessions: PropTypes.func.isRequired
+  dataSource: PropTypes.object.isRequired
 };
 
 export default connect(
