@@ -1,4 +1,6 @@
 import Container from './container';
-import Footer from './footer';
+import Content from './content';
+import Block from './block';
+import Row from './row';
 
-export {Footer, Container};
+export {Block, Container, Content, Row};

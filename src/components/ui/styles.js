@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
     padding: 5,
-    justifyContent: 'flex-start'
+    justifyContent: 'space-between'
   }
 });
 

@@ -8,7 +8,7 @@ import playerStates from 'constants/player-states';
 
 import {AudioRecorder, AudioUtils} from 'react-native-audio';
 
-import Container from 'ui/container';
+import {Container, Block} from 'ui';
 import {Button} from 'nachos-ui';
 
 class RecordSession extends Component {
@@ -75,11 +75,9 @@ class RecordSession extends Component {
       <Container>
         <Button kind="squared" onPress={() => this.recordPressed()}>{(recordingState !== playerStates.recording) ? 'Record' : 'Pause'}</Button>
         <Text>{time}{recordingState}</Text>
-        {time > 0 && recordingState === playerStates.paused ? (
-          <Button kind="squared" onPress={() => this.savePressed()}>Save</Button>
-        ) : (
-          <Button kind="squared" disabled>Save</Button>
-        )}
+        <Block>
+          <Button kind="squared" disabled={time === 0 || recordingState !== playerStates.paused} onPress={() => this.savePressed()}>Save</Button>
+        </Block>
       </Container>
     );
   }
