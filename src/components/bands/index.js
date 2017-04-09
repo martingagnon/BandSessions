@@ -1,25 +1,24 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View} from 'react-native';
 
 import * as Actions from 'actions/sessions';
 
 import BandList from './components/band-list';
-import {styles} from './styles';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {Container, Content, Block} from 'ui';
+import {Button} from 'nachos-ui';
 
 class Bands extends Component {
   static navigationOptions = {
-    title: 'Bands',
-    header: ({navigate}) => {
-      return {right: <Icon.Button name="plus" backgroundColor="#3b5998" onPress={() => navigate('AddBand')} />};
-    }
+    title: 'Bands'
   };
 
   constructor(props) {
     super(props);
+  }
+
+  onAddPressed = () => {
+    this.props.navigation.navigate('AddBand');
   }
 
   onBandPressed = (band) => {
@@ -29,11 +28,16 @@ class Bands extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <BandList dataSource={this.props.dataSource} onPress={(band) => {
-          this.onBandPressed(band);
-        }}/>
-      </View>
+      <Container>
+        <Content>
+          <BandList dataSource={this.props.dataSource} onPress={(band) => {
+            this.onBandPressed(band);
+          }}/>
+        </Content>
+        <Block>
+          <Button kind="squared" onPress={() => this.onAddPressed()}>Add</Button>
+        </Block>
+      </Container>
     );
   }
 }

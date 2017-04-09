@@ -1,16 +1,15 @@
 import React, {Component, PropTypes} from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {Text} from 'react-native';
 
 import * as Actions from 'actions/record-session';
-import recordingStates from 'constants/recording-states';
+import playerStates from 'constants/player-states';
 
-import {View, Text} from 'react-native';
 import {AudioRecorder, AudioUtils} from 'react-native-audio';
 
-import ActionButton from '../tools/buttons/button';
-
-import {styles} from './styles';
+import {Container, Block} from 'ui';
+import {Button} from 'nachos-ui';
 
 class RecordSession extends Component {
   static navigationOptions = {
@@ -20,7 +19,7 @@ class RecordSession extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      audioPath: `${AudioUtils.DocumentDirectoryPath }/test.aac`
+      audioPath: `${AudioUtils.DocumentDirectoryPath }/audio.aac`
     };
   }
 
@@ -36,51 +35,50 @@ class RecordSession extends Component {
 
   componentDidMount() {
     this.prepareRecordingPath(this.state.audioPath);
-
+    this.props.setRecordingTime(0);
+    this.props.setRecordingState(playerStates.stopped);
     AudioRecorder.onProgress = (data) => {
       this.props.setRecordingTime(Math.floor(data.currentTime));
     };
   }
 
-  shouldPrepareRecording() {
-    return (this.props.recordingState === recordingStates.stopped);
+  componentWillUnmount() {
+    AudioRecorder.stopRecording();
   }
 
-  async _pause() {
-    await AudioRecorder.pauseRecording();
-    this.props.setRecordingState(recordingStates.paused);
-  }
-
-  async _stop() {
+  async savePressed() {
     await AudioRecorder.stopRecording();
-    this.props.setRecordingState(recordingStates.stopped);
+    this.props.setRecordingState(playerStates.stopped);
 
     const navigate = this.props.navigation.navigate;
     navigate('AddSession', {filePath: this.state.audioPath});
   }
 
-  async _record() {
-
-    if (this.shouldPrepareRecording()) {
-      this.prepareRecordingPath(this.state.audioPath);
+  async recordPressed() {
+    switch (this.props.recordingState) {
+      case playerStates.stopped:
+      case playerStates.paused:
+        await AudioRecorder.startRecording();
+        this.props.setRecordingState(playerStates.recording);
+        break;
+      case playerStates.recording:
+        await AudioRecorder.pauseRecording();
+        this.props.setRecordingState(playerStates.paused);
+        break;
     }
-    await AudioRecorder.startRecording();
-    this.props.setRecordingState(recordingStates.recording);
   }
 
   render() {
     const {recordingState, time} = this.props;
 
     return (
-      <View style={styles.container}>
-        <Text>{recordingState} - {time}s</Text>
-        <ActionButton title="record" onPress={() => {
-          this._record();
-        }}></ActionButton>
-        <ActionButton title="complete" onPress={() => {
-          this._stop();
-        }}></ActionButton>
-      </View>
+      <Container>
+        <Button kind="squared" onPress={() => this.recordPressed()}>{(recordingState !== playerStates.recording) ? 'Record' : 'Pause'}</Button>
+        <Text>{time}{recordingState}</Text>
+        <Block>
+          <Button kind="squared" disabled={time === 0 || recordingState !== playerStates.paused} onPress={() => this.savePressed()}>Save</Button>
+        </Block>
+      </Container>
     );
   }
 }

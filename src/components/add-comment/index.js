@@ -1,13 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View, Text} from 'react-native';
 
 import * as CommentActions from 'actions/add-comment';
 import * as PlayerActions from 'actions/player';
 import PlayerStates from 'constants/player-states';
-import {styles} from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Container from 'ui/container';
 
 class AddComment extends Component {
   static navigationOptions = {
@@ -29,9 +28,9 @@ class AddComment extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Container>
         <Icon.Button name="plus-circle" backgroundColor="#3b5998" onPress={() => this.onAddComment()} />
-      </View>
+      </Container>
     );
   }
 }

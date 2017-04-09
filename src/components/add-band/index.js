@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 
 import * as Actions from 'actions/add-band';
 
-import {View} from 'react-native';
 import {Button, Input} from 'nachos-ui';
+import Container from 'ui/container';
 
 class AddBand extends Component {
   static navigationOptions = {
@@ -24,18 +24,14 @@ class AddBand extends Component {
 
   render() {
     return (
-      <View>
+      <Container>
         <Input status="normal" placeholder="Band Name"
           value={this.state.bandName}
           onChangeText={value => this.setState({...this.state, bandName: value })}
         />
-
-        {this.state.bandName.length > 2 ? (
-        <Button kind="squared" onPress={() => this.onAddPressed()}>Add</Button>
-        ) : (
-        <Button kind="squared" disabled>Add</Button>
-        )}
-      </View>
+        <Button kind="squared" onPress={() => this.onAddPressed()}
+          disabled={this.state.bandName.length <= 2}>Add</Button>
+      </Container>
 
     );
   }

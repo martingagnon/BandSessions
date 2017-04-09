@@ -1,17 +1,16 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View} from 'react-native';
 
 import * as Actions from 'actions/sessions';
 
 import SessionList from './components/session-list';
-import ActionButton from '../tools/buttons/button';
-import {styles} from './styles';
+import {Container, Block, Content} from 'ui';
+import {Button} from 'nachos-ui';
 
 class Sessions extends Component {
   static navigationOptions = {
-    title: 'Sessions'
+    title: 'Recordings'
   };
 
   onAddSessionPress = () => {
@@ -26,16 +25,16 @@ class Sessions extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <SessionList dataSource={this.props.dataSource} onPress={(session) => {
-          this.onSessionPressed(session);
-        }}/>
-
-        <ActionButton title="Add Session" onPress={() => {
-          this.onAddSessionPress();
-        }}>
-        </ActionButton>
-      </View>
+      <Container>
+        <Content>
+          <SessionList dataSource={this.props.dataSource} onPress={(session) => {
+            this.onSessionPressed(session);
+          }}/>
+        </Content>
+        <Block>
+          <Button kind="squared" onPress={() => this.onAddSessionPress()}>Add Recording</Button>
+        </Block>
+      </Container>
     );
   }
 }

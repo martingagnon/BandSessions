@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View} from 'react-native';
+
+import Container from 'ui/container';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -28,11 +29,11 @@ class Login extends Component {
 
   render() {
     return (
-      <View>
-      <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={() => this.loginWithFacebook()}>
-          Login with Facebook
-      </Icon.Button>
-      </View>
+      <Container>
+        <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={() => this.loginWithFacebook()}>
+            Login with Facebook
+        </Icon.Button>
+      </Container>
     );
   }
 }

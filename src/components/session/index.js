@@ -7,9 +7,7 @@ import * as Actions from 'actions/session';
 import * as PlayerActions from 'actions/player';
 import PlayerStates from 'constants/player-states';
 import Player from './components/player';
-import {styles} from './styles';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {Content, Container} from 'ui';
 
 class Session extends Component {
   static navigationOptions = {
@@ -19,7 +17,10 @@ class Session extends Component {
   constructor(props) {
     super(props);
     this.state = {session: props.navigation.state.params.session};
-    props.downloadSession(this.state.session);
+  }
+
+  componentDidMount() {
+    this.props.downloadSession(this.state.session);
   }
 
   addComment() {
@@ -32,11 +33,12 @@ class Session extends Component {
     const {transferState, progress, audioPath} = this.props;
 
     return (
-      <View style={styles.container}>
-        <Text>{transferState} {progress}</Text>
-        {!!audioPath ? (<Player audioPath={audioPath}></Player>) : null }
-        <Icon.Button name="comment" backgroundColor="#3b5998" onPress={() => this.addComment()} />
-      </View>
+      <Container>
+        <Content>
+          <Text>{transferState} {progress}</Text>
+          {!!audioPath ? (<Player audioPath={audioPath} addComment={() => this.addComment()}></Player>) : (<View></View>) }
+        </Content>
+      </Container>
     );
   }
 }

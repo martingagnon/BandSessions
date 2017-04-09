@@ -1,8 +1,8 @@
 import { RECORDING_STATE, RECORDING_TIME} from 'actions/record-session';
-import recordingStates from 'constants/recording-states';
+import playerStates from 'constants/player-states';
 
 const initialState = {
-  recordingState: recordingStates.stopped,
+  recordingState: playerStates.stopped,
   time: 0
 };
 
