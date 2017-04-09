@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import * as Actions from 'actions/sessions';
 
 import SessionList from './components/session-list';
-import {Container, Footer} from 'ui';
+import {Container, Block, Content} from 'ui';
 import {Button} from 'nachos-ui';
 
 class Sessions extends Component {
@@ -26,12 +26,14 @@ class Sessions extends Component {
   render() {
     return (
       <Container>
-        <SessionList dataSource={this.props.dataSource} onPress={(session) => {
-          this.onSessionPressed(session);
-        }}/>
-        <Footer>
+        <Content>
+          <SessionList dataSource={this.props.dataSource} onPress={(session) => {
+            this.onSessionPressed(session);
+          }}/>
+        </Content>
+        <Block>
           <Button kind="squared" onPress={() => this.onAddSessionPress()}>Add Recording</Button>
-        </Footer>
+        </Block>
       </Container>
     );
   }

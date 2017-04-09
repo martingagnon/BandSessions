@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
 
-export default class Footer extends Component {
+export default class Content extends Component {
   render() {
     return (
-      <View style={styles.footer}>
+      <View style={styles.content}>
         {this.props.children}
       </View>
     );
@@ -12,5 +12,5 @@ export default class Footer extends Component {
 }
 
 const styles = StyleSheet.create({
-  footer: {bottom: 50}
+  content: {flex: 1}
 });

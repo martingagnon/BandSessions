@@ -10,11 +10,18 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import PlayerStates from 'constants/player-states';
 import * as Actions from 'actions/player';
 
+import {Button} from 'nachos-ui';
+import {Row} from 'ui';
+import {styles} from './styles'
+
 class Player extends Component {
   constructor(props) {
     super(props);
     const sound = new Sound(props.audioPath, '', () => {});
     this.state = {position: 0, sound};
+  }
+
+  componentDidMount() {
     this.waitReady(this);
   }
 
@@ -65,23 +72,33 @@ class Player extends Component {
     }
   }
 
+  nextActionIsPlay() {
+    return (this.props.playerState === PlayerStates.paused || this.props.playerState === PlayerStates.stopped);
+  }
+
   render() {
     const {duration, sound} = this.state;
     const {currentTime, playerState} = this.props;
     sound.getCurrentTime((_, playing) => {
-      if (playing && this.props.playerState === PlayerStates.paused) {
+      if (playing && playerState === PlayerStates.paused) {
         sound.pause();
-      } else if (!playing && this.props.playerState === PlayerStates.playing) {
+      } else if (!playing && playerState === PlayerStates.playing) {
         sound.play();
         this.playerLoop();
       }
     });
+    const playIconName = this.nextActionIsPlay() ? 'ios-play' : 'ios-pause';
 
     return (
       <View>
         <Slider value={Math.round(currentTime)} maximumValue={Math.round(duration) | 0} onValueChange={(value) => this.sliderChanged(value)} />
         <Text>Time: {Math.round(currentTime)}</Text><Text>Duration: {Math.round(duration | 0)}</Text>
-        <Icon.Button name={playerState === PlayerStates.paused ? 'play' : 'pause'} backgroundColor="#3b5998" onPress={() => this.togglePlayPause()} />
+        <Row>
+          <View style={styles.toolbarItem}><Button kind="squared" iconName="ios-arrow-back"/></View>
+          <View style={styles.toolbarItem}><Button kind="squared" iconName={playIconName} onPress={() => this.togglePlayPause()}/></View>
+          <View style={styles.toolbarItem}><Button kind="squared" iconName="ios-arrow-forward"/></View>
+          <View style={styles.toolbarItem}><Button kind="squared" iconName="ios-chatbubbles" onPress={this.props.addComment}/></View>
+        </Row>
       </View>
     );
   }
@@ -92,7 +109,8 @@ Player.propTypes = {
   setPlayerTime: PropTypes.func.isRequired,
   setPlayerState: PropTypes.func.isRequired,
   playerState: PropTypes.number.isRequired,
-  currentTime: PropTypes.number.isRequired
+  currentTime: PropTypes.number.isRequired,
+  addComment: PropTypes.func.isRequired
 };
 
 export default connect(

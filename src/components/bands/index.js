@@ -5,10 +5,8 @@ import {connect} from 'react-redux';
 import * as Actions from 'actions/sessions';
 
 import BandList from './components/band-list';
-import {Container, Footer} from 'ui';
+import {Container, Content, Block} from 'ui';
 import {Button} from 'nachos-ui';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Bands extends Component {
   static navigationOptions = {
@@ -31,12 +29,14 @@ class Bands extends Component {
   render() {
     return (
       <Container>
-        <BandList dataSource={this.props.dataSource} onPress={(band) => {
-          this.onBandPressed(band);
-        }}/>
-        <Footer>
+        <Content>
+          <BandList dataSource={this.props.dataSource} onPress={(band) => {
+            this.onBandPressed(band);
+          }}/>
+        </Content>
+        <Block>
           <Button kind="squared" onPress={() => this.onAddPressed()}>Add</Button>
-        </Footer>
+        </Block>
       </Container>
     );
   }

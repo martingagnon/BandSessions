@@ -5,9 +5,9 @@ import SessionItem from './session-item';
 
 export default class SessionList extends Component {
   render() {
-    const {dataSource} = this.props;
+    const {dataSource, style} = this.props;
     return (
-      <ListView dataSource={dataSource} enableEmptySections={true} renderRow={(item) => <SessionItem item={item} onPress={this.props.onPress} />} />
+      <ListView dataSource={dataSource} style={style} automaticallyAdjustContentInsets={false} enableEmptySections={true} renderRow={(item) => <SessionItem item={item} onPress={this.props.onPress} />} />
     );
   }
 }
