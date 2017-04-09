@@ -1,10 +1,8 @@
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const COMMENT_ADDED = 'COMMENT_ADDED';
+import {getCommentService} from 'services/comments';
 
-const commentAdded = () => ({type: COMMENT_ADDED});
-
-export const addComment = (session, comment, time) => {
-  return async (dispatch) => {
-    dispatch(commentAdded);
+export const addComment = (session, comment, time, emotion) => {
+  return async () => {
+    const service = getCommentService(session);
+    await service.add({comment, time, emotion});
   };
 };

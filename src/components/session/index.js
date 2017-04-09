@@ -31,11 +31,12 @@ class Session extends Component {
 
   render() {
     const {transferState, progress, audioPath} = this.props;
+    const commentsCount = this.state.session.comments ? this.state.session.comments.length : 0;
 
     return (
       <Container>
         <Content>
-          <Text>{transferState} {progress}</Text>
+          <Text>{transferState} - {progress} - {commentsCount}</Text>
           {!!audioPath ? (<Player audioPath={audioPath} addComment={() => this.addComment()}></Player>) : (<View></View>) }
         </Content>
       </Container>
