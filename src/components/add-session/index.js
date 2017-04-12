@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import * as Actions from 'actions/add-session';
+import * as Actions from 'actions/sessions';
 import fileTransferStates from 'constants/file-transfer-states';
 import Container from 'ui/container';
 import {Input, Button} from 'nachos-ui';
@@ -16,6 +16,7 @@ class AddSession extends Component {
     super(props);
     this.state = {
       filePath: props.navigation.state.params.filePath,
+      bandId: props.navigation.state.params.bandId,
       recordingName: ''
     };
   }
@@ -28,7 +29,7 @@ class AddSession extends Component {
   }
 
   onSaveSessionPress = () => {
-    this.props.addSession(this.state.filePath, {name: this.state.recordingName});
+    this.props.addSession(this.state.bandId, this.state.filePath, {name: this.state.recordingName});
   };
 
   render() {

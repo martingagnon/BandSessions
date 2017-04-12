@@ -19,7 +19,8 @@ class RecordSession extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      audioPath: `${AudioUtils.DocumentDirectoryPath }/audio.aac`
+      audioPath: `${AudioUtils.DocumentDirectoryPath }/audio.aac`,
+      bandId: props.navigation.state.params.bandId
     };
   }
 
@@ -35,7 +36,7 @@ class RecordSession extends Component {
     this.props.stopRecording();
 
     const navigate = this.props.navigation.navigate;
-    navigate('AddSession', {filePath: this.state.audioPath});
+    navigate('AddSession', {filePath: this.state.audioPath, bandId: this.state.bandId});
   }
 
   async recordPressed() {

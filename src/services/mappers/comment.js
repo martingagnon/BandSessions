@@ -3,6 +3,6 @@ export default function mapper(child) {
     comment: child.val().comment,
     time: child.val().time,
     emotion: child.val().emotion,
-    key: child.key
+    id: child.key
   };
 }

@@ -3,7 +3,7 @@ import {
   SESSION_UPLOAD_PROGRESS,
   SESSION_UPLOAD_COMPLETED,
   SESSION_UPLOAD_ERROR
-} from 'actions/add-session';
+} from 'actions/sessions';
 
 import fileTransferStates from 'constants/file-transfer-states';
 

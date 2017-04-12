@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import * as CommentActions from 'actions/add-comment';
+import * as CommentActions from 'actions/comments';
 import * as PlayerActions from 'actions/player';
 import PlayerStates from 'constants/player-states';
 import Container from 'ui/container';

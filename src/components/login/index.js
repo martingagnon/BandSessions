@@ -3,13 +3,10 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import Container from 'ui/container';
+import {Button} from 'nachos-ui';
+import * as CurrentUserActions from 'actions/current-user';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-import * as SessionsActions from 'actions/sessions';
-import * as BandsActions from 'actions/bands';
-import {sessionService} from 'services/sessions';
-import {bandService} from 'services/bands';
+import {LoginButton} from 'react-native-fbsdk';
 
 class Login extends Component {
   static navigationOptions = {
@@ -18,11 +15,10 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
-    sessionService.observe((sessions) => props.updateSessions(sessions));
-    bandService.observe((bands) => props.updateBands(bands));
   }
 
-  loginWithFacebook() {
+  doLoggedIn() {
+    this.props.updateCurrentuser();
     const navigate = this.props.navigation.navigate;
     navigate('Bands');
   }
@@ -30,19 +26,24 @@ class Login extends Component {
   render() {
     return (
       <Container>
-        <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={() => this.loginWithFacebook()}>
-            Login with Facebook
-        </Icon.Button>
+        <LoginButton readPermissions={['email']}
+          onLoginFinished={
+            (error, result) => {
+              if (!error && !result.isCancelled) {
+                this.doLoggedIn();
+              }
+            }
+          }/>
+          <Button onPress={() => this.doLoggedIn()}/>
       </Container>
     );
   }
 }
 
 Login.propTypes = {
-  updateBands: PropTypes.func.isRequired,
-  updateSessions: PropTypes.func.isRequired
+  updateCurrentuser: PropTypes.func.isRequired
 };
 
 export default connect(
   state => (state),
-  dispatch => bindActionCreators(Object.assign({}, SessionsActions, BandsActions), dispatch))(Login);
+  dispatch => bindActionCreators(Object.assign({}, CurrentUserActions), dispatch))(Login);
