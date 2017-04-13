@@ -3,10 +3,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import Container from 'ui/container';
-import {Button} from 'nachos-ui';
 import * as CurrentUserActions from 'actions/current-user';
 
-import {LoginButton} from 'react-native-fbsdk';
+import {LoginButton, AccessToken} from 'react-native-fbsdk';
 
 class Login extends Component {
   static navigationOptions = {
@@ -15,6 +14,16 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {showLogin: false};
+    this.validateAccessToken();
+  }
+
+  async validateAccessToken() {
+    const accessToken = await AccessToken.getCurrentAccessToken();
+    if (accessToken) {
+      this.doLoggedIn();
+    }
+    this.setState({showLogin: true});
   }
 
   doLoggedIn() {
@@ -24,8 +33,11 @@ class Login extends Component {
   }
 
   render() {
+    const {showLogin} = this.state;
+
     return (
       <Container>
+        {showLogin ? (
         <LoginButton readPermissions={['email']}
           onLoginFinished={
             (error, result) => {
@@ -34,7 +46,7 @@ class Login extends Component {
               }
             }
           }/>
-          <Button onPress={() => this.doLoggedIn()}/>
+        ) : null}
       </Container>
     );
   }

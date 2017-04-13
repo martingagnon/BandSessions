@@ -18,6 +18,7 @@ class Session extends Component {
 
   constructor(props) {
     super(props);
+
     const sessionId = props.navigation.state.params.session.id;
     const service = getCommentsService(sessionId, (comments) => props.updateComments(comments, sessionId));
     this.state = {session: props.navigation.state.params.session, service};

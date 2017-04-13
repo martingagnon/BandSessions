@@ -21,7 +21,7 @@ class AddComment extends Component {
 
   onAddComment() {
     const {session, currentTime, comment, emotion} = this.state;
-    this.props.addComment(session, comment, currentTime, emotion);
+    this.props.addComment(session, comment, currentTime, emotion, this.props.currentUser);
     this.props.setPlayerState(PlayerStates.playing);
     this.props.navigation.goBack();
   }
@@ -46,9 +46,10 @@ class AddComment extends Component {
 
 AddComment.propTypes = {
   setPlayerState: PropTypes.func.isRequired,
-  addComment: PropTypes.func.isRequired
+  addComment: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired
 };
 
 export default connect(
-  state => ({...state.addComment, player: state.player}),
+  state => ({...state.addComment, player: state.player, ...state.currentUser}),
   dispatch => bindActionCreators(Object.assign({}, CommentActions, PlayerActions), dispatch))(AddComment);
