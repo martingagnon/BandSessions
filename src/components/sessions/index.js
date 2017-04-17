@@ -32,12 +32,12 @@ class Sessions extends Component {
   }
 
   onAddSessionPress = () => {
-    const navigate = this.props.navigation.navigate;
+    const {navigate} = this.props.navigation;
     navigate('RecordSession', {bandId: this.state.bandId});
   };
 
   onSessionPressed = (session) => {
-    const navigate = this.props.navigation.navigate;
+    const {navigate} = this.props.navigation;
     navigate('Session', {session});
   };
 
@@ -52,7 +52,7 @@ class Sessions extends Component {
           }}/>
         </Content>
         <Block>
-          <Button kind="squared" onPress={() => this.onAddSessionPress()}>Add Recording</Button>
+          <Button kind="squared" iconName="md-add-circle" onPress={() => this.onAddSessionPress()}></Button>
         </Block>
       </Container>
     );

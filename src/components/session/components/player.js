@@ -11,7 +11,7 @@ import * as Actions from 'actions/player';
 
 import {Button} from 'nachos-ui';
 import {Row} from 'ui';
-import {styles} from './styles';
+import styles from './styles';
 
 class Player extends Component {
   constructor(props) {

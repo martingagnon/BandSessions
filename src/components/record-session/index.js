@@ -1,14 +1,15 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Text} from 'react-native';
+import {Text, View, TouchableHighlight} from 'react-native';
 
 import * as Actions from 'actions/audio-recorder';
 import playerStates from 'constants/player-states';
+import styles from './styles';
 
 import {AudioUtils} from 'react-native-audio';
 
-import {Container, Block} from 'ui';
+import {Container, Block, Center} from 'ui';
 import {Button} from 'nachos-ui';
 
 class RecordSession extends Component {
@@ -43,15 +44,36 @@ class RecordSession extends Component {
     this.props.toggleRecordPause();
   }
 
+  getTimeString(seconds) {
+    const date = new Date(null);
+    date.setSeconds(seconds);
+
+    const hoursStart = 11;
+    const length = 8;
+    return date.toISOString().substr(hoursStart, length);
+  }
+
   render() {
     const {recordingState, time} = this.props;
+    const timeString = this.getTimeString(time);
 
     return (
       <Container>
-        <Button kind="squared" onPress={() => this.recordPressed()}>{(recordingState !== playerStates.recording) ? 'Record' : 'Pause'}</Button>
-        <Text>{time}{recordingState}</Text>
+        <Center>
+          <Text style={styles.timer}>{timeString}</Text>
+        </Center>
+
         <Block>
-          <Button kind="squared" disabled={time === 0 || recordingState !== playerStates.paused} onPress={() => this.savePressed()}>Save</Button>
+          <View style={styles.footer}>
+            <View style={styles.recordingView}>
+              <Button kind="squared" style={styles.recordingButton} iconSize={90} iconName={(recordingState !== playerStates.recording) ? 'md-microphone' : 'md-pause'} onPress={() => this.recordPressed()}></Button>
+            </View>
+            <View style={styles.saveView}>
+              <Button kind="squared" style={styles.saveButton} iconSize={40} iconName="md-archive" disabled={time === 0 || recordingState !== playerStates.paused} onPress={() => this.savePressed()}></Button>
+            </View>
+          </View>
+        </Block>
+        <Block>
         </Block>
       </Container>
     );
