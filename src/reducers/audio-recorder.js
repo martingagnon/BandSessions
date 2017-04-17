@@ -1,4 +1,4 @@
-import { RECORDING_STATE, RECORDING_TIME} from 'actions/record-session';
+import { RECORDING_STATE, RECORDING_TIME} from 'actions/audio-recorder';
 import playerStates from 'constants/player-states';
 
 const initialState = {
@@ -6,7 +6,7 @@ const initialState = {
   time: 0
 };
 
-export default function recordSession(state = initialState, action) {
+export default function audioRecorder(state = initialState, action) {
   switch (action.type) {
     case RECORDING_STATE:
       return {...state, recordingState: action.recordingState};

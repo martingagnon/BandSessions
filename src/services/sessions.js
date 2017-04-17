@@ -1,11 +1,4 @@
 import {service} from './base';
-
-const mapper = (child) => {
-  return {
-    name: child.val().name,
-    audio: child.val().audio,
-    key: child.key
-  };
-};
+import mapper from './mappers/session';
 
 export const sessionService = service('sessions', mapper);

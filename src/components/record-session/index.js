@@ -3,10 +3,10 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Text} from 'react-native';
 
-import * as Actions from 'actions/record-session';
+import * as Actions from 'actions/audio-recorder';
 import playerStates from 'constants/player-states';
 
-import {AudioRecorder, AudioUtils} from 'react-native-audio';
+import {AudioUtils} from 'react-native-audio';
 
 import {Container, Block} from 'ui';
 import {Button} from 'nachos-ui';
@@ -23,49 +23,23 @@ class RecordSession extends Component {
     };
   }
 
-  prepareRecordingPath(audioPath) {
-    AudioRecorder.prepareRecordingAtPath(audioPath, {
-      SampleRate: 22050,
-      Channels: 1,
-      AudioQuality: 'Low',
-      AudioEncoding: 'aac',
-      AudioEncodingBitRate: 32000
-    });
-  }
-
   componentDidMount() {
-    this.prepareRecordingPath(this.state.audioPath);
-    this.props.setRecordingTime(0);
-    this.props.setRecordingState(playerStates.stopped);
-    AudioRecorder.onProgress = (data) => {
-      this.props.setRecordingTime(Math.floor(data.currentTime));
-    };
+    this.props.prepareRecording(this.state.audioPath);
   }
 
   componentWillUnmount() {
-    AudioRecorder.stopRecording();
+    this.props.stopRecording();
   }
 
   async savePressed() {
-    await AudioRecorder.stopRecording();
-    this.props.setRecordingState(playerStates.stopped);
+    this.props.stopRecording();
 
     const navigate = this.props.navigation.navigate;
     navigate('AddSession', {filePath: this.state.audioPath});
   }
 
   async recordPressed() {
-    switch (this.props.recordingState) {
-      case playerStates.stopped:
-      case playerStates.paused:
-        await AudioRecorder.startRecording();
-        this.props.setRecordingState(playerStates.recording);
-        break;
-      case playerStates.recording:
-        await AudioRecorder.pauseRecording();
-        this.props.setRecordingState(playerStates.paused);
-        break;
-    }
+    this.props.toggleRecordPause();
   }
 
   render() {
@@ -86,10 +60,12 @@ class RecordSession extends Component {
 RecordSession.propTypes = {
   recordingState: PropTypes.number.isRequired,
   time: PropTypes.number.isRequired,
-  setRecordingState: PropTypes.func.isRequired,
-  setRecordingTime: PropTypes.func.isRequired
+  prepareRecording: PropTypes.func.isRequired,
+  stopRecording: PropTypes.func.isRequired,
+  toggleRecordPause: PropTypes.func.isRequired
+
 };
 
 export default connect(
-    state => (state.recordSession),
+    state => (state.audioRecorder),
     dispatch => bindActionCreators(Actions, dispatch))(RecordSession);

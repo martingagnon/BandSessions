@@ -5,14 +5,13 @@ import {View, Text} from 'react-native';
 
 import Slider from 'react-native-slider';
 import Sound from 'react-native-sound';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import PlayerStates from 'constants/player-states';
 import * as Actions from 'actions/player';
 
 import {Button} from 'nachos-ui';
 import {Row} from 'ui';
-import {styles} from './styles'
+import {styles} from './styles';
 
 class Player extends Component {
   constructor(props) {

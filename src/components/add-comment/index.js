@@ -5,8 +5,9 @@ import {connect} from 'react-redux';
 import * as CommentActions from 'actions/add-comment';
 import * as PlayerActions from 'actions/player';
 import PlayerStates from 'constants/player-states';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Container from 'ui/container';
+
+import {Switcher, Input, Button} from 'nachos-ui';
 
 class AddComment extends Component {
   static navigationOptions = {
@@ -15,21 +16,29 @@ class AddComment extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {session: props.navigation.state.params.session, currentTime: this.props.player.currentTime};
+    this.state = {session: props.navigation.state.params.session, currentTime: this.props.player.currentTime, comment: '', emotion: 0};
   }
 
   onAddComment() {
-    const {session, currentTime} = this.state;
-    const comment = 'My comment';
+    const {session, currentTime, comment, emotion} = this.state;
+    this.props.addComment(session, comment, currentTime, emotion);
     this.props.setPlayerState(PlayerStates.playing);
-    this.props.addComment(session, comment, currentTime);
     this.props.navigation.goBack();
   }
 
   render() {
     return (
       <Container>
-        <Icon.Button name="plus-circle" backgroundColor="#3b5998" onPress={() => this.onAddComment()} />
+      <Input height={100} status="normal" placeholder="Comment"
+        value={this.state.comment} multiline={true} numberOfLines={4}
+        onChangeText={value => this.setState({...this.state, comment: value})}
+      />
+      <Switcher onChange={value => this.setState({...this.state, emotion: value})}>
+        <Button value={1} iconName="ios-thumbs-up"/>
+        <Button value={-1} iconName="ios-thumbs-down"/>
+      </Switcher>
+      <Button kind="squared" onPress={() => this.onAddComment()}
+        disabled={this.state.comment.length <= 2}>Add</Button>
       </Container>
     );
   }
