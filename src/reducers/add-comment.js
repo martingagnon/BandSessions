@@ -1,5 +1,3 @@
-import { COMMENT_ADDED } from 'actions/add-comment';
-
-export default function player(state = {}, action) {
+export default function player(state = {}, _) {
   return state;
 }
