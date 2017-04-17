@@ -2,7 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+import {ListView} from 'react-native';
+
 import * as Actions from 'actions/sessions';
+import getSessionsService from 'services/sessions';
 
 import SessionList from './components/session-list';
 import {Container, Block, Content} from 'ui';
@@ -13,26 +16,43 @@ class Sessions extends Component {
     title: 'Recordings'
   };
 
+  constructor(props) {
+    super(props);
+    const bandId = props.navigation.state.params.band.id;
+    const service = getSessionsService(bandId, (sessions) => props.updateSessions(sessions, bandId));
+    this.state = {bandId, service, dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}).cloneWithRows([])};
+  }
+
+  componentWillMount() {
+    this.state.service.observe();
+  }
+
+  componentWillUnmount() {
+    this.state.service.stopObserving();
+  }
+
   onAddSessionPress = () => {
-    const navigate = this.props.navigation.navigate;
-    navigate('RecordSession');
+    const {navigate} = this.props.navigation;
+    navigate('RecordSession', {bandId: this.state.bandId});
   };
 
   onSessionPressed = (session) => {
-    const navigate = this.props.navigation.navigate;
+    const {navigate} = this.props.navigation;
     navigate('Session', {session});
   };
 
   render() {
+    const bandSessions = this.props.sessions[this.state.bandId] || [];
+    const dataSource = this.state.dataSource.cloneWithRows(bandSessions);
     return (
       <Container>
         <Content>
-          <SessionList dataSource={this.props.dataSource} onPress={(session) => {
+          <SessionList dataSource={dataSource} onPress={(session) => {
             this.onSessionPressed(session);
           }}/>
         </Content>
         <Block>
-          <Button kind="squared" onPress={() => this.onAddSessionPress()}>Add Recording</Button>
+          <Button kind="squared" iconName="md-add-circle" onPress={() => this.onAddSessionPress()}></Button>
         </Block>
       </Container>
     );
@@ -40,7 +60,8 @@ class Sessions extends Component {
 }
 
 Sessions.propTypes = {
-  dataSource: PropTypes.object.isRequired
+  sessions: PropTypes.object.isRequired,
+  updateSessions: PropTypes.func.isRequired
 };
 
 export default connect(

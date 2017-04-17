@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "9999"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E9A1D011000000000"
+               BuildableName = "libFBExperimentContextHeaders.a"
+               BlueprintName = "FBExperimentContextHeaders"
+               ReferencedContainer = "container:../../../../Libraries/FBFeatureGating/FBFeatureGating.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E47F2A98300000000"
+               BuildableName = "libFBMobileConfigCTypesHeader.a"
+               BlueprintName = "FBMobileConfigCTypesHeader"
+               ReferencedContainer = "container:../../../../Libraries/FBMobileConfig/FBMobileConfig.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E4570259700000000"
+               BuildableName = "libFBMobileConfigContextImplHeaders.a"
+               BlueprintName = "FBMobileConfigContextImplHeaders"
+               ReferencedContainer = "container:../../../../Libraries/FBMobileConfig/FBMobileConfig.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E7792B8A900000000"
+               BuildableName = "MobileConfig.framework"
+               BlueprintName = "AdUnitsSample-mobileconfig-symbols-bundle-gen"
+               ReferencedContainer = "container:AdUnitsSample.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E77346B8300000000"
+               BuildableName = "libAdUnitsSample-mobileconfig-syms-appstub-gen.a"
+               BlueprintName = "AdUnitsSample-mobileconfig-syms-appstub-gen"
+               ReferencedContainer = "container:AdUnitsSample.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "99A49D8B1A5C43AC00AD7599"
+               BuildableName = "FBAudienceNetwork.framework"
+               BlueprintName = "FBAudienceNetwork"
+               ReferencedContainer = "container:../../src/FBAudienceNetwork/FBAudienceNetwork.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E30DA11B600000000"
+               BuildableName = "AdUnitsSample.app"
+               BlueprintName = "AdUnitsSample"
+               ReferencedContainer = "container:AdUnitsSample.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E32CCB69700000000"
+               BuildableName = "libOCHamcrest.a"
+               BlueprintName = "OCHamcrest"
+               ReferencedContainer = "container:../../../../VendorLib/OCHamcrest/OCHamcrest.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E8AA3AD7E00000000"
+               BuildableName = "libOCMock.a"
+               BlueprintName = "OCMock"
+               ReferencedContainer = "container:../../../../VendorLib/OCMock/OCMock.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E59342C2400000000"
+               BuildableName = "libOHHTTPStubs.a"
+               BlueprintName = "OHHTTPStubs"
+               ReferencedContainer = "container:../../../../VendorLib/OHHTTPStubs/OHHTTPStubs/OHHTTPStubs.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E9D5C126600000000"
+               BuildableName = "libOCMockito.a"
+               BlueprintName = "OCMockito"
+               ReferencedContainer = "container:../../../../VendorLib/OCMockito/OCMockito.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04E107D2CF500000000"
+               BuildableName = "libFBAudienceNetworkTestHost-mobileconfig-syms-appstub-gen.a"
+               BlueprintName = "FBAudienceNetworkTestHost-mobileconfig-syms-appstub-gen"
+               ReferencedContainer = "container:../../src/FBAudienceNetwork/FBAudienceNetwork.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E66DC04EE1B0E59B00000000"
+               BuildableName = "MobileConfig.framework"
+               BlueprintName = "FBAudienceNetworkTestHost-mobileconfig-symbols-bundle-gen"
+               ReferencedContainer = "container:../../src/FBAudienceNetwork/FBAudienceNetwork.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "90E28C741BE3E97100BEB0D0"
+               BuildableName = "FBAudienceNetworkTestHost.app"
+               BlueprintName = "FBAudienceNetworkTestHost"
+               ReferencedContainer = "container:../../src/FBAudienceNetwork/FBAudienceNetwork.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "90AB42AF1BDEAD5400E295D3"
+               BuildableName = "FBAudienceNetworkTests.xctest"
+               BlueprintName = "FBAudienceNetworkTests"
+               ReferencedContainer = "container:../../src/FBAudienceNetwork/FBAudienceNetwork.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "90AB42AF1BDEAD5400E295D3"
+               BuildableName = "FBAudienceNetworkTests.xctest"
+               BlueprintName = "FBAudienceNetworkTests"
+               ReferencedContainer = "container:../../src/FBAudienceNetwork/FBAudienceNetwork.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E66DC04E30DA11B600000000"
+            BuildableName = "AdUnitsSample.app"
+            BlueprintName = "AdUnitsSample"
+            ReferencedContainer = "container:AdUnitsSample.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E66DC04E30DA11B600000000"
+            BuildableName = "AdUnitsSample.app"
+            BlueprintName = "AdUnitsSample"
+            ReferencedContainer = "container:AdUnitsSample.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

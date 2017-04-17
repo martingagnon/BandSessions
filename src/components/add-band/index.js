@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import * as Actions from 'actions/add-band';
+import * as Actions from 'actions/bands';
 
 import {Button, Input} from 'nachos-ui';
 import Container from 'ui/container';

@@ -3,8 +3,10 @@ import {service} from './base';
 const mapper = (child) => {
   return {
     name: child.val().name,
-    key: child.key
+    id: child.key
   };
 };
 
-export const bandService = service('bands', mapper);
+export default function getBandsService(callback) {
+  return service('bands', mapper, callback);
+}

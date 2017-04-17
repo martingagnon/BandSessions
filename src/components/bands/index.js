@@ -2,11 +2,13 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import * as Actions from 'actions/sessions';
+import * as Actions from 'actions/bands';
 
 import BandList from './components/band-list';
 import {Container, Content, Block} from 'ui';
 import {Button} from 'nachos-ui';
+import {ListView} from 'react-native';
+import getBandsService from 'services/bands';
 
 class Bands extends Component {
   static navigationOptions = {
@@ -15,6 +17,16 @@ class Bands extends Component {
 
   constructor(props) {
     super(props);
+    const service = getBandsService((bands) => props.updateBands(bands));
+    this.state = {service, dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}).cloneWithRows([])};
+  }
+
+  componentWillMount() {
+    this.state.service.observe();
+  }
+
+  componentWillUnmount() {
+    this.state.service.stopObserving();
   }
 
   onAddPressed = () => {
@@ -27,10 +39,11 @@ class Bands extends Component {
   };
 
   render() {
+    const dataSource = this.state.dataSource.cloneWithRows(this.props.bands);
     return (
       <Container>
         <Content>
-          <BandList dataSource={this.props.dataSource} onPress={(band) => {
+          <BandList dataSource={dataSource} onPress={(band) => {
             this.onBandPressed(band);
           }}/>
         </Content>
@@ -43,7 +56,8 @@ class Bands extends Component {
 }
 
 Bands.propTypes = {
-  dataSource: PropTypes.object.isRequired
+  bands: PropTypes.array.isRequired,
+  updateBands: PropTypes.func.isRequired
 };
 
 export default connect(

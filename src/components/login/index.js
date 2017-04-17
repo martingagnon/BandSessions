@@ -3,13 +3,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import Container from 'ui/container';
+import * as CurrentUserActions from 'actions/current-user';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-import * as SessionsActions from 'actions/sessions';
-import * as BandsActions from 'actions/bands';
-import {sessionService} from 'services/sessions';
-import {bandService} from 'services/bands';
+import {LoginButton, AccessToken} from 'react-native-fbsdk';
 
 class Login extends Component {
   static navigationOptions = {
@@ -18,31 +14,48 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
-    sessionService.observe((sessions) => props.updateSessions(sessions));
-    bandService.observe((bands) => props.updateBands(bands));
+    this.state = {showLogin: false};
+    this.validateAccessToken();
   }
 
-  loginWithFacebook() {
+  async validateAccessToken() {
+    const accessToken = await AccessToken.getCurrentAccessToken();
+    if (accessToken) {
+      this.doLoggedIn();
+    }
+    this.setState({showLogin: true});
+  }
+
+  doLoggedIn() {
+    this.props.updateCurrentuser();
     const navigate = this.props.navigation.navigate;
     navigate('Bands');
   }
 
   render() {
+    const {showLogin} = this.state;
+
     return (
       <Container>
-        <Icon.Button name="facebook" backgroundColor="#3b5998" onPress={() => this.loginWithFacebook()}>
-            Login with Facebook
-        </Icon.Button>
+        {showLogin ? (
+        <LoginButton readPermissions={['email']}
+          onLoginFinished={
+            (error, result) => {
+              if (!error && !result.isCancelled) {
+                this.doLoggedIn();
+              }
+            }
+          }/>
+        ) : null}
       </Container>
     );
   }
 }
 
 Login.propTypes = {
-  updateBands: PropTypes.func.isRequired,
-  updateSessions: PropTypes.func.isRequired
+  updateCurrentuser: PropTypes.func.isRequired
 };
 
 export default connect(
   state => (state),
-  dispatch => bindActionCreators(Object.assign({}, SessionsActions, BandsActions), dispatch))(Login);
+  dispatch => bindActionCreators(Object.assign({}, CurrentUserActions), dispatch))(Login);
