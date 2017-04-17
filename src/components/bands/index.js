@@ -48,7 +48,7 @@ class Bands extends Component {
           }}/>
         </Content>
         <Block>
-          <Button kind="squared" onPress={() => this.onAddPressed()}>Add</Button>
+          <Button kind="squared" iconName="md-add-circle" onPress={() => this.onAddPressed()}/>
         </Block>
       </Container>
     );

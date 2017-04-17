@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Text, View, TouchableHighlight} from 'react-native';
+import {Text, View} from 'react-native';
 
 import * as Actions from 'actions/audio-recorder';
 import playerStates from 'constants/player-states';
@@ -57,6 +57,9 @@ class RecordSession extends Component {
     const {recordingState, time} = this.props;
     const timeString = this.getTimeString(time);
 
+    const recordingButtonStyle = {height: 100, width:100};
+    const saveButtonStyle = {height: 75, width:75};
+
     return (
       <Container>
         <Center>
@@ -66,10 +69,10 @@ class RecordSession extends Component {
         <Block>
           <View style={styles.footer}>
             <View style={styles.recordingView}>
-              <Button kind="squared" style={styles.recordingButton} iconSize={90} iconName={(recordingState !== playerStates.recording) ? 'md-microphone' : 'md-pause'} onPress={() => this.recordPressed()}></Button>
+              <Button kind="squared" style={recordingButtonStyle} iconSize={90} iconName={(recordingState !== playerStates.recording) ? 'md-microphone' : 'md-pause'} onPress={() => this.recordPressed()}></Button>
             </View>
             <View style={styles.saveView}>
-              <Button kind="squared" style={styles.saveButton} iconSize={40} iconName="md-archive" disabled={time === 0 || recordingState !== playerStates.paused} onPress={() => this.savePressed()}></Button>
+              <Button kind="squared" style={saveButtonStyle} iconSize={40} iconName="md-archive" disabled={time === 0 || recordingState !== playerStates.paused} onPress={() => this.savePressed()}></Button>
             </View>
           </View>
         </Block>
