@@ -42,7 +42,9 @@ class Session extends Component {
 
   render() {
     const {transferState, progress, audioPath} = this.props;
-    const comments = this.props.comments[this.state.session.id] || [];
+    const {session} = this.state;
+
+    const comments = this.props.comments[session.id] || [];
     const commentsCount = comments.length;
 
     const buttonStyle = {height: 50, width: 75};
@@ -52,7 +54,7 @@ class Session extends Component {
     return (
       <Container>
         <Content>
-          {!!audioPath ? (<Player audioPath={audioPath}/>) : (<View></View>) }
+          {!!audioPath ? (<Player session={session} audioPath={audioPath}/>) : (<View></View>) }
         </Content>
         <Toolbar onAddComment={() => this.addComment()} session={this.state.session} />
       </Container>
