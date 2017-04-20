@@ -42,7 +42,7 @@ class Session extends Component {
   }
 
   render() {
-    const {transferState, progress, audioPath} = this.props;
+    const {progress, audioPath} = this.props;
     const {session} = this.state;
 
     return (

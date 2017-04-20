@@ -48,8 +48,8 @@ class RecordSession extends Component {
     const {recordingState, time} = this.props;
     const timeString = getTimeString(time);
 
-    const recordingButtonStyle = {height: 100, width:100};
-    const saveButtonStyle = {height: 75, width:75};
+    const recordingButtonStyle = {height: 100, width: 100};
+    const saveButtonStyle = {height: 75, width: 75};
 
     return (
       <Container>

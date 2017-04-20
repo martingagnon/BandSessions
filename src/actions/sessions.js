@@ -4,8 +4,10 @@ import getSessionsService from 'services/sessions';
 
 const fs = RNFetchBlob.fs;
 const Blob = RNFetchBlob.polyfill.Blob;
+/* eslint-disable no-undef*/
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 window.Blob = Blob;
+/* eslint-enable no-undef*/
 
 export const SESSION_UPLOAD_PENDING = 'SESSION_UPLOAD_PENDING';
 export const SESSION_UPLOAD_PROGRESS = 'SESSION_UPLOAD_PROGRESS';
