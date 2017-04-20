@@ -7,7 +7,7 @@ import * as PlayerActions from 'actions/player';
 import PlayerStates from 'constants/player-states';
 import Container from 'ui/container';
 
-import {Switcher, Input, Button} from 'nachos-ui';
+import {Input, Button} from 'nachos-ui';
 
 class AddComment extends Component {
   static navigationOptions = {
@@ -33,10 +33,6 @@ class AddComment extends Component {
         value={this.state.comment} multiline={true} numberOfLines={4}
         onChangeText={value => this.setState({...this.state, comment: value})}
       />
-      <Switcher onChange={value => this.setState({...this.state, emotion: value})}>
-        <Button value={1} iconName="ios-thumbs-up"/>
-        <Button value={-1} iconName="ios-thumbs-down"/>
-      </Switcher>
       <Button kind="squared" onPress={() => this.onAddComment()}
         disabled={this.state.comment.length <= 2}>Add</Button>
       </Container>

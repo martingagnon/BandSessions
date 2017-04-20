@@ -5,13 +5,10 @@ import {View, Text} from 'react-native';
 
 import Slider from 'react-native-slider';
 import Sound from 'react-native-sound';
+import Comments from './comments';
 
 import PlayerStates from 'constants/player-states';
 import * as Actions from 'actions/player';
-
-import {Button} from 'nachos-ui';
-import {Row} from 'ui';
-import styles from './styles';
 
 class Player extends Component {
   constructor(props) {
@@ -32,9 +29,8 @@ class Player extends Component {
   waitReady(player) {
     const {sound} = player.state;
     if (sound.isLoaded()) {
-      const duration = sound.getDuration();
-      player.setState({...player.state, duration});
-      player.play();
+      player.props.setPlayerDuration(sound.getDuration());
+      player.props.setPlayerState(PlayerStates.playing);
     } else {
       setTimeout(() => player.waitReady(player), 100);
     }
@@ -55,29 +51,9 @@ class Player extends Component {
     this.state.sound.setCurrentTime(value);
   }
 
-  play() {
-    this.props.setPlayerState(PlayerStates.playing);
-  }
-
-  pause() {
-    this.props.setPlayerState(PlayerStates.paused);
-  }
-
-  togglePlayPause() {
-    if (this.props.playerState !== PlayerStates.paused) {
-      this.pause();
-    } else {
-      this.play();
-    }
-  }
-
-  nextActionIsPlay() {
-    return (this.props.playerState === PlayerStates.paused || this.props.playerState === PlayerStates.stopped);
-  }
-
   render() {
-    const {duration, sound} = this.state;
-    const {currentTime, playerState} = this.props;
+    const {sound} = this.state;
+    const {playerDuration, currentTime, playerState} = this.props;
     sound.getCurrentTime((_, playing) => {
       if (playing && playerState === PlayerStates.paused) {
         sound.pause();
@@ -86,18 +62,12 @@ class Player extends Component {
         this.playerLoop();
       }
     });
-    const playIconName = this.nextActionIsPlay() ? 'ios-play' : 'ios-pause';
 
     return (
       <View>
-        <Slider value={Math.round(currentTime)} maximumValue={Math.round(duration) | 0} onValueChange={(value) => this.sliderChanged(value)} />
-        <Text>Time: {Math.round(currentTime)}</Text><Text>Duration: {Math.round(duration | 0)}</Text>
-        <Row>
-          <View style={styles.toolbarItem}><Button kind="squared" iconName="ios-arrow-back"/></View>
-          <View style={styles.toolbarItem}><Button kind="squared" iconName={playIconName} onPress={() => this.togglePlayPause()}/></View>
-          <View style={styles.toolbarItem}><Button kind="squared" iconName="ios-arrow-forward"/></View>
-          <View style={styles.toolbarItem}><Button kind="squared" iconName="ios-chatbubbles" onPress={this.props.addComment}/></View>
-        </Row>
+        <Slider value={Math.round(currentTime)} maximumValue={Math.round(playerDuration) | 0} onValueChange={(value) => this.sliderChanged(value)} />
+        <Comments session={this.props.session}/>
+        <Text>Time: {Math.round(currentTime)}</Text><Text>Duration: {Math.round(playerDuration | 0)}</Text>
       </View>
     );
   }
@@ -106,10 +76,12 @@ class Player extends Component {
 Player.propTypes = {
   audioPath: PropTypes.string.isRequired,
   setPlayerTime: PropTypes.func.isRequired,
+  setPlayerDuration: PropTypes.func.isRequired,
   setPlayerState: PropTypes.func.isRequired,
   playerState: PropTypes.number.isRequired,
+  playerDuration: PropTypes.number.isRequired,
   currentTime: PropTypes.number.isRequired,
-  addComment: PropTypes.func.isRequired
+  session: PropTypes.object.isRequired
 };
 
 export default connect(
