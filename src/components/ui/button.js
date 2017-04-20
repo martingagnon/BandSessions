@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import ReactNative from 'react-native';
 
+import {Text, View, TouchableHighlight} from 'react-native';
 import {styles, constants} from './styles';
-
-const {Text, View, TouchableHighlight} = ReactNative;
 
 export default class ActionButton extends Component {
   render() {

@@ -2,14 +2,13 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {ListView} from 'react-native';
-
 import * as Actions from 'actions/sessions';
 import getSessionsService from 'services/sessions';
 
-import SessionList from './components/session-list';
-import {Container, Block, Content} from 'ui';
+import {ListView} from 'react-native';
 import {Button} from 'nachos-ui';
+import {Container, Block, Content} from 'ui';
+import SessionList from './components/session-list';
 
 class Sessions extends Component {
   static navigationOptions = {

@@ -1,14 +1,14 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {ListView} from 'react-native';
 
 import * as Actions from 'actions/bands';
+import getBandsService from 'services/bands';
 
+import {Button} from 'nachos-ui';
 import BandList from './components/band-list';
 import {Container, Content, Block} from 'ui';
-import {Button} from 'nachos-ui';
-import {ListView} from 'react-native';
-import getBandsService from 'services/bands';
 
 class Bands extends Component {
   static navigationOptions = {

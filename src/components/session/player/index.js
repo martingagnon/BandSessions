@@ -1,16 +1,15 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View, Text, Slider} from 'react-native';
 
 import Sound from 'react-native-sound';
-import Comments from './comments';
-import styles from './styles'
-
 import PlayerStates from 'constants/player-states';
 import * as Actions from 'actions/player';
-
 import {getTimeString} from 'services/utils';
+
+import {View, Text, Slider} from 'react-native';
+import Comments from './comments';
+import styles from './styles';
 
 class Player extends Component {
   constructor(props) {

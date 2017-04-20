@@ -1,18 +1,16 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Text, View} from 'react-native';
 
-import * as Actions from 'actions/audio-recorder';
 import playerStates from 'constants/player-states';
-import styles from './styles';
-
+import * as Actions from 'actions/audio-recorder';
+import {getTimeString} from 'services/utils';
 import {AudioUtils} from 'react-native-audio';
 
-import {Container, Block, Center} from 'ui';
+import {Text, View} from 'react-native';
 import {Button} from 'nachos-ui';
-
-import {getTimeString} from 'services/utils';
+import {Container, Block, Center} from 'ui';
+import styles from './styles';
 
 class RecordSession extends Component {
   static navigationOptions = {

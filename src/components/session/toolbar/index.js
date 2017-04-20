@@ -8,7 +8,6 @@ import * as CommentsActions from 'actions/comments';
 import PlayerStates from 'constants/player-states';
 import {Button} from 'nachos-ui';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import styles from './styles';
 
 class Toolbar extends Component {

@@ -2,10 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import * as Actions from 'actions/sessions';
 import fileTransferStates from 'constants/file-transfer-states';
-import Container from 'ui/container';
+import * as Actions from 'actions/sessions';
+
 import {Input, Button} from 'nachos-ui';
+import Container from 'ui/container';
 
 class AddSession extends Component {
   static navigationOptions = {

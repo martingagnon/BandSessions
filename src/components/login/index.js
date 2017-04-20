@@ -2,10 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import Container from 'ui/container';
 import * as CurrentUserActions from 'actions/current-user';
 
 import {LoginButton, AccessToken} from 'react-native-fbsdk';
+import Container from 'ui/container';
 
 class Login extends Component {
   static navigationOptions = {

@@ -2,12 +2,12 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import * as CommentActions from 'actions/comments';
-import * as PlayerActions from 'actions/player';
 import PlayerStates from 'constants/player-states';
-import Container from 'ui/container';
+import * as PlayerActions from 'actions/player';
+import * as CommentActions from 'actions/comments';
 
 import {Input, Button} from 'nachos-ui';
+import Container from 'ui/container';
 
 class AddComment extends Component {
   static navigationOptions = {

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {ListView} from 'react-native';
 
+import {ListView} from 'react-native';
 import BandItem from './band-item';
 
 export default class BandList extends Component {
