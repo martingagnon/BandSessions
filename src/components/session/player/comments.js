@@ -55,7 +55,7 @@ class Comments extends Component {
   }
 
   render() {
-    const comments = this.props.comments[this.props.session.id];
+    const comments = this.props.comments[this.props.session.id] || [];
     const {dimensions} = this.state;
 
     return (
