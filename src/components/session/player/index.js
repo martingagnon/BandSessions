@@ -5,6 +5,7 @@ import {View, Text} from 'react-native';
 
 import Slider from 'react-native-slider';
 import Sound from 'react-native-sound';
+import Comments from './comments';
 
 import PlayerStates from 'constants/player-states';
 import * as Actions from 'actions/player';
@@ -28,8 +29,7 @@ class Player extends Component {
   waitReady(player) {
     const {sound} = player.state;
     if (sound.isLoaded()) {
-      const duration = sound.getDuration();
-      player.setState({...player.state, duration});
+      player.props.setPlayerDuration(sound.getDuration());
       player.props.setPlayerState(PlayerStates.playing);
     } else {
       setTimeout(() => player.waitReady(player), 100);
@@ -52,8 +52,8 @@ class Player extends Component {
   }
 
   render() {
-    const {duration, sound} = this.state;
-    const {currentTime, playerState} = this.props;
+    const {sound} = this.state;
+    const {playerDuration, currentTime, playerState} = this.props;
     sound.getCurrentTime((_, playing) => {
       if (playing && playerState === PlayerStates.paused) {
         sound.pause();
@@ -65,8 +65,9 @@ class Player extends Component {
 
     return (
       <View>
-        <Slider value={Math.round(currentTime)} maximumValue={Math.round(duration) | 0} onValueChange={(value) => this.sliderChanged(value)} />
-        <Text>Time: {Math.round(currentTime)}</Text><Text>Duration: {Math.round(duration | 0)}</Text>
+        <Slider value={Math.round(currentTime)} maximumValue={Math.round(playerDuration) | 0} onValueChange={(value) => this.sliderChanged(value)} />
+        <Comments session={this.props.session}/>
+        <Text>Time: {Math.round(currentTime)}</Text><Text>Duration: {Math.round(playerDuration | 0)}</Text>
       </View>
     );
   }
@@ -75,9 +76,12 @@ class Player extends Component {
 Player.propTypes = {
   audioPath: PropTypes.string.isRequired,
   setPlayerTime: PropTypes.func.isRequired,
+  setPlayerDuration: PropTypes.func.isRequired,
   setPlayerState: PropTypes.func.isRequired,
   playerState: PropTypes.number.isRequired,
-  currentTime: PropTypes.number.isRequired
+  playerDuration: PropTypes.number.isRequired,
+  currentTime: PropTypes.number.isRequired,
+  session: PropTypes.object.isRequired
 };
 
 export default connect(
