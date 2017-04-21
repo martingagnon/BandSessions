@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View} from 'react-native';
+import {Text} from 'react-native';
 
 import * as Actions from 'actions/session';
 import * as PlayerActions from 'actions/player';
 import * as CommentsActions from 'actions/comments';
 import PlayerStates from 'constants/player-states';
 import Player from './player';
+import Comments from './comments';
 import Toolbar from './toolbar';
 import {Content, Container} from 'ui';
 import getCommentsService from 'services/comments';
@@ -44,18 +45,16 @@ class Session extends Component {
     const {transferState, progress, audioPath} = this.props;
     const {session} = this.state;
 
-    const comments = this.props.comments[session.id] || [];
-    const commentsCount = comments.length;
-
-    const buttonStyle = {height: 50, width: 75};
-    const commentButtonStyle = {height: 50, width: 160};
-    const playButtonStyle = {height: 100, width: 100};
-
     return (
       <Container>
-        <Content>
-          {!!audioPath ? (<Player session={session} audioPath={audioPath}/>) : (<View></View>) }
-        </Content>
+        {!!audioPath ? (
+          <Content>
+            <Player session={session} audioPath={audioPath}/>
+            <Comments session={session} />
+          </Content>
+        ) : (
+          <Content><Text>{progress}</Text></Content>
+        ) }
         <Toolbar onAddComment={() => this.addComment()} session={this.state.session} />
       </Container>
     );

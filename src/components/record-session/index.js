@@ -12,6 +12,8 @@ import {AudioUtils} from 'react-native-audio';
 import {Container, Block, Center} from 'ui';
 import {Button} from 'nachos-ui';
 
+import {getTimeString} from 'services/utils';
+
 class RecordSession extends Component {
   static navigationOptions = {
     title: 'Record'
@@ -44,18 +46,9 @@ class RecordSession extends Component {
     this.props.toggleRecordPause();
   }
 
-  getTimeString(seconds) {
-    const date = new Date(null);
-    date.setSeconds(seconds);
-
-    const hoursStart = 11;
-    const length = 8;
-    return date.toISOString().substr(hoursStart, length);
-  }
-
   render() {
     const {recordingState, time} = this.props;
-    const timeString = this.getTimeString(time);
+    const timeString = getTimeString(time);
 
     const recordingButtonStyle = {height: 100, width:100};
     const saveButtonStyle = {height: 75, width:75};

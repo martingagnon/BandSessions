@@ -1,14 +1,16 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View, Text} from 'react-native';
+import {View, Text, Slider} from 'react-native';
 
-import Slider from 'react-native-slider';
 import Sound from 'react-native-sound';
 import Comments from './comments';
+import styles from './styles'
 
 import PlayerStates from 'constants/player-states';
 import * as Actions from 'actions/player';
+
+import {getTimeString} from 'services/utils';
 
 class Player extends Component {
   constructor(props) {
@@ -47,8 +49,20 @@ class Player extends Component {
     });
   }
 
-  sliderChanged(value) {
+  sliderChanged() {
+    if (!this.state.stateBeforeDrag) {
+      this.setState({...this.state, stateBeforeDrag: this.props.playerState});
+    }
+    this.props.setPlayerState(PlayerStates.paused);
+  }
+
+  slidingComplete(value) {
+    if (this.state.stateBeforeDrag === PlayerStates.playing) {
+      this.props.setPlayerState(PlayerStates.playing);
+    }
+    this.props.setPlayerTime(value);
     this.state.sound.setCurrentTime(value);
+    this.setState({...this.state, stateBeforeDrag: null});
   }
 
   render() {
@@ -65,9 +79,16 @@ class Player extends Component {
 
     return (
       <View>
-        <Slider value={Math.round(currentTime)} maximumValue={Math.round(playerDuration) | 0} onValueChange={(value) => this.sliderChanged(value)} />
+        <Slider value={currentTime}
+          minimumValue={0}
+          maximumValue={playerDuration}
+          onValueChange={(value) => this.sliderChanged(value)}
+          onSlidingComplete={(value) => this.slidingComplete(value)}
+          />
         <Comments session={this.props.session}/>
-        <Text>Time: {Math.round(currentTime)}</Text><Text>Duration: {Math.round(playerDuration | 0)}</Text>
+        <View style={styles.time}>
+          <Text>{getTimeString(currentTime)}</Text><Text>{getTimeString(playerDuration | 0)}</Text>
+        </View>
       </View>
     );
   }
