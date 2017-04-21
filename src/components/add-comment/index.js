@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 import * as CommentActions from 'actions/comments';
 import * as PlayerActions from 'actions/player';
-import PlayerStates from 'constants/player-states';
 import Container from 'ui/container';
 
 import {Input, Button} from 'nachos-ui';
@@ -41,7 +40,7 @@ class AddComment extends Component {
 }
 
 AddComment.propTypes = {
-  setPlayerState: PropTypes.func.isRequired,
+  play: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   currentUser: PropTypes.object.isRequired
 };
