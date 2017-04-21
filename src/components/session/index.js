@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View, Text} from 'react-native';
 
 import * as Actions from 'actions/session';
 import * as PlayerActions from 'actions/player';
