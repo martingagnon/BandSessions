@@ -6,7 +6,7 @@ import {Text} from 'react-native';
 import * as Actions from 'actions/session';
 import * as PlayerActions from 'actions/player';
 import * as CommentsActions from 'actions/comments';
-import PlayerStates from 'constants/player-states';
+import TransferState from 'constants/file-transfer-states';
 import Player from './player';
 import Comments from './comments';
 import Toolbar from './toolbar';
@@ -36,7 +36,7 @@ class Session extends Component {
   }
 
   addComment() {
-    this.props.setPlayerState(PlayerStates.paused);
+    this.props.pause();
     const navigate = this.props.navigation.navigate;
     navigate('AddComment', {session: this.props.navigation.state.params.session});
   }
@@ -47,7 +47,7 @@ class Session extends Component {
 
     return (
       <Container>
-        {!!audioPath ? (
+        {transferState === TransferState.completed ? (
           <Content>
             <Player session={session} audioPath={audioPath}/>
             <Comments session={session} />
@@ -63,8 +63,9 @@ class Session extends Component {
 
 Session.propTypes = {
   downloadSession: PropTypes.func.isRequired,
-  setPlayerState: PropTypes.func.isRequired,
-  updateComments: PropTypes.func.isRequired
+  pause: PropTypes.func.isRequired,
+  updateComments: PropTypes.func.isRequired,
+  progress: PropTypes.number.isRequired
 };
 
 export default connect(

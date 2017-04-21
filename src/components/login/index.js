@@ -2,42 +2,24 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import Container from 'ui/container';
+import {Center} from 'ui';
 import * as CurrentUserActions from 'actions/current-user';
 
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
+import {LoginButton} from 'react-native-fbsdk';
 
 class Login extends Component {
-  static navigationOptions = {
-    title: 'Login'
-  };
-
   constructor(props) {
     super(props);
-    this.state = {showLogin: false};
-    this.validateAccessToken();
-  }
-
-  async validateAccessToken() {
-    const accessToken = await AccessToken.getCurrentAccessToken();
-    if (accessToken) {
-      this.doLoggedIn();
-    }
-    this.setState({showLogin: true});
   }
 
   doLoggedIn() {
     this.props.updateCurrentuser();
-    const navigate = this.props.navigation.navigate;
-    navigate('Bands');
+    this.props.onLogin();
   }
 
   render() {
-    const {showLogin} = this.state;
-
     return (
-      <Container>
-        {showLogin ? (
+      <Center>
         <LoginButton readPermissions={['email']}
           onLoginFinished={
             (error, result) => {
@@ -46,14 +28,14 @@ class Login extends Component {
               }
             }
           }/>
-        ) : null}
-      </Container>
+      </Center>
     );
   }
 }
 
 Login.propTypes = {
-  updateCurrentuser: PropTypes.func.isRequired
+  updateCurrentuser: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired
 };
 
 export default connect(

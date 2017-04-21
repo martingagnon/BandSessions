@@ -1,4 +1,4 @@
-import {getBandsService} from 'services/bands';
+import getBandsService from 'services/bands';
 
 export const UPDATE_BANDS = 'UPDATE_BANDS';
 export const ADD_BAND = 'ADD_BAND';
