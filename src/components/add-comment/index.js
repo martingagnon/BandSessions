@@ -22,7 +22,7 @@ class AddComment extends Component {
   onAddComment() {
     const {session, currentTime, comment, emotion} = this.state;
     this.props.addComment(session, comment, currentTime, emotion, this.props.currentUser);
-    this.props.setPlayerState(PlayerStates.playing);
+    this.props.play();
     this.props.navigation.goBack();
   }
 

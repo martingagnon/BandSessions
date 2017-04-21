@@ -12,15 +12,24 @@ const downloadError = (error) => ({type: SESSION_DOWNLOAD_ERROR, error});
 
 export const downloadSession = (session) => {
   return async (dispatch) => {
+    dispatch(downloadProgress(0));
     dispatch(downloadPending());
+    const {dirs} = RNFetchBlob.fs;
+    const path = `${dirs.CacheDir}/${session.id}`;
+
     try {
-      const response = await RNFetchBlob.config({fileCache: true}).fetch('GET', session.audio).progress((received, total) => {
-        dispatch(downloadProgress(received / total));
-      });
-      const audioPath = response.path();
-      dispatch(downloadCompleted(audioPath));
+      const exists = await RNFetchBlob.fs.exists(path);
+
+      if (!exists) {
+        await RNFetchBlob.config({path}).fetch('GET', session.audio).progress((received, total) => {
+          dispatch(downloadProgress(received / total));
+        });
+      }
+
+      dispatch(downloadCompleted(path));
+      downloadProgress(100);
     } catch (error) {
-      dispatch(downloadError(error));
+      dispatch(downloadError(path));
     }
   };
 };

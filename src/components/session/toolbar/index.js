@@ -11,6 +11,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
 
+const SECONDS_COMMENT = 5;
+
 class Toolbar extends Component {
   static navigationOptions = {
     title: ({ state }) => state.params.session.name.toString()
@@ -24,7 +26,7 @@ class Toolbar extends Component {
   componentWillReceiveProps() {
     const comments = this.props.comments[this.props.session.id] || [];
     comments.sort((commentA, commentB) => commentA.time - commentB.time);
-    const nextComment = comments.find((comment) => comment.time > this.props.currentTime);
+    const nextComment = comments.find((comment) => comment.time > (this.props.currentTime + SECONDS_COMMENT + 1));
     const previousComment = comments.concat([]).reverse().find((comment) => comment.time < this.props.currentTime);
     this.setState({...this.state, previousComment, nextComment});
   }
@@ -55,11 +57,11 @@ class Toolbar extends Component {
   }
 
   onPreviousComment() {
-    this.props.setPlayerTime(this.state.previousComment.time);
+    this.props.setPlayerTime(this.state.previousComment.time - SECONDS_COMMENT);
   }
 
   onNextComment() {
-    this.props.setPlayerTime(this.state.nextComment.time);
+    this.props.setPlayerTime(this.state.nextComment.time - SECONDS_COMMENT);
   }
 
   render() {
@@ -86,7 +88,7 @@ class Toolbar extends Component {
           </View>
           <View style={styles.previousNextRow}>
             <View style={styles.previousNextButton}><Button style={buttonStyle} kind="squared" iconName="md-skip-backward" onPress={() => this.onPreviousComment()} disabled={!previousComment}/></View>
-            <View style={styles.previousNextButton}><Button style={buttonStyle} kind="squared" iconName="md-skip-forward" onPress={() => () => this.onNextComment()} disabled={!nextComment}/></View>
+            <View style={styles.previousNextButton}><Button style={buttonStyle} kind="squared" iconName="md-skip-forward" onPress={() => this.onNextComment()} disabled={!nextComment}/></View>
           </View>
           <View style={styles.addCommentRow}>
             <Button style={commentButtonStyle} kind="squared" iconSize={30} iconName="md-add-circle" onPress={() => this.props.onAddComment()}/>

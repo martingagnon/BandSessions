@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {View, Text, Slider} from 'react-native';
 
 import Comments from './comments';
-import styles from './styles'
+import styles from './styles';
 
 import PlayerStates from 'constants/player-states';
 import * as Actions from 'actions/player';
