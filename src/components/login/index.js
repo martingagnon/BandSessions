@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import Container from 'ui/container';
+import {Center} from 'ui';
 import * as CurrentUserActions from 'actions/current-user';
 
 import {LoginButton} from 'react-native-fbsdk';
@@ -19,7 +19,7 @@ class Login extends Component {
 
   render() {
     return (
-      <Container>
+      <Center>
         <LoginButton readPermissions={['email']}
           onLoginFinished={
             (error, result) => {
@@ -28,7 +28,7 @@ class Login extends Component {
               }
             }
           }/>
-      </Container>
+      </Center>
     );
   }
 }
