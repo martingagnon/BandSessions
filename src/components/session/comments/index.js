@@ -3,6 +3,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {View, Text, ListView} from 'react-native';
+import {Content} from 'ui';
+
+const COMMENTS_SECONDS = 5;
 
 class Comments extends Component {
   constructor(props) {
@@ -13,7 +16,7 @@ class Comments extends Component {
 
   componentWillReceiveProps({comments, currentTime}) {
     const allSessionComments = (comments[this.props.session.id] || []);
-    const sessionComments = allSessionComments.filter((comment) => Math.abs(currentTime - comment.time) <= 5);
+    const sessionComments = allSessionComments.filter((comment) => Math.abs(currentTime - comment.time) <= COMMENTS_SECONDS);
     const dataSource = this.state.dataSource.cloneWithRows(sessionComments);
 
     this.setState({...this.state, dataSource});
@@ -29,12 +32,12 @@ class Comments extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <Content>
         <ListView dataSource={this.state.dataSource}
           automaticallyAdjustContentInsets={false}
           enableEmptySections={true}
           renderRow={(comment) => this.renderComment(comment)} />
-      </View>
+      </Content>
     );
   }
 }

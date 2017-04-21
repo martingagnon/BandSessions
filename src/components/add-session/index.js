@@ -34,7 +34,7 @@ class AddSession extends Component {
   };
 
   render() {
-    const {transferState, progress} = this.props;
+    // TODO: Add progress popup (Dan?) const {transferState, progress} = this.props;
 
     return (
       <Container>
