@@ -36,7 +36,7 @@ class Session extends Component {
   }
 
   addComment() {
-    this.props.setPlayerState(PlayerStates.paused);
+    this.props.pause();
     const navigate = this.props.navigation.navigate;
     navigate('AddComment', {session: this.props.navigation.state.params.session});
   }
@@ -63,7 +63,7 @@ class Session extends Component {
 
 Session.propTypes = {
   downloadSession: PropTypes.func.isRequired,
-  setPlayerState: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired,
   updateComments: PropTypes.func.isRequired
 };
 

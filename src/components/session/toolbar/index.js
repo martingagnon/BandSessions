@@ -16,16 +16,29 @@ class Toolbar extends Component {
     title: ({ state }) => state.params.session.name.toString()
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentWillReceiveProps() {
+    const comments = this.props.comments[this.props.session.id] || [];
+    comments.sort((commentA, commentB) => commentA.time - commentB.time);
+    const nextComment = comments.find((comment) => comment.time > this.props.currentTime);
+    const previousComment = comments.concat([]).reverse().find((comment) => comment.time < this.props.currentTime);
+    this.setState({...this.state, previousComment, nextComment});
+  }
+
   play() {
-    this.props.setPlayerState(PlayerStates.playing);
+    this.props.play();
   }
 
   pause() {
-    this.props.setPlayerState(PlayerStates.paused);
+    this.props.pause();
   }
 
   togglePlayPause() {
-    if (this.props.playerState !== PlayerStates.paused) {
+    if (this.props.playerState === PlayerStates.playing) {
       this.pause();
     } else {
       this.play();
@@ -41,12 +54,21 @@ class Toolbar extends Component {
     this.props.addComment(session, '', currentTime, emotion, currentUser);
   }
 
+  onPreviousComment() {
+    this.props.setPlayerTime(this.state.previousComment.time);
+  }
+
+  onNextComment() {
+    this.props.setPlayerTime(this.state.nextComment.time);
+  }
+
   render() {
     const playIconName = this.nextActionIsPlay() ? 'md-play' : 'md-pause';
 
     const buttonStyle = {height: 50, width: 75};
     const commentButtonStyle = {height: 50, width: 160};
     const playButtonStyle = {height: 100, width: 100};
+    const {previousComment, nextComment} = this.state;
 
     return (
       <View style={styles.footer}>
@@ -63,8 +85,8 @@ class Toolbar extends Component {
             <Text>Comments</Text>
           </View>
           <View style={styles.previousNextRow}>
-            <View style={styles.previousNextButton}><Button style={buttonStyle} kind="squared" iconName="md-skip-backward"/></View>
-            <View style={styles.previousNextButton}><Button style={buttonStyle} kind="squared" iconName="md-skip-forward"/></View>
+            <View style={styles.previousNextButton}><Button style={buttonStyle} kind="squared" iconName="md-skip-backward" onPress={() => this.onPreviousComment()} disabled={!previousComment}/></View>
+            <View style={styles.previousNextButton}><Button style={buttonStyle} kind="squared" iconName="md-skip-forward" onPress={() => () => this.onNextComment()} disabled={!nextComment}/></View>
           </View>
           <View style={styles.addCommentRow}>
             <Button style={commentButtonStyle} kind="squared" iconSize={30} iconName="md-add-circle" onPress={() => this.props.onAddComment()}/>
@@ -76,7 +98,8 @@ class Toolbar extends Component {
 }
 
 Toolbar.propTypes = {
-  setPlayerState: PropTypes.func.isRequired,
+  play: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   onAddComment: PropTypes.func.isRequired,
   session: PropTypes.object.isRequired

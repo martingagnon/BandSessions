@@ -3,7 +3,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {View, Text, Slider} from 'react-native';
 
-import Sound from 'react-native-sound';
 import Comments from './comments';
 import styles from './styles'
 
@@ -15,67 +14,34 @@ import {getTimeString} from 'services/utils';
 class Player extends Component {
   constructor(props) {
     super(props);
-    const sound = new Sound(props.audioPath, '', () => {});
-    this.state = {position: 0, sound};
+    this.state = {};
   }
 
-  componentDidMount() {
-    this.waitReady(this);
+  componentWillMount() {
+    this.props.preparePlayer(this.props.audioPath);
   }
 
   componentWillUnmount() {
-    const {sound} = this.state;
-    sound.stop();
-  }
-
-  waitReady(player) {
-    const {sound} = player.state;
-    if (sound.isLoaded()) {
-      player.props.setPlayerDuration(sound.getDuration());
-      player.props.setPlayerState(PlayerStates.playing);
-    } else {
-      setTimeout(() => player.waitReady(player), 100);
-    }
-  }
-
-  playerLoop() {
-    const player = this;
-    const {sound} = player.state;
-    sound.getCurrentTime((currentTime, playing) => {
-      if (playing) {
-        player.props.setPlayerTime(currentTime);
-        setTimeout(() => player.playerLoop(player), 100);
-      }
-    });
+    this.props.stop();
   }
 
   sliderChanged() {
     if (!this.state.stateBeforeDrag) {
       this.setState({...this.state, stateBeforeDrag: this.props.playerState});
     }
-    this.props.setPlayerState(PlayerStates.paused);
+    this.props.pause();
   }
 
   slidingComplete(value) {
-    if (this.state.stateBeforeDrag === PlayerStates.playing) {
-      this.props.setPlayerState(PlayerStates.playing);
-    }
     this.props.setPlayerTime(value);
-    this.state.sound.setCurrentTime(value);
+    if (this.state.stateBeforeDrag === PlayerStates.playing) {
+      this.props.play();
+    }
     this.setState({...this.state, stateBeforeDrag: null});
   }
 
   render() {
-    const {sound} = this.state;
-    const {playerDuration, currentTime, playerState} = this.props;
-    sound.getCurrentTime((_, playing) => {
-      if (playing && playerState === PlayerStates.paused) {
-        sound.pause();
-      } else if (!playing && playerState === PlayerStates.playing) {
-        sound.play();
-        this.playerLoop();
-      }
-    });
+    const {playerDuration, currentTime} = this.props;
 
     return (
       <View>
@@ -97,8 +63,10 @@ class Player extends Component {
 Player.propTypes = {
   audioPath: PropTypes.string.isRequired,
   setPlayerTime: PropTypes.func.isRequired,
-  setPlayerDuration: PropTypes.func.isRequired,
-  setPlayerState: PropTypes.func.isRequired,
+  play: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired,
+  stop: PropTypes.func.isRequired,
+  preparePlayer: PropTypes.func.isRequired,
   playerState: PropTypes.number.isRequired,
   playerDuration: PropTypes.number.isRequired,
   currentTime: PropTypes.number.isRequired,
