@@ -4,7 +4,7 @@ export const prepareRecording = (audioPath) => {
   AudioRecorder.prepareRecordingAtPath(audioPath, {
     SampleRate: 22050,
     Channels: 1,
-    AudioQuality: 'Low',
+    AudioQuality: 'High',
     AudioEncoding: 'aac',
     AudioEncodingBitRate: 32000
   });

@@ -8,9 +8,9 @@ import playerStates from 'constants/player-states';
 import styles from './styles';
 
 import {AudioUtils} from 'react-native-audio';
-
-import {Container, Block, Center} from 'ui';
+import KeepAwake from 'react-native-keep-awake';
 import {Button} from 'nachos-ui';
+import {Container, Block, Center} from 'ui';
 
 import {getTimeString} from 'services/utils';
 
@@ -29,10 +29,12 @@ class RecordSession extends Component {
 
   componentDidMount() {
     this.props.prepareRecording(this.state.audioPath);
+    KeepAwake.activate();
   }
 
   componentWillUnmount() {
     this.props.stopRecording();
+    KeepAwake.deactivate();
   }
 
   async savePressed() {
@@ -58,7 +60,6 @@ class RecordSession extends Component {
         <Center>
           <Text style={styles.timer}>{timeString}</Text>
         </Center>
-
         <Block>
           <View style={styles.footer}>
             <View style={styles.recordingView}>
