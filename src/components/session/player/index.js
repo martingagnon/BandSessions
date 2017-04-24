@@ -51,10 +51,10 @@ class Player extends Component {
           onValueChange={(value) => this.sliderChanged(value)}
           onSlidingComplete={(value) => this.slidingComplete(value)}
           />
-        <Comments session={this.props.session}/>
-        <View style={styles.time}>
-          <Text>{getTimeString(currentTime)}</Text><Text>{getTimeString(playerDuration | 0)}</Text>
-        </View>
+          <Comments session={this.props.session}/>
+          <View style={styles.time}>
+            <Text>{getTimeString(currentTime)}</Text><Text>{getTimeString(playerDuration | 0)}</Text>
+          </View>
       </View>
     );
   }

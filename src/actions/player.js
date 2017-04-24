@@ -16,6 +16,7 @@ export const preparePlayer = (audioPath) => {
     audioPlayer.setOnDuration((duration) => dispatch(setPlayerDuration(duration)));
     audioPlayer.setOnState((state) => dispatch(setPlayerState(state)));
     audioPlayer.setOnTime((time) => dispatch(setTime(time)));
+
     audioPlayer.prepareAudio(audioPath);
   };
 };

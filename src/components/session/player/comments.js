@@ -20,13 +20,12 @@ class Comments extends Component {
   }
 
   positionStyle(comment) {
-    const percentage = comment.time / this.props.playerDuration;
-    const position = this.state.dimensions.width * percentage;
-    return {position: 'absolute', left: position};
-  }
-
-  thumbsStyle(comment) {
-    return {...this.positionStyle(comment), height: SIZE, borderRadius: SIZE / 2, width: SIZE};
+    if (this.props.playerDuration > 0) {
+      const percentage = comment.time / this.props.playerDuration;
+      const position = this.state.dimensions.width * percentage;
+      return {position: 'absolute', left: position};
+    }
+    return {position: 'absolute', left: 0};
   }
 
   thumbsUpElement(comment) {
@@ -60,7 +59,7 @@ class Comments extends Component {
 
     return (
       <View style={styles.container} onLayout={this.onLayout}>
-          {dimensions ? comments.map((comment) => this.createCommentElement(comment)) : undefined}
+          {dimensions ? comments.map((comment) => this.createCommentElement(comment)) : <View></View>}
       </View>
     );
   }

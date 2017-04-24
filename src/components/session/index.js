@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Text} from 'react-native';
 
 import * as Actions from 'actions/session';
 import * as PlayerActions from 'actions/player';
@@ -10,7 +9,7 @@ import TransferState from 'constants/file-transfer-states';
 import Player from './player';
 import Comments from './comments';
 import Toolbar from './toolbar';
-import {Content, Container} from 'ui';
+import {Content, Container, Loading} from 'ui';
 import getCommentsService from 'services/comments';
 
 class Session extends Component {
@@ -48,14 +47,16 @@ class Session extends Component {
     return (
       <Container>
         {transferState === TransferState.completed ? (
-          <Content>
-            <Player session={session} audioPath={audioPath}/>
-            <Comments session={session} />
-          </Content>
+          <Container>
+            <Content>
+              <Player session={session} audioPath={audioPath}/>
+              <Comments session={session} />
+            </Content>
+            <Toolbar onAddComment={() => this.addComment()} session={this.state.session} />
+          </Container>
         ) : (
-          <Content><Text>{progress}</Text></Content>
+          <Loading progress={progress}/>
         ) }
-        <Toolbar onAddComment={() => this.addComment()} session={this.state.session} />
       </Container>
     );
   }

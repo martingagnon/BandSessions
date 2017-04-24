@@ -4,7 +4,10 @@ import PlayerStates from 'constants/player-states';
 
 export default class AudioPlayer {
   prepareAudio(audioPath) {
+    Sound.setCategory('Playback');
     this.dispatchState(PlayerStates.loading);
+    this.dispatchTime(0);
+
     this.sound = new Sound(audioPath, '', (error) => {
       if (error) {
         this.dispatchState(PlayerStates.error);
