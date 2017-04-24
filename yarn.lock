@@ -4240,6 +4240,10 @@ react-native-fetch-blob@^0.10.2:
     base-64 "0.1.0"
     glob "^7.0.6"
 
+react-native-keep-awake@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-keep-awake/-/react-native-keep-awake-2.0.4.tgz#da58b3161f1360163445c53e8c1cf411068f9a75"
+
 react-native-player@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/react-native-player/-/react-native-player-0.0.9.tgz#be5247f3a8a2fccf53828accc31dd7e09d353401"

@@ -2,15 +2,16 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+import TransferState from 'constants/file-transfer-states';
 import * as Actions from 'actions/session';
 import * as PlayerActions from 'actions/player';
 import * as CommentsActions from 'actions/comments';
-import TransferState from 'constants/file-transfer-states';
+import getCommentsService from 'services/comments';
+
+import {Content, Container, Loading} from 'ui';
 import Player from './player';
 import Comments from './comments';
 import Toolbar from './toolbar';
-import {Content, Container, Loading} from 'ui';
-import getCommentsService from 'services/comments';
 
 class Session extends Component {
   static navigationOptions = {
