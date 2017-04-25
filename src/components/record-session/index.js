@@ -25,21 +25,19 @@ class RecordSession extends Component {
       audioPath: `${AudioUtils.DocumentDirectoryPath }/audio.aac`,
       bandId: props.navigation.state.params.bandId
     };
+    props.stopRecording();
+    props.prepareRecording(this.state.audioPath);
   }
 
   componentDidMount() {
-    this.props.prepareRecording(this.state.audioPath);
     KeepAwake.activate();
   }
 
   componentWillUnmount() {
-    this.props.stopRecording();
     KeepAwake.deactivate();
   }
 
   async savePressed() {
-    this.props.stopRecording();
-
     const navigate = this.props.navigation.navigate;
     navigate('AddSession', {filePath: this.state.audioPath, bandId: this.state.bandId});
   }

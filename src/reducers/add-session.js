@@ -1,4 +1,5 @@
 import {
+  SESSION_UPLOAD_UNSTARTED,
   SESSION_UPLOAD_PENDING,
   SESSION_UPLOAD_PROGRESS,
   SESSION_UPLOAD_COMPLETED,
@@ -14,6 +15,8 @@ const initialState = {
 
 export default function addSession(state = initialState, action) {
   switch (action.type) {
+    case SESSION_UPLOAD_UNSTARTED:
+      return {...state, transferState: fileTransferStates.unstarted};
     case SESSION_UPLOAD_PENDING:
       return {...state, transferState: fileTransferStates.pending};
     case SESSION_UPLOAD_PROGRESS:

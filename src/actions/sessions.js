@@ -7,6 +7,7 @@ const Blob = RNFetchBlob.polyfill.Blob;
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 window.Blob = Blob;
 
+export const SESSION_UPLOAD_UNSTARTED = 'SESSION_UPLOAD_UNSTARTED';
 export const SESSION_UPLOAD_PENDING = 'SESSION_UPLOAD_PENDING';
 export const SESSION_UPLOAD_PROGRESS = 'SESSION_UPLOAD_PROGRESS';
 export const SESSION_UPLOAD_COMPLETED = 'SESSION_UPLOAD_COMPLETED';
@@ -17,6 +18,8 @@ const uploadPending = () => ({type: SESSION_UPLOAD_PENDING});
 const uploadCompleted = (session) => ({type: SESSION_UPLOAD_COMPLETED, session});
 const uploadProgress = (progress) => ({type: SESSION_UPLOAD_PROGRESS, progress});
 const uploadError = (error) => ({type: SESSION_UPLOAD_ERROR, error});
+
+export const uploadUnstarted = () => ({type: SESSION_UPLOAD_UNSTARTED});
 
 export const addSession = (bandId, file, session) => {
   return async (dispatch) => {
@@ -36,10 +39,11 @@ export const addSession = (bandId, file, session) => {
     }, (error) => {
       dispatch(uploadError(error));
     }, async () => {
-      dispatch(uploadCompleted());
       uploadBlob.close();
       const audio = await storageFileRef.getDownloadURL();
       getSessionsService(bandId).add({...session, audio});
+      dispatch(uploadProgress(100));
+      dispatch(uploadCompleted());
     });
   };
 };
