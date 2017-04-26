@@ -34,7 +34,7 @@ export const addSession = (bandId, file, session) => {
     const uploadTask = storageFileRef.put(uploadBlob, { contentType: mime });
 
     uploadTask.on('state_changed', (snapshot) => {
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes);
       dispatch(uploadProgress(progress));
     }, (error) => {
       dispatch(uploadError(error));

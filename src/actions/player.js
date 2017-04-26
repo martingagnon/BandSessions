@@ -22,9 +22,9 @@ export const preparePlayer = (audioPath) => {
 };
 
 export const setPlayerTime = (time) => {
-  return () => {
+  return (dispatch) => {
     audioPlayer.setTime(time);
-    setTime(time);
+    dispatch(setTime(time));
   };
 };
 
