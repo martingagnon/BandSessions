@@ -7,10 +7,12 @@ import comments from './comments';
 import bands from './bands';
 import addSession from './add-session';
 import currentUser from './current-user';
+import band from './band';
+import members from './members';
 
 const rootReducer = (nav) => {
   return combineReducers({
-    nav, sessions, audioRecorder, session, player, comments, bands, addSession, currentUser
+    nav, sessions, audioRecorder, session, player, comments, bands, band, addSession, currentUser, members
   });
 };
 
