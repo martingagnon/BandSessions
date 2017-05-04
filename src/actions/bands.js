@@ -1,7 +1,11 @@
 import getBandsService from 'services/bands';
+import getBandService from 'services/band';
 
 export const UPDATE_BANDS = 'UPDATE_BANDS';
-export const ADD_BAND = 'ADD_BAND';
+export const BAND_CREATED = 'BAND_CREATED';
+export const NEW_BAND = 'NEW_BAND';
+
+const bandCreated = (band) => ({type: BAND_CREATED, band});
 
 export const updateBands = (bands) => {
   return {
@@ -10,8 +14,13 @@ export const updateBands = (bands) => {
   };
 };
 
+export const newBand = () => {
+  return {type: NEW_BAND};
+};
+
 export const addBand = (name) => {
-  return () => {
-    getBandsService().add({name});
+  return (dispatch) => {
+    const addedBandId = getBandsService().add({name}).key;
+    getBandService(addedBandId, (band) => dispatch(bandCreated(band))).observeOnce();
   };
 };

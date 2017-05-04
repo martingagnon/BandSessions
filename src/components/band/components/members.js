@@ -1,14 +1,12 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import getMembersService from 'services/members';
 import * as Actions from 'actions/members';
+import getMembersService from 'services/members';
 import {getBandUsers} from 'services/utils/users.js';
 
-import {View, ListView, StyleSheet} from 'react-native';
-import MemberItem from './member-item';
-import styles from './styles';
+import {View, Text, Image, ListView, StyleSheet} from 'react-native';
 
 class Members extends Component {
   constructor(props) {
@@ -17,12 +15,12 @@ class Members extends Component {
     this.state = {service, dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}).cloneWithRows([])};
   }
 
-  componentWillUpdate(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.band.id !== this.props.band.id) {
       this.state.service.stopObserving();
       const service = this.getServiceForProps(nextProps);
       service.observe();
-      this.setState(...this.state, service);
+      this.setState({...this.state, service});
     }
   }
 
@@ -33,11 +31,24 @@ class Members extends Component {
   }
 
   componentWillMount() {
-    this.state.service.observe();
+    if (this.state.service) {
+      this.state.service.observe();
+    }
   }
 
   componentWillUnmount() {
-    this.state.service.stopObserving();
+    if (this.state.service) {
+      this.state.service.stopObserving();
+    }
+  }
+
+  renderMember(member) {
+    return (
+      <View style={styles.user}>
+        <Image style={styles.image} source={{uri: member.picture}} />
+        <Text>{member.name}</Text>
+      </View>
+    );
   }
 
   getUsers() {
@@ -50,17 +61,27 @@ class Members extends Component {
     const dataSource = this.state.dataSource.cloneWithRows(users);
 
     return (
-      <ListView dataSource={dataSource} horizontal={true} style={styles.memberList} automaticallyAdjustContentInsets={false} enableEmptySections={true} renderRow={(item) => <MemberItem item={item} />} />
+      <View style={this.props.style}>
+        <ListView dataSource={dataSource} style={styles.list} automaticallyAdjustContentInsets={false} enableEmptySections={true} renderRow={(user) => this.renderMember(user)} />
+      </View>
     );
   }
 }
 
-Members.propTypes = {
-  members: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
-  band: PropTypes.object.isRequired,
-  updateMembers: PropTypes.func.isRequired
-};
+const styles = StyleSheet.create({
+  list: {
+    flex: 1,
+    backgroundColor: '#cfcfcf'
+  },
+  image: {
+    width: 30,
+    height: 30,
+    borderRadius: 15
+  },
+  user: {
+    flexDirection: 'row'
+  }
+});
 
 export default connect(
   state => ({...state.members, ...state.users}),

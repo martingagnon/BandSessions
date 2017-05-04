@@ -5,7 +5,9 @@ import {View, Text} from 'react-native';
 
 import * as PlayerActions from 'actions/player';
 import * as CommentsActions from 'actions/comments';
+import {BOOKMARK_EMOJI} from 'constants/comment-emojis'
 import PlayerStates from 'constants/player-states';
+
 import {Button} from 'nachos-ui';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -51,9 +53,9 @@ class Toolbar extends Component {
     return (this.props.playerState === PlayerStates.paused || this.props.playerState === PlayerStates.stopped);
   }
 
-  addThumbs(emotion) {
+  addThumbs(emoji) {
     const {session, currentTime, currentUser} = this.props;
-    this.props.addComment(session, '', currentTime, emotion, currentUser);
+    this.props.addComment(session, '', currentTime, emoji, currentUser);
   }
 
   onPreviousComment() {
@@ -75,8 +77,8 @@ class Toolbar extends Component {
     return (
       <View style={styles.footer}>
         <View style={styles.thumbsHolder}>
-          <Button type="success" style={buttonStyle} kind="squared" iconSize={30} iconName="md-thumbs-up" onPress={() => this.addThumbs(1)}/>
-          <Button type="danger" style={buttonStyle} kind="squared" iconSize={30} iconName="md-thumbs-down" onPress={() => this.addThumbs(-1)}/>
+          <Button type="success" style={buttonStyle} kind="squared" iconSize={30} iconName="md-thumbs-up" onPress={() => this.addThumbs('👍')}/>
+          <Button type="danger" style={buttonStyle} kind="squared" iconSize={30} iconName="md-thumbs-down" onPress={() => this.addThumbs(BOOKMARK_EMOJI)}/>
         </View>
         <View style={styles.playHolder}>
           <Button type="naked" iconColor="#000000" style={playButtonStyle} kind="squared" iconSize={50} iconName={playIconName} onPress={() => this.togglePlayPause()}/>

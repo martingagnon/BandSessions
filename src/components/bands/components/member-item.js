@@ -10,7 +10,7 @@ export default class ListItem extends Component {
     return (
       <Image
         style={styles.memberImage}
-        source={{uri: this.props.item.picture.data.url}}
+        source={{uri: this.props.item.picture}}
       />
     );
   }

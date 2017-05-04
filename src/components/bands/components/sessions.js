@@ -16,7 +16,7 @@ class Sessions extends Component {
     this.state = {service, dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}).cloneWithRows([])};
   }
 
-  componentWillUpdate(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.band.id !== this.props.band.id) {
       this.state.service.stopObserving();
       const service = this.getServiceForProps(nextProps);

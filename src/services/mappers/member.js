@@ -1,3 +1,3 @@
 export default function mapper(child) {
-  return child.val();
+  return Object.assign(child.val(), {id: child.key});
 }

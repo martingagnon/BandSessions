@@ -1,10 +1,15 @@
 import getCommentsService from 'services/comments';
+import {COMMENT_EMOJI} from 'constants/comment-emojis';
+
 export const UPDATE_COMMENTS = 'UPDATE_COMMENTS';
 
-export const addComment = (session, comment, time, emotion, currentUser) => {
+export const addComment = (session, comment, time, emoji, currentUser) => {
   return async () => {
     const service = getCommentsService(session.id);
-    await service.add({comment, time, emotion, user: currentUser});
+    if (!emoji) {
+      emoji = COMMENT_EMOJI;
+    }
+    await service.add({comment, time, emoji, user: currentUser.id});
   };
 };
 

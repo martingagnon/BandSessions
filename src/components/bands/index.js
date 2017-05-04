@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+import * as Actions from 'actions/current-user';
+
 import {View} from 'react-native';
 import {Content} from 'ui';
 import BandList from './components/bands';
@@ -14,8 +16,13 @@ class Bands extends Component {
     title: 'Bands'
   };
 
+  constructor(props) {
+    super(props);
+    props.updateCurrentuser();
+  }
+
   onAddPressed = () => {
-    this.props.navigation.navigate('AddBand');
+    this.props.navigation.navigate('Band', {});
   }
 
   onSessionSelected = (session) => {
@@ -47,4 +54,4 @@ class Bands extends Component {
 
 export default connect(
   state => (state.band),
-  dispatch => bindActionCreators({}, dispatch))(Bands);
+  dispatch => bindActionCreators(Actions, dispatch))(Bands);
