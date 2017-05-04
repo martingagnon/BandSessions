@@ -13,7 +13,6 @@ class Login extends Component {
   }
 
   doLoggedIn() {
-    this.props.updateCurrentuser();
     this.props.onLogin();
   }
 

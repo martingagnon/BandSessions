@@ -20,7 +20,7 @@ class Bands extends Component {
     this.state = {service, dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}).cloneWithRows([addItem])};
   }
 
-  componentWillUpdate(nextProps) {
+  componentWillReceiveProps(nextProps) {
     const {band} = this.props;
     const {bands} = nextProps;
     if (!band && bands.length > 0) {
@@ -59,12 +59,12 @@ class Bands extends Component {
 }
 
 Bands.propTypes = {
-  onAdd: PropTypes.func.isRequired,
   bands: PropTypes.array.isRequired,
+  onAdd: PropTypes.func.isRequired,
   updateBands: PropTypes.func.isRequired,
   setBand: PropTypes.func.isRequired
 };
 
 export default connect(
-  state => ({...state.bands, ...state.band}),
+  state => ({...state.bands, ...state.band, ...state.currentUser}),
   dispatch => bindActionCreators(Object.assign(BandActions, BandsActions), dispatch))(Bands);

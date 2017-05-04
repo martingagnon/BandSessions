@@ -13,13 +13,22 @@ export const service = (serviceName, mapper, callback) => {
 
   return {
     add: (object) => {
-      databaseRef.push(object);
+      return databaseRef.push(object).key;
     },
     observe: () => {
       databaseRef.on('value', observingMethod);
     },
     stopObserving: () => {
       databaseRef.off('value', observingMethod);
+    },
+    observeOnce: () => {
+      databaseRef.once('value', observingMethod);
+    },
+    set: (object) => {
+      return databaseRef.set(object);
+    },
+    remove: () => {
+      return databaseRef.remove();
     }
   };
 };
