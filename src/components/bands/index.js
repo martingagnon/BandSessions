@@ -1,14 +1,15 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import * as Actions from 'actions/bands';
+import * as Actions from 'actions/current-user';
 
-import BandList from './components/band-list';
-import {Container, Content, Block} from 'ui';
-import {Button} from 'nachos-ui';
-import {ListView} from 'react-native';
-import getBandsService from 'services/bands';
+import {View} from 'react-native';
+import {Content} from 'ui';
+import BandList from './components/bands';
+import Sessions from './components/sessions';
+import Members from './components/members';
+import styles from './styles';
 
 class Bands extends Component {
   static navigationOptions = {
@@ -17,49 +18,40 @@ class Bands extends Component {
 
   constructor(props) {
     super(props);
-    const service = getBandsService((bands) => props.updateBands(bands));
-    this.state = {service, dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}).cloneWithRows([])};
-  }
-
-  componentWillMount() {
-    this.state.service.observe();
-  }
-
-  componentWillUnmount() {
-    this.state.service.stopObserving();
+    props.updateCurrentuser();
   }
 
   onAddPressed = () => {
-    this.props.navigation.navigate('AddBand');
+    this.props.navigation.navigate('Band', {});
   }
 
-  onBandPressed = (band) => {
-    const navigate = this.props.navigation.navigate;
-    navigate('Sessions', {band});
-  };
+  onSessionSelected = (session) => {
+    const {navigate} = this.props.navigation;
+    navigate('Session', {session});
+  }
 
   render() {
-    const dataSource = this.state.dataSource.cloneWithRows(this.props.bands);
+    const {band} = this.props;
     return (
-      <Container>
-        <Content>
-          <BandList dataSource={dataSource} onPress={(band) => {
-            this.onBandPressed(band);
-          }}/>
-        </Content>
-        <Block>
-          <Button kind="squared" iconName="md-add-circle" onPress={() => this.onAddPressed()}/>
-        </Block>
-      </Container>
+      <Content>
+        <View style={styles.bands}>
+          <BandList onAdd={() => this.onAddPressed()}/>
+        </View>
+        { band ? (
+          <Content>
+            <View style={styles.members}>
+              <Members band={band}/>
+            </View>
+            <Sessions band={band} onPress={(session) => this.onSessionSelected(session)}/>
+          </Content>
+        ) : (
+          <Content></Content>
+        )}
+      </Content>
     );
   }
 }
 
-Bands.propTypes = {
-  bands: PropTypes.array.isRequired,
-  updateBands: PropTypes.func.isRequired
-};
-
 export default connect(
-  state => (state.bands),
+  state => (state.band),
   dispatch => bindActionCreators(Actions, dispatch))(Bands);

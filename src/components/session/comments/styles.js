@@ -8,7 +8,8 @@ export default StyleSheet.create({
   thumbnail: {
     height: 44,
     width: 44,
-    marginRight: 5
+    marginRight: 5,
+    borderRadius: 22
   },
   nameIcon: {
     flexDirection: 'row'

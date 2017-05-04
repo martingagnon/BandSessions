@@ -1,10 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {View, StyleSheet} from 'react-native';
 
-import Icon from 'react-native-vector-icons/Ionicons';
-
-const SIZE = 10;
+import {View, Text, StyleSheet} from 'react-native';
 
 class Comments extends Component {
   constructor (props) {
@@ -22,39 +19,24 @@ class Comments extends Component {
   positionStyle(comment) {
     if (this.props.playerDuration > 0) {
       const percentage = comment.time / this.props.playerDuration;
-      const position = this.state.dimensions.width * percentage;
-      return {position: 'absolute', left: position};
+      const position = (this.state.dimensions.width * percentage);
+      return {position: 'absolute', left: position, fontSize: 10};
     }
-    return {position: 'absolute', left: 0};
-  }
-
-  thumbsUpElement(comment) {
-    const style = {...this.positionStyle(comment)};
-    return <Icon name="md-thumbs-up" style={style} size={SIZE} color="#94de45" key={comment.id}/>;
-  }
-
-  thumbsDownElement(comment) {
-    const style = {...this.positionStyle(comment)};
-    return <Icon name="md-thumbs-down" style={style} size={SIZE} color="#ff9c00" key={comment.id}/>;
-  }
-
-  commentElement(comment) {
-    const style = {...this.positionStyle(comment)};
-    return <Icon name="md-chatbubbles" style={style} size={SIZE} color="#000000" key={comment.id}/>;
+    return {position: 'absolute'};
   }
 
   createCommentElement(comment) {
-    if (comment.emotion === 1) {
-      return this.thumbsUpElement(comment);
-    } else if (comment.emotion === -1) {
-      return this.thumbsDownElement(comment);
-    } else {
-      return this.commentElement(comment);
-    }
+    const style = {...this.positionStyle(comment)};
+    return <Text style={style} key={comment.id}>{comment.emoji}</Text>;
+  }
+
+  getComments() {
+    const {comments, session} = this.props;
+    return comments[session.id] || [];
   }
 
   render() {
-    const comments = this.props.comments[this.props.session.id] || [];
+    const comments = this.getComments();
     const {dimensions} = this.state;
 
     return (
@@ -73,7 +55,7 @@ Comments.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    height: SIZE * 2
+    height: 20
   }
 });
 
