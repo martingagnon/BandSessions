@@ -27,4 +27,4 @@ export const get = (usersIds, callback) => {
     }
   );
   new GraphRequestManager().addRequest(infoRequest).start();
-}
+};

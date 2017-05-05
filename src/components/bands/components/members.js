@@ -6,9 +6,9 @@ import getMembersService from 'services/members';
 import * as Actions from 'actions/members';
 import {getBandUsers} from 'services/utils/users.js';
 
-import {View, ListView, StyleSheet} from 'react-native';
+import {ListView, StyleSheet} from 'react-native';
 import MemberItem from './member-item';
-import styles from './styles';
+import colors from 'components/colors';
 
 class Members extends Component {
   constructor(props) {
@@ -61,6 +61,13 @@ Members.propTypes = {
   band: PropTypes.object.isRequired,
   updateMembers: PropTypes.func.isRequired
 };
+
+const styles = StyleSheet.create({
+  memberList: {
+    height: 48,
+    backgroundColor: colors.clear
+  }
+});
 
 export default connect(
   state => ({...state.members, ...state.users}),

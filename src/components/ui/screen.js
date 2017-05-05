@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {View, StyleSheet} from 'react-native';
 
-export default class Container extends Component {
+export default class Screen extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.screen}>
         {this.props.children}
       </View>
     );
@@ -12,9 +12,8 @@ export default class Container extends Component {
 }
 
 export const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    padding: 5,
-    justifyContent: 'space-between'
+    backgroundColor: '#382c6d'
   }
 });

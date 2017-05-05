@@ -8,10 +8,9 @@ import * as BandsActions from 'actions/bands';
 import * as BandActions from 'actions/band';
 import {addItem} from './add-band-item';
 
-import {ListView} from 'react-native';
+import {ListView, StyleSheet} from 'react-native';
 import BandItem from './band-item';
 import AddBandItem from './add-band-item';
-import styles from './styles';
 
 class Bands extends Component {
   constructor(props) {
@@ -46,7 +45,7 @@ class Bands extends Component {
     if (item === addItem) {
       return <AddBandItem item={item} onPress={this.props.onAdd} />;
     } else {
-      return <BandItem item={item} selected={item === band} onPress={(band) => this.selectBand(band)} />;
+      return <BandItem band={item} selected={item === band} onPress={(band) => this.selectBand(band)} />;
     }
   }
 
@@ -64,6 +63,12 @@ Bands.propTypes = {
   updateBands: PropTypes.func.isRequired,
   setBand: PropTypes.func.isRequired
 };
+
+const styles = StyleSheet.create({
+  bandList: {
+    height: 70
+  }
+});
 
 export default connect(
   state => ({...state.bands, ...state.band, ...state.currentUser}),

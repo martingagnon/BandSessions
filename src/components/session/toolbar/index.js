@@ -25,11 +25,11 @@ class Toolbar extends Component {
     this.state = {};
   }
 
-  componentWillReceiveProps() {
-    const comments = this.props.comments[this.props.session.id] || [];
+  componentWillReceiveProps(nextProps) {
+    const comments = nextProps.comments[nextProps.session.id] || [];
     comments.sort((commentA, commentB) => commentA.time - commentB.time);
-    const nextComment = comments.find((comment) => comment.time > (this.props.currentTime + SECONDS_COMMENT + 1));
-    const previousComment = comments.concat([]).reverse().find((comment) => comment.time < this.props.currentTime);
+    const nextComment = comments.find((comment) => comment.time > (nextProps.currentTime + SECONDS_COMMENT + 1));
+    const previousComment = comments.concat([]).reverse().find((comment) => comment.time < nextProps.currentTime);
     this.setState({...this.state, previousComment, nextComment});
   }
 
