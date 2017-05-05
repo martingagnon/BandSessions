@@ -15,12 +15,15 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   content: {
-    height: 64,
+    marginTop: 30,
+    height: 38,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-between'
   },
   text: {
     fontSize: 18,
-    color: colors.white
+    fontFamily: 'OpenSans',
+    color: colors.white,
+    backgroundColor: colors.clear
   }
 });

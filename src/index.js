@@ -3,6 +3,7 @@ import {Provider, connect} from 'react-redux';
 import {addNavigationHelpers} from 'react-navigation';
 import {AppNavigator} from 'components/navigation';
 import {AccessToken} from 'react-native-fbsdk';
+import {View, StatusBar} from 'react-native';
 import Splash from 'components/splash';
 import Login from 'components/login';
 
@@ -33,12 +34,15 @@ class AppWithNavigationState extends Component {
 
   appNavigator() {
     return (
-      <AppNavigator
-        navigation={addNavigationHelpers({
-          dispatch: this.props.dispatch,
-          state: this.props.nav
-        })}
-      />
+      <View style={{flex: 1,backgroundColor: 'transparent'}}>
+        <StatusBar barStyle="light-content"/>
+        <AppNavigator
+          navigation={addNavigationHelpers({
+            dispatch: this.props.dispatch,
+            state: this.props.nav
+          })}
+        />
+      </View>
     );
   }
 

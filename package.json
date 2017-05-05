@@ -26,6 +26,7 @@
     "react-native-keep-awake": "^2.0.4",
     "react-native-player": "^0.0.9",
     "react-native-sound": "^0.9.1",
+    "react-native-svg-uri": "^1.2.0",
     "react-native-vector-icons": "^4.0.1",
     "react-navigation": "^1.0.0-beta.7",
     "react-redux": "^5.0.3",
@@ -41,5 +42,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
   }
 }
