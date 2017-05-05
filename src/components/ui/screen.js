@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
+import colors from 'components/colors';
 
 export default class Screen extends Component {
   render() {
     return (
       <View style={styles.screen}>
-        {this.props.children}
+        <Image source={require('images/bkg-blurred.png')}>
+          {this.props.children}
+        </Image>
       </View>
     );
   }
@@ -13,7 +16,6 @@ export default class Screen extends Component {
 
 export const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    backgroundColor: '#382c6d'
+    flex: 1
   }
 });

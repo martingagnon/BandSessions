@@ -16,7 +16,7 @@ export default class ListItem extends Component {
       <TouchableHighlight onPress={() => this.props.onPress(band)}>
         <View style={styles.bandItem}>
           <Image
-            style={styles.bandImage}
+            style={selected ? styles.selectedBandImage : styles.bandImage }
             source={{uri: imageUri}}
           />
           <Text style={ selected ? styles.selectedBandItemText : styles.bandItemText}>
@@ -37,11 +37,13 @@ const styles = StyleSheet.create({
   },
   bandItemText: {
     color: colors.white,
+    fontFamily: 'OpenSans',
     fontSize: 11,
     marginTop: 4
   },
   selectedBandItemText: {
     color: colors.white,
+    fontFamily: 'OpenSans-Bold',
     fontSize: 11,
     fontWeight: 'bold',
     marginTop: 4
@@ -50,6 +52,13 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40
+  },
+  selectedBandImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderColor: colors.white,
+    borderWidth: 2
   },
   selectedLine: {
     height: 2,

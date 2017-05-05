@@ -49,6 +49,8 @@ export const addSession = (bandId, file, session) => {
 };
 
 export const updateSessions = (sessions, bandId) => {
+  sessions.reverse();
+
   return {
     type: UPDATE_SESSIONS,
     sessions,
