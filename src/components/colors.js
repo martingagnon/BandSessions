@@ -6,5 +6,7 @@ export default {
   background: '#f2f2f2',
   separator: '#e9e9e9',
   border: '#eee',
-  text: '#333'
+  text: '#333',
+  shadow: '#000',
+  barney: '#9f1cb9'
 };
