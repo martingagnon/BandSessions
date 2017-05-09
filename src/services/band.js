@@ -1,11 +1,5 @@
 import {service} from './base';
-
-const mapper = (child) => {
-  return {
-    name: child.val().name,
-    id: child.key
-  };
-};
+import mapper from './mappers/band';
 
 export default function getBandService(bandId, callback) {
   return service(`bands/${bandId}`, mapper, callback);

@@ -5,9 +5,9 @@ import {connect} from 'react-redux';
 import getSessionsService from 'services/sessions';
 import * as Actions from 'actions/sessions';
 
-import {ListView} from 'react-native';
+import {View, ListView, StyleSheet} from 'react-native';
 import SessionItem from './session-item';
-import styles from './styles';
+import colors from 'components/colors';
 
 class Sessions extends Component {
   constructor(props) {
@@ -40,11 +40,14 @@ class Sessions extends Component {
   }
 
   render() {
-    const bandSessions = this.props.sessions[this.props.band.id] || [];
+    const {sessions, band} = this.props;
+    const bandSessions = sessions[band.id] || [];
     const dataSource = this.state.dataSource.cloneWithRows(bandSessions);
 
     return (
-      <ListView dataSource={dataSource} style={styles.sessionList} automaticallyAdjustContentInsets={false} enableEmptySections={true} renderRow={(item) => <SessionItem item={item} onPress={this.props.onPress} />} />
+      <View style={this.props.style}>
+        <ListView dataSource={dataSource} style={styles.sessionsList} automaticallyAdjustContentInsets={false} enableEmptySections={true} renderRow={(item) => <SessionItem item={item} onPress={this.props.onPress} />} />
+      </View>
     );
   }
 }
@@ -53,6 +56,15 @@ Sessions.propTypes = {
   band: PropTypes.object.isRequired,
   updateSessions: PropTypes.func.isRequired
 };
+
+const styles = StyleSheet.create({
+  sessionsList: {
+    flex: 1,
+    backgroundColor: colors.white,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10
+  }
+});
 
 export default connect(
   state => (state.sessions),

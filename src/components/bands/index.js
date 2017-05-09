@@ -4,16 +4,18 @@ import {connect} from 'react-redux';
 
 import * as Actions from 'actions/current-user';
 
-import {View} from 'react-native';
-import {Content} from 'ui';
+import {View, StyleSheet} from 'react-native';
+import {Header, Screen, Content} from 'ui';
 import BandList from './components/bands';
 import Sessions from './components/sessions';
 import Members from './components/members';
-import styles from './styles';
+import colors from 'components/colors'
 
 class Bands extends Component {
   static navigationOptions = {
-    title: 'Bands'
+    header: {
+      visible: false
+    }
   };
 
   constructor(props) {
@@ -33,7 +35,8 @@ class Bands extends Component {
   render() {
     const {band} = this.props;
     return (
-      <Content>
+      <Screen>
+        <Header>Recordings</Header>
         <View style={styles.bands}>
           <BandList onAdd={() => this.onAddPressed()}/>
         </View>
@@ -42,15 +45,28 @@ class Bands extends Component {
             <View style={styles.members}>
               <Members band={band}/>
             </View>
-            <Sessions band={band} onPress={(session) => this.onSessionSelected(session)}/>
+            <Sessions style={styles.sessions} band={band} onPress={(session) => this.onSessionSelected(session)}/>
           </Content>
         ) : (
           <Content></Content>
         )}
-      </Content>
+      </Screen>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  bands: {
+    height: 110
+  },
+  members: {
+    height: 48,
+    backgroundColor: colors.clear
+  },
+  sessions: {
+    flex: 1
+  }
+});
 
 export default connect(
   state => (state.band),

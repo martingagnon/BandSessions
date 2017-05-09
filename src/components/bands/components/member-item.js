@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import ReactNative from 'react-native';
 
-import styles from './styles.js';
-
-const {Image} = ReactNative;
+import {Image, StyleSheet} from 'react-native';
 
 export default class ListItem extends Component {
   render() {
@@ -15,3 +12,12 @@ export default class ListItem extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  memberImage: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    marginLeft: 5
+  }
+});

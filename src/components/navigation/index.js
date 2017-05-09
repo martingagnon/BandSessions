@@ -8,5 +8,6 @@ export const AppNavigator = StackNavigator(routes, {
         return `${state.params.title}`;
       }
     }
-  }
+  },
+  headerMode: 'none'
 });
