@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 
-export default class Screen extends Component {
+export default class Splash extends Component {
   render() {
     return (
       <View style={styles.screen}>
-        <Image source={require('images/bkg-blurred.png')}>
+        <Image source={require('images/bkg-clear.png')}>
           {this.props.children}
         </Image>
       </View>
@@ -15,7 +15,6 @@ export default class Screen extends Component {
 
 export const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    flexDirection: 'row'
+    flex: 1
   }
 });

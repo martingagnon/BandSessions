@@ -8,7 +8,7 @@ export const addItem = {isAddItem: true};
 export default class ListItem extends Component {
   render() {
     return (
-      <TouchableHighlight onPress={() => this.props.onPress(this.props.item)}>
+      <TouchableHighlight underlayColor={colors.clear} onPress={() => this.props.onPress(this.props.item)}>
         <View style={styles.addBandItem}>
           <Text style={styles.addBandItemText}>+</Text>
         </View>

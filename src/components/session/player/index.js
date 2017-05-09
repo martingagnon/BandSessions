@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {View, Text, Slider} from 'react-native';
-
-import Comments from './comments';
-import styles from './styles';
 
 import PlayerStates from 'constants/player-states';
 import * as Actions from 'actions/player';
+
+import {View, Text, Slider, StyleSheet} from 'react-native';
+import Comments from './comments';
+import colors from 'components/colors';
 
 import {getTimeString} from 'services/utils';
 
@@ -45,16 +45,16 @@ class Player extends Component {
 
     return (
       <View>
+        <View style={styles.time}>
+          <Text style={styles.timeValue}>{getTimeString(currentTime)}</Text><Text style={styles.timeValue}>{getTimeString(playerDuration | 0)}</Text>
+        </View>
+        <Comments session={this.props.session}/>
         <Slider value={currentTime}
           minimumValue={0}
           maximumValue={playerDuration}
           onValueChange={(value) => this.sliderChanged(value)}
           onSlidingComplete={(value) => this.slidingComplete(value)}
           />
-          <Comments session={this.props.session}/>
-          <View style={styles.time}>
-            <Text>{getTimeString(currentTime)}</Text><Text>{getTimeString(playerDuration | 0)}</Text>
-          </View>
       </View>
     );
   }
@@ -72,6 +72,18 @@ Player.propTypes = {
   currentTime: PropTypes.number.isRequired,
   session: PropTypes.object.isRequired
 };
+
+const styles = StyleSheet.create({
+  time: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  timeValue: {
+    fontFamily: 'OpenSans',
+    fontSize: 15,
+    color: colors.white
+  }
+});
 
 export default connect(
   state => (state.player),

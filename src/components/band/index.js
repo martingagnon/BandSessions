@@ -6,7 +6,7 @@ import * as Actions from 'actions/bands';
 
 import {View, StyleSheet} from 'react-native';
 import {Input, Button} from 'nachos-ui';
-import {Container, Content} from 'ui';
+import {Content} from 'ui';
 import UserSearch from './components/user-search';
 import Members from './components/members';
 

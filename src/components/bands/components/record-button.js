@@ -7,7 +7,7 @@ export default class RecordButton extends Component {
   render() {
     return (
       <View style={this.props.style}>
-        <TouchableHighlight onPress={() => this.props.onPress(this.props.item)}>
+        <TouchableHighlight underlayColor={colors.clear} onPress={() => this.props.onPress(this.props.item)}>
           <Image style={styles.button}
             source={require('images/btn-record.png')}
           />
@@ -21,10 +21,10 @@ export const styles = StyleSheet.create({
   button: {
     height: 54,
     width: 54,
-    shadowOffset: {width: -2, height: -2},
-    shadowRadius: 9,
+    shadowOffset: {width: 1, height: -1},
+    shadowRadius: 10,
     shadowColor: colors.shadow,
-    shadowOpacity: 0.4,
-    borderRadius: 24
+    shadowOpacity: 0.9,
+    borderRadius: 27
   }
 });

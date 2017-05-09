@@ -25,7 +25,11 @@ class Bands extends Component {
   }
 
   onAddPressed = () => {
-    this.props.navigation.navigate('Band', {});
+    // this.props.navigation.navigate('Band', {});
+  }
+
+  onRecordPressed = () => {
+    this.props.navigation.navigate('RecordSession', {bandId: this.props.band.id});
   }
 
   onSessionSelected = (session) => {
@@ -47,7 +51,7 @@ class Bands extends Component {
               <Members band={band}/>
             </View>
             <Sessions style={styles.sessions} band={band} onPress={(session) => this.onSessionSelected(session)}/>
-            <Record style={styles.record} onPress={() => this.onAddPressed()}/>
+            <Record style={styles.record} onPress={() => this.onRecordPressed()}/>
           </Content>
         ) : (
           <Content></Content>

@@ -14,7 +14,6 @@ export default class Container extends Component {
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5,
     justifyContent: 'space-between'
   }
 });

@@ -5,8 +5,11 @@ import {connect} from 'react-redux';
 import TransferStates from 'constants/file-transfer-states';
 import * as Actions from 'actions/sessions';
 import * as SessionActions from 'actions/session';
-import {Container, Content, Loading} from 'ui';
-import {Input, Button} from 'nachos-ui';
+
+import {View, StyleSheet, TextInput, KeyboardAvoidingView} from 'react-native';
+import {Screen, Loading, Button} from 'ui';
+
+import colors from 'components/colors';
 
 const LOADING_STATES = [TransferStates.pending, TransferStates.completed];
 
@@ -40,21 +43,27 @@ class AddSession extends Component {
   render() {
     const {transferState, progress} = this.props;
     const shouldShowLoading = LOADING_STATES.includes(transferState);
+    const canSave = this.state.recordingName.length > 2;
 
     return (
-      <Container>
+      <Screen>
       {shouldShowLoading ? (
         <Loading progress={progress}/>
       ) : (
-        <Content>
-          <Input status="normal" placeholder="Recording name"
-            value={this.state.recordingName}
-            onChangeText={recordingName => this.setState({...this.state, recordingName })}
-          />
-          <Button kind="squared" onPress={() => this.onSaveSessionPress()} disabled={this.state.recordingName.length <= 2}>Add</Button>
-        </Content>
+        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+          <View style={styles.center}>
+            <View style={styles.textHolder}>
+              <TextInput style={styles.input} placeholder="Recording name"
+                value={this.state.recordingName}
+                onChangeText={recordingName => this.setState({...this.state, recordingName })}/>
+            </View>
+          </View>
+          <View style={styles.footer}>
+            <Button style={styles.save} disabled={!canSave} onPress={() => this.onSaveSessionPress()} disabled={this.state.recordingName.length <= 2}>Upload & Save</Button>
+          </View>
+        </KeyboardAvoidingView>
       ) }
-      </Container>
+      </Screen>
     );
   }
 }
@@ -63,6 +72,37 @@ AddSession.propTypes = {
   addSession: PropTypes.func.isRequired,
   uploadUnstarted: PropTypes.func.isRequired
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  textHolder: {
+    flex: 1,
+    maxHeight: 60,
+    borderRadius: 20,
+    backgroundColor: colors.white
+  },
+  input: {
+    flex: 1,
+    margin: 10,
+    fontFamily: 'OpenSans'
+  },
+  footer: {
+    height: 60,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'flex-end'
+  },
+  save: {
+    flex: 1
+  }
+});
 
 export default connect(
   state => ({...state.addSession, nav: state.nav}),

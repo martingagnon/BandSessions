@@ -8,10 +8,11 @@ import * as PlayerActions from 'actions/player';
 import * as CommentsActions from 'actions/comments';
 import getCommentsService from 'services/comments';
 
-import {Content, Container, Loading} from 'ui';
+import {Screen, Header, Content, Container, Loading} from 'ui';
 import Player from './player';
 import Comments from './comments';
-import Toolbar from './toolbar';
+import Control from './toolbar/control';
+import CommentsToolbar from './toolbar/comments';
 
 class Session extends Component {
   static navigationOptions = {
@@ -41,24 +42,30 @@ class Session extends Component {
     navigate('AddComment', {session: this.props.navigation.state.params.session});
   }
 
+  onGoBack() {
+    this.props.navigation.goBack();
+  }
+
   render() {
     const {transferState, progress, audioPath} = this.props;
     const {session} = this.state;
 
     return (
-      <Container>
+      <Screen>
+        <Header onGoBack={() => this.onGoBack()}>{session.name}</Header>
         {transferState === TransferState.completed ? (
           <Container>
             <Content>
-              <Player session={session} audioPath={audioPath}/>
               <Comments session={session} />
+              <CommentsToolbar onAddComment={() => this.addComment()} session={this.state.session} />
+              <Player session={session} audioPath={audioPath}/>
             </Content>
-            <Toolbar onAddComment={() => this.addComment()} session={this.state.session} />
+            <Control onAddComment={() => this.addComment()} session={this.state.session} />
           </Container>
         ) : (
           <Loading progress={progress}/>
         ) }
-      </Container>
+      </Screen>
     );
   }
 }

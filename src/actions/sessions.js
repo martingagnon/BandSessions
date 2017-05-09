@@ -42,7 +42,7 @@ export const addSession = (bandId, file, session) => {
       uploadBlob.close();
       const audio = await storageFileRef.getDownloadURL();
       getSessionsService(bandId).add({...session, audio});
-      dispatch(uploadProgress(100));
+      dispatch(uploadProgress(1));
       dispatch(uploadCompleted());
     });
   };

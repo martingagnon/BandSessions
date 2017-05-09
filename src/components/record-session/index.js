@@ -1,16 +1,17 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Text, View} from 'react-native';
 
 import * as Actions from 'actions/audio-recorder';
 import playerStates from 'constants/player-states';
-import styles from './styles';
 
 import {AudioUtils} from 'react-native-audio';
 import KeepAwake from 'react-native-keep-awake';
-import {Button} from 'nachos-ui';
-import {Container, Block, Center} from 'ui';
+
+import {Text, View, StyleSheet} from 'react-native';
+import {Screen, Header, Center, SVGButton, Button} from 'ui';
+
+import colors from 'components/colors';
 
 import {getTimeString} from 'services/utils';
 
@@ -37,40 +38,39 @@ class RecordSession extends Component {
     KeepAwake.deactivate();
   }
 
-  async savePressed() {
+  onClose() {
+    this.props.navigation.goBack();
+  }
+
+  savePressed() {
     const navigate = this.props.navigation.navigate;
     navigate('AddSession', {filePath: this.state.audioPath, bandId: this.state.bandId});
   }
 
-  async recordPressed() {
+  recordPressed() {
     this.props.toggleRecordPause();
   }
 
   render() {
     const {recordingState, time} = this.props;
     const timeString = getTimeString(time);
-
-    const recordingButtonStyle = {height: 100, width: 100};
-    const saveButtonStyle = {height: 75, width: 75};
+    const showSaveButton = !(time === 0 || recordingState !== playerStates.paused);
 
     return (
-      <Container>
+      <Screen>
+        <Header onClose={() => this.onClose()}>Record Session</Header>
         <Center>
           <Text style={styles.timer}>{timeString}</Text>
-        </Center>
-        <Block>
-          <View style={styles.footer}>
-            <View style={styles.recordingView}>
-              <Button kind="squared" style={recordingButtonStyle} iconSize={90} iconName={(recordingState !== playerStates.recording) ? 'md-microphone' : 'md-pause'} onPress={() => this.recordPressed()}></Button>
-            </View>
-            <View style={styles.saveView}>
-              <Button kind="squared" style={saveButtonStyle} iconSize={40} iconName="md-archive" disabled={time === 0 || recordingState !== playerStates.paused} onPress={() => this.savePressed()}></Button>
-            </View>
+          <View>
+            <SVGButton height={100} width={100} svg={require('images/btn-record.svg')} onPress={() => this.recordPressed()}/>
           </View>
-        </Block>
-        <Block>
-        </Block>
-      </Container>
+        </Center>
+        <View style={styles.footer}>
+          { showSaveButton ? (
+            <Button style={styles.saveButton} onPress={() => this.savePressed()}>Save this recording</Button>
+          ) : (null)}
+        </View>
+      </Screen>
     );
   }
 }
@@ -81,8 +81,25 @@ RecordSession.propTypes = {
   prepareRecording: PropTypes.func.isRequired,
   stopRecording: PropTypes.func.isRequired,
   toggleRecordPause: PropTypes.func.isRequired
-
 };
+
+const styles = StyleSheet.create({
+  timer: {
+    fontFamily: 'OpenSans-light',
+    fontSize: 50,
+    backgroundColor: colors.clear,
+    color: colors.white
+  },
+  saveButton: {
+    height: 60,
+    flex: 1
+  },
+  footer: {
+    height: 60,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  }
+});
 
 export default connect(
     state => (state.audioRecorder),

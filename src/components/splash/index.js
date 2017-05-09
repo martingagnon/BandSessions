@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Container from 'ui/container';
+import SplashBackground from 'ui/splash';
 
 export default class Splash extends Component {
   static navigationOptions = {
@@ -8,7 +8,7 @@ export default class Splash extends Component {
 
   render() {
     return (
-      <Container></Container>
+      <SplashBackground/>
     );
   }
 }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {Text, StyleSheet} from 'react-native';
 import {Center} from 'ui';
+import colors from 'components/colors';
 
 export default class Loading extends Component {
   render() {
@@ -17,7 +18,9 @@ export default class Loading extends Component {
 
 export const styles = StyleSheet.create({
   text: {
-    fontWeight: 'bold',
-    fontSize: 50
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: 50,
+    color: colors.white,
+    backgroundColor: colors.clear
   }
 });
