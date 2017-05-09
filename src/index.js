@@ -34,7 +34,7 @@ class AppWithNavigationState extends Component {
 
   appNavigator() {
     return (
-      <View style={{flex: 1,backgroundColor: 'transparent'}}>
+      <View style={{flex: 1, backgroundColor: 'transparent'}}>
         <StatusBar barStyle="light-content"/>
         <AppNavigator
           navigation={addNavigationHelpers({

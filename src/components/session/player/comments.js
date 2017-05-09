@@ -9,7 +9,7 @@ class Comments extends Component {
     this.state = {dimensions: undefined};
   }
 
-  onLayout = event => {
+  onLayout(event) {
     const {width, height} = event.nativeEvent.layout;
     if (!this.state.dimensions || width !== this.state.dimensions.width) {
       this.setState({...this.state, dimensions: {width, height}});
@@ -40,7 +40,7 @@ class Comments extends Component {
     const {dimensions} = this.state;
 
     return (
-      <View style={styles.container} onLayout={this.onLayout}>
+      <View style={styles.container} onLayout={(event) => this.onLayout(event)}>
           {dimensions ? comments.map((comment) => this.createCommentElement(comment)) : <View></View>}
       </View>
     );

@@ -62,7 +62,7 @@ class RecordSession extends Component {
         <Center>
           <Text style={styles.timer}>{timeString}</Text>
           <View>
-            <SVGButton height={100} width={100} svg={require('images/btn-record.svg')} onPress={() => this.recordPressed()}/>
+            <SVGButton height={100} width={100} svg={require('images/btn-record-svg.svg')} onPress={() => this.recordPressed()}/>
           </View>
         </Center>
         <View style={styles.footer}>
