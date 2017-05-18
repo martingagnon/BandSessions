@@ -6,7 +6,7 @@ import TransferState from 'constants/file-transfer-states';
 import * as Actions from 'actions/session';
 import * as PlayerActions from 'actions/player';
 import * as CommentsActions from 'actions/comments';
-import getCommentsService from 'services/comments';
+import getCommentsService from 'services/firebase/comments';
 
 import {Screen, Header, Content, Container, Loading} from 'ui';
 import Player from './player';

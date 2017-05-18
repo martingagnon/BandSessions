@@ -1,5 +1,5 @@
-import getBandsService from 'services/bands';
-import getBandService from 'services/band';
+import getBandsService from 'services/firebase/bands';
+import getBandService from 'services/firebase/band';
 
 export const UPDATE_BANDS = 'UPDATE_BANDS';
 export const BAND_CREATED = 'BAND_CREATED';

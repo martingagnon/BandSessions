@@ -1,6 +1,6 @@
 import RNFetchBlob from 'react-native-fetch-blob';
-import * as database from 'services/firebase';
-import getSessionsService from 'services/sessions';
+import * as database from 'services/firebase/firebase';
+import getSessionsService from 'services/firebase/sessions';
 
 const fs = RNFetchBlob.fs;
 const Blob = RNFetchBlob.polyfill.Blob;

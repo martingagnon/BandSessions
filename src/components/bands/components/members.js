@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import getMembersService from 'services/members';
+import getMembersService from 'services/firebase/members';
 import * as Actions from 'actions/members';
 import {getBandUsers} from 'services/utils/users.js';
 

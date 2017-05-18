@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import * as Actions from 'actions/members';
-import getMembersService from 'services/members';
+import getMembersService from 'services/firebase/members';
 import {getBandUsers} from 'services/utils/users.js';
 
 import {View, Text, Image, ListView, StyleSheet} from 'react-native';

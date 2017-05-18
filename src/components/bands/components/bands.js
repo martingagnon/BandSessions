@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import getBandsService from 'services/bands';
+import getBandsService from 'services/firebase/bands';
 
 import * as BandsActions from 'actions/bands';
 import * as BandActions from 'actions/band';

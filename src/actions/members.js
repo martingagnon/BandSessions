@@ -1,4 +1,4 @@
-import getMemberService from 'services/member';
+import getMemberService from 'services/firebase/member';
 import {fetchUsers} from './users';
 
 export const UPDATE_MEMBERS = 'UPDATE_MEMBERS';

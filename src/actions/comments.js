@@ -1,4 +1,4 @@
-import getCommentsService from 'services/comments';
+import getCommentsService from 'services/firebase/comments';
 import {COMMENT_EMOJI} from 'constants/comment-emojis';
 
 export const UPDATE_COMMENTS = 'UPDATE_COMMENTS';

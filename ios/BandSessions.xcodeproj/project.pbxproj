@@ -1374,15 +1374,18 @@
 				DEVELOPMENT_TEAM = F7VBEN5L2C;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				INFOPLIST_FILE = BandSessions/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.martlabs.bandsessions.ios;
 				PRODUCT_NAME = BandSessions;
-				PROVISIONING_PROFILE = "fb704b8e-4fac-439e-9d68-554738263933";
+				PROVISIONING_PROFILE = "e53870c5-6a68-4dd0-a54a-43659304bacf";
 				PROVISIONING_PROFILE_SPECIFIER = "BandSessions AdHoc";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1392,19 +1395,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F7VBEN5L2C;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				INFOPLIST_FILE = BandSessions/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.martlabs.bandsessions.ios;
 				PRODUCT_NAME = BandSessions;
-				PROVISIONING_PROFILE = "230fd761-a38c-40f3-a6e3-71c1e15cf534";
+				PROVISIONING_PROFILE = "e53870c5-6a68-4dd0-a54a-43659304bacf";
 				PROVISIONING_PROFILE_SPECIFIER = "BandSessions AdHoc";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

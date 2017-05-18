@@ -32,6 +32,7 @@ export default class Screen extends Component {
 
 export const styles = StyleSheet.create({
   screen: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'row'
   }
 });

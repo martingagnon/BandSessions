@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import getSessionsService from 'services/sessions';
+import getSessionsService from 'services/firebase/sessions';
 import * as Actions from 'actions/sessions';
 
 import {View, ListView, StyleSheet} from 'react-native';
