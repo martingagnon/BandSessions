@@ -26,8 +26,12 @@ class RecordSession extends Component {
       audioPath: `${AudioUtils.DocumentDirectoryPath }/audio.aac`,
       bandId: props.navigation.state.params.bandId
     };
-    props.stopRecording();
-    props.prepareRecording(this.state.audioPath);
+    this.resetRecording();
+  }
+
+  resetRecording() {
+    this.props.stopRecording();
+    this.props.prepareRecording(this.state.audioPath);
   }
 
   componentDidMount() {
@@ -44,11 +48,19 @@ class RecordSession extends Component {
 
   savePressed() {
     const navigate = this.props.navigation.navigate;
-    navigate('AddSession', {filePath: this.state.audioPath, bandId: this.state.bandId});
+    navigate('AddSession', {filePath: this.state.audioPath, bandId: this.state.bandId, duration: this.props.time, bookmarks: this.props.bookmarks});
   }
 
   recordPressed() {
     this.props.toggleRecordPause();
+  }
+
+  deletePressed() {
+    this.resetRecording();
+  }
+
+  bookmarkPressed() {
+    this.props.addBookmark(this.props.time);
   }
 
   render() {
@@ -61,8 +73,10 @@ class RecordSession extends Component {
         <Header onClose={() => this.onClose()}>Record Session</Header>
         <Center>
           <Text style={styles.timer}>{timeString}</Text>
-          <View>
+          <View style={styles.controls}>
+            <SVGButton height={52} width={52} svg={require('images/btn-record-svg.svg')} onPress={() => this.deletePressed()}/>
             <SVGButton height={100} width={100} svg={require('images/btn-record-svg.svg')} onPress={() => this.recordPressed()}/>
+            <SVGButton height={52} width={52} svg={require('images/btn-record-svg.svg')} onPress={() => this.bookmarkPressed()}/>
           </View>
         </Center>
         <View style={styles.footer}>
@@ -80,7 +94,8 @@ RecordSession.propTypes = {
   time: PropTypes.number.isRequired,
   prepareRecording: PropTypes.func.isRequired,
   stopRecording: PropTypes.func.isRequired,
-  toggleRecordPause: PropTypes.func.isRequired
+  toggleRecordPause: PropTypes.func.isRequired,
+  addBookmark: PropTypes.func.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -89,6 +104,12 @@ const styles = StyleSheet.create({
     fontSize: 50,
     backgroundColor: colors.clear,
     color: colors.white
+  },
+  controls: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: 250
   },
   saveButton: {
     height: 60,

@@ -20,10 +20,9 @@ class AddSession extends Component {
 
   constructor(props) {
     super(props);
+    const {filePath, bandId, duration, bookmarks} = props.navigation.state.params;
     this.state = {
-      filePath: props.navigation.state.params.filePath,
-      bandId: props.navigation.state.params.bandId,
-      recordingName: ''
+      filePath, bandId, duration, bookmarks, recordingName: ''
     };
     this.props.uploadUnstarted();
   }
@@ -37,7 +36,7 @@ class AddSession extends Component {
   }
 
   onSaveSessionPress = () => {
-    this.props.addSession(this.state.bandId, this.state.filePath, {name: this.state.recordingName});
+    this.props.addSession(this.state.bandId, this.state.filePath, {name: this.state.recordingName, duration: this.state.duration}, this.state.bookmarks);
   };
 
   render() {

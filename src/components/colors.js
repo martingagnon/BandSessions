@@ -8,5 +8,5 @@ export default {
   border: '#eee',
   text: '#333',
   shadow: '#000',
-  barney: '#9f1cb9'
+  warmGrey: '#9b9b9b'
 };

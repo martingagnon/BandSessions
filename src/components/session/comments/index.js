@@ -28,7 +28,7 @@ class Comments extends Component {
 
   renderComment(comment) {
     const user = this.props.users[comment.user];
-    if (!user) return;
+    if (!user) return (<View></View>);
     return (
       <View style={styles.comment}>
         <Image

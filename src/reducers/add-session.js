@@ -22,7 +22,7 @@ export default function addSession(state = initialState, action) {
     case SESSION_UPLOAD_PROGRESS:
       return {...state, progress: action.progress};
     case SESSION_UPLOAD_COMPLETED:
-      return {...state, progress: 100, transferState: fileTransferStates.completed};
+      return {...state, progress: 1, transferState: fileTransferStates.completed};
     case SESSION_UPLOAD_ERROR:
       return {...state, transferState: fileTransferStates.error, error: action.error};
     default:

@@ -1,6 +1,8 @@
 import RNFetchBlob from 'react-native-fetch-blob';
 import * as database from 'services/firebase/firebase';
 import getSessionsService from 'services/firebase/sessions';
+import getCommentsService from 'services/firebase/comments';
+import {BOOKMARK_EMOJI} from 'constants/comment-emojis';
 
 const fs = RNFetchBlob.fs;
 const Blob = RNFetchBlob.polyfill.Blob;
@@ -21,7 +23,7 @@ const uploadError = (error) => ({type: SESSION_UPLOAD_ERROR, error});
 
 export const uploadUnstarted = () => ({type: SESSION_UPLOAD_UNSTARTED});
 
-export const addSession = (bandId, file, session) => {
+export const addSession = (bandId, file, session, bookmarks) => {
   return async (dispatch) => {
     dispatch(uploadPending());
 
@@ -41,7 +43,12 @@ export const addSession = (bandId, file, session) => {
     }, async () => {
       uploadBlob.close();
       const audio = await storageFileRef.getDownloadURL();
-      getSessionsService(bandId).add({...session, audio});
+      const sessionId = await getSessionsService(bandId).add({...session, audio});
+
+      const commentsService = getCommentsService(sessionId);
+      const bookmarkJobs = bookmarks.map((time) => commentsService.add({time, emoji: BOOKMARK_EMOJI}));
+      await Promise.all(bookmarkJobs);
+
       dispatch(uploadProgress(1));
       dispatch(uploadCompleted());
     });

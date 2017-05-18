@@ -3,6 +3,7 @@ import playerStates from 'constants/player-states';
 
 export const RECORDING_STATE = 'RECORDING_STATE';
 export const RECORDING_TIME = 'RECORDING_TIME';
+export const ADD_BOOKMARK = 'ADD_BOOKMARK';
 
 const setRecordingState = (recordingState) => {
   return {
@@ -14,6 +15,13 @@ const setRecordingState = (recordingState) => {
 const setRecordingTime = (time) => {
   return {
     type: RECORDING_TIME,
+    time
+  };
+};
+
+export const addBookmark = (time) => {
+  return {
+    type: ADD_BOOKMARK,
     time
   };
 };

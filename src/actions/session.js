@@ -27,7 +27,7 @@ export const downloadSession = (session) => {
       }
 
       dispatch(downloadCompleted(path));
-      downloadProgress(100);
+      downloadProgress(1);
     } catch (error) {
       dispatch(downloadError(path));
     }

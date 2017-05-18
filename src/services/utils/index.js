@@ -1,4 +1,6 @@
 export const getTimeString = (seconds) => {
+  if (seconds === null || seconds === undefined) return '';
+
   const date = new Date(null);
   date.setSeconds(seconds);
 
