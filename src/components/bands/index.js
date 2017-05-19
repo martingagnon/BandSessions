@@ -7,6 +7,7 @@ import * as Actions from 'actions/current-user';
 import {View, StyleSheet} from 'react-native';
 import {Header, Screen, Content} from 'ui';
 import BandList from './components/bands';
+import BandSettings from './components/band-settings';
 import Sessions from './components/sessions';
 import Members from './components/members';
 import Record from './components/record-button';
@@ -25,7 +26,7 @@ class Bands extends Component {
   }
 
   onAddPressed = () => {
-    // this.props.navigation.navigate('Band', {});
+    this.props.navigation.navigate('Band', {});
   }
 
   onRecordPressed = () => {
@@ -35,6 +36,10 @@ class Bands extends Component {
   onSessionSelected = (session) => {
     const {navigate} = this.props.navigation;
     navigate('Session', {session});
+  }
+
+  onBandSetting = (band) => {
+    this.props.navigation.navigate('Band', {band});
   }
 
   render() {
@@ -49,6 +54,7 @@ class Bands extends Component {
           <Content>
             <View style={styles.members}>
               <Members band={band}/>
+              <BandSettings onPress={() => this.onBandSetting(band)}/>
             </View>
             <Sessions style={styles.sessions} band={band} onPress={(session) => this.onSessionSelected(session)}/>
             <Record style={styles.record} onPress={() => this.onRecordPressed()}/>
@@ -67,7 +73,8 @@ const styles = StyleSheet.create({
   },
   members: {
     height: 48,
-    backgroundColor: colors.clear
+    backgroundColor: colors.clear,
+    flexDirection: 'row'
   },
   sessions: {
     flex: 1

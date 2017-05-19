@@ -7,6 +7,7 @@ import getMembersService from 'services/firebase/members';
 import {getBandUsers} from 'services/utils/users.js';
 
 import {View, Text, Image, ListView, StyleSheet} from 'react-native';
+import colors from 'components/colors.js'
 
 class Members extends Component {
   constructor(props) {
@@ -42,18 +43,18 @@ class Members extends Component {
     }
   }
 
-  renderMember(member) {
-    return (
-      <View style={styles.user}>
-        <Image style={styles.image} source={{uri: member.picture}} />
-        <Text>{member.name}</Text>
-      </View>
-    );
-  }
-
   getUsers() {
     const {users, members, band} = this.props;
     return getBandUsers(band.id, members, users);
+  }
+
+  renderMember(member) {
+    return (
+      <View style={styles.member}>
+        <Image style={styles.image} source={{uri: member.picture}} />
+        <Text style={styles.memberName}>{member.name}</Text>
+      </View>
+    );
   }
 
   render() {
@@ -71,15 +72,26 @@ class Members extends Component {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-    backgroundColor: '#cfcfcf'
+    backgroundColor: colors.white
   },
   image: {
-    width: 30,
-    height: 30,
-    borderRadius: 15
+    width: 36,
+    height: 36,
+    marginLeft: 17,
+    borderRadius: 18
   },
-  user: {
-    flexDirection: 'row'
+  member: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 60,
+    borderBottomWidth: 1,
+    borderColor: colors.paleGrey
+  },
+  memberName: {
+    fontSize: 14,
+    fontFamily: 'OpenSans',
+    marginLeft: 11,
+    color: colors.black
   }
 });
 

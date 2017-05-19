@@ -815,7 +815,6 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = F7VBEN5L2C;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1368,10 +1367,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = F7VBEN5L2C;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				INFOPLIST_FILE = BandSessions/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1383,8 +1382,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.martlabs.bandsessions.ios;
 				PRODUCT_NAME = BandSessions;
-				PROVISIONING_PROFILE = "e53870c5-6a68-4dd0-a54a-43659304bacf";
-				PROVISIONING_PROFILE_SPECIFIER = "BandSessions AdHoc";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

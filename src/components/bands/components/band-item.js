@@ -13,7 +13,7 @@ export default class ListItem extends Component {
     const imageUri = band.picture ? band.picture : DEFAULT_IMAGE_URI;
 
     return (
-      <TouchableHighlight onPress={() => this.props.onPress(band)}>
+      <TouchableHighlight onPress={() => this.props.onPress(band)} underlayColor={colors.clear}>
         <View style={styles.bandItem}>
           <Image
             style={selected ? styles.selectedBandImage : styles.bandImage }

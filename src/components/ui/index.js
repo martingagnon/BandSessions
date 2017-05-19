@@ -8,5 +8,6 @@ import Loading from './loading';
 import Header from './header';
 import Screen from './screen';
 import SVGButton from './svg-button';
+import NavigationButton from './navigation-button'
 
-export {Block, Container, Content, Row, Center, Loading, Header, Screen, SVGButton, Button};
+export {Block, Container, Content, Row, Center, Loading, Header, Screen, SVGButton, Button, NavigationButton};

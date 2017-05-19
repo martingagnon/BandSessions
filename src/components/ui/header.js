@@ -24,6 +24,7 @@ export default class Header extends Component {
         <Text style={styles.text}>{this.props.children}</Text>
         <View style={styles.buttonView}>
           {this.props.onClose ? this.renderClose() : null}
+          {this.props.rightView ? this.props.rightView : null}
         </View>
       </View>
     );

@@ -4,13 +4,12 @@ import {connect} from 'react-redux';
 
 import * as Actions from 'actions/bands';
 
-import {View, StyleSheet} from 'react-native';
-import {Input, Button} from 'nachos-ui';
-import {Content} from 'ui';
-import UserSearch from './components/user-search';
+import {View, TextInput, StyleSheet} from 'react-native';
+import {Screen, Header, Content, Button, NavigationButton} from 'ui';
 import Members from './components/members';
+import colors from 'components/colors';
 
-class AddBand extends Component {
+class Band extends Component {
   static navigationOptions = {
     title: 'Bands'
   };
@@ -33,54 +32,104 @@ class AddBand extends Component {
   }
 
   onAddPressed() {
-    this.props.addBand(this.state.bandName);
+    if (this.state.bandName.length > 0) {
+      this.props.addBand(this.state.bandName);
+    }
+  }
+
+  onDeletePressed() {
+    // Todo
+  }
+
+  invitePressed() {
+    // Todo
+  }
+
+  onGoBack() {
+    this.props.navigation.goBack();
+  }
+
+  addButton() {
+    return <NavigationButton onPress={() => this.onAddPressed()}>Create</NavigationButton>;
+  }
+
+  deleteButton() {
+    return <NavigationButton onPress={() => this.onDeletePressed()}>Delete</NavigationButton>;
   }
 
   render() {
     const {bandName, band, isCreate} = this.state;
+    const title = isCreate ? 'New Band' : 'Edit Band';
+    const rightView = isCreate ? this.addButton() : this.deleteButton();
+
     return (
-      <Content>
+      <Screen>
+        <Header onGoBack={() => this.onGoBack()} rightView={rightView}>{title}</Header>
         <View style={styles.header}>
-          {isCreate ? (
-            <Button kind="squared" onPress={() => this.onAddPressed()}
-              disabled={this.state.bandName.length <= 2}>Add</Button>
-            ) : (null)
-          }
         </View>
-        <Input status="normal" placeholder="Band Name"
-          value={bandName}
-          onChangeText={value => this.setState({...this.state, bandName: value })} height={60} />
+        <View style={styles.textHolder}>
+          <TextInput style={styles.textInput} placeholder="Band Name"
+            value={this.state.bandName}
+            onChangeText={bandName => this.setState({...this.state, bandName })}/>
+        </View>
         {band ? (
           <Content>
-            <UserSearch style={styles.userSearch} band={band}/>
             <Members style={styles.members} band={band}/>
+            <View style={styles.footer}>
+              <Button style={styles.inviteButton} onPress={() => this.invitePressed()}>Invite members</Button>
+            </View>
           </Content>
-          ) : (null)
+          ) : (
+            <View style={styles.body}/>
+          )
         }
-      </Content>
+      </Screen>
     );
   }
 }
 const styles = StyleSheet.create({
   header: {
-    height: 238,
-    backgroundColor: '#c720e7'
-  },
-  userSearch: {
-    top: 0,
-    position: 'absolute',
-    zIndex: 1
+    height: 238
   },
   members: {
+    flex: 1
+  },
+  body: {
+    flex: 1,
+    backgroundColor: colors.white
+  },
+  textHolder: {
+    borderTopRightRadius: 12,
+    borderTopLeftRadius: 12,
+    height: 60,
+    backgroundColor: colors.white,
+    borderBottomWidth: 1,
+    borderColor: colors.paleGrey,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  textInput: {
+    marginLeft: 25,
+    fontSize: 20,
+    fontFamily: 'OpenSans',
+    color: colors.black,
+    maxHeight: 35,
+    flex: 1
+  },
+  footer: {
+    height: 60
+  },
+  inviteButton: {
+    height: 60,
     flex: 1
   }
 });
 
-AddBand.propTypes = {
+Band.propTypes = {
   addBand: PropTypes.func.isRequired,
   newBand: PropTypes.func.isRequired
 };
 
 export default connect(
   state => (state.bands),
-  dispatch => bindActionCreators(Actions, dispatch))(AddBand);
+  dispatch => bindActionCreators(Actions, dispatch))(Band);
