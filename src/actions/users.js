@@ -10,6 +10,8 @@ export const fetchUsers = (dispatch, getState, userIds) => {
         dispatch({type: UPDATE_USERS, users});
         fullfill();
       });
+    } else {
+      fullfill();
     }
   });
 };

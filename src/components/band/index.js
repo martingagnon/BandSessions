@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import * as Actions from 'actions/bands';
 
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {View, Text, TextInput, Keyboard, StyleSheet} from 'react-native';
 import {Screen, Header, Content, Button, NavigationButton} from 'ui';
 import BandPicture from './components/band-picture'
 import Members from './components/members';
@@ -34,6 +34,7 @@ class Band extends Component {
 
   onAddPressed() {
     if (this.state.bandName.length > 0) {
+      Keyboard.dismiss();
       this.props.addBand(this.state.bandName);
     }
   }

@@ -1,5 +1,6 @@
 import getBandsService from 'services/firebase/bands';
 import getBandService from 'services/firebase/band';
+import getMemberService from 'services/firebase/member';
 
 export const UPDATE_BANDS = 'UPDATE_BANDS';
 export const BAND_CREATED = 'BAND_CREATED';
@@ -19,8 +20,12 @@ export const newBand = () => {
 };
 
 export const addBand = (name) => {
-  return (dispatch) => {
-    const addedBandId = getBandsService().add({name}).key;
+  return (dispatch, getState) => {
+    const addedBandId = getBandsService().add({name});
+
+    const {currentUser} = getState().currentUser;
+    getMemberService(addedBandId, currentUser.id).set({role: 'admin'});
+
     getBandService(addedBandId, (band) => dispatch(bandCreated(band))).observeOnce();
   };
 };
