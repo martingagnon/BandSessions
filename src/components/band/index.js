@@ -4,8 +4,9 @@ import {connect} from 'react-redux';
 
 import * as Actions from 'actions/bands';
 
-import {View, TextInput, StyleSheet} from 'react-native';
+import {View, Text, TextInput, StyleSheet} from 'react-native';
 import {Screen, Header, Content, Button, NavigationButton} from 'ui';
+import BandPicture from './components/band-picture'
 import Members from './components/members';
 import colors from 'components/colors';
 
@@ -49,6 +50,9 @@ class Band extends Component {
     this.props.navigation.goBack();
   }
 
+  onImage() {
+  }
+
   addButton() {
     return <NavigationButton onPress={() => this.onAddPressed()}>Create</NavigationButton>;
   }
@@ -59,6 +63,7 @@ class Band extends Component {
 
   render() {
     const {bandName, band, isCreate} = this.state;
+    const bandPicture = band ? band.picture : null
     const title = isCreate ? 'New Band' : 'Edit Band';
     const rightView = isCreate ? this.addButton() : this.deleteButton();
 
@@ -66,6 +71,8 @@ class Band extends Component {
       <Screen>
         <Header onGoBack={() => this.onGoBack()} rightView={rightView}>{title}</Header>
         <View style={styles.header}>
+          <BandPicture style={styles.picture} onPress={() => this.onImage()} picture={bandPicture}/>
+          <Text style={styles.selectText} >Tap to select picture</Text>
         </View>
         <View style={styles.textHolder}>
           <TextInput style={styles.textInput} placeholder="Band Name"
@@ -89,7 +96,8 @@ class Band extends Component {
 }
 const styles = StyleSheet.create({
   header: {
-    height: 238
+    height: 200,
+    alignItems: 'center'
   },
   members: {
     flex: 1
@@ -122,6 +130,17 @@ const styles = StyleSheet.create({
   inviteButton: {
     height: 60,
     flex: 1
+  },
+  selectText: {
+    marginTop: 8,
+    fontFamily: 'OpenSans',
+    fontStyle: 'italic',
+    fontSize: 14,
+    color: colors.white,
+    backgroundColor: colors.clear
+  },
+  picture: {
+    marginTop: 20
   }
 });
 
