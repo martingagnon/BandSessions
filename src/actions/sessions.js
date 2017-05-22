@@ -6,8 +6,10 @@ import {BOOKMARK_EMOJI} from 'constants/comment-emojis';
 
 const fs = RNFetchBlob.fs;
 const Blob = RNFetchBlob.polyfill.Blob;
+/*eslint-disable */
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 window.Blob = Blob;
+/*eslint-enable */
 
 export const SESSION_UPLOAD_UNSTARTED = 'SESSION_UPLOAD_UNSTARTED';
 export const SESSION_UPLOAD_PENDING = 'SESSION_UPLOAD_PENDING';
