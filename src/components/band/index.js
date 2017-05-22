@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+import ImagePicker from 'react-native-image-picker';
 import * as Actions from 'actions/bands';
 
 import {View, Text, TextInput, Keyboard, StyleSheet} from 'react-native';
@@ -9,6 +10,13 @@ import {Screen, Header, Content, Button, NavigationButton} from 'ui';
 import BandPicture from './components/band-picture'
 import Members from './components/members';
 import colors from 'components/colors';
+
+const ImagePickerOptions = {
+  title: 'Select Band Picture',
+  storageOptions: {
+    skipBackup: true
+  }
+};
 
 class Band extends Component {
   static navigationOptions = {
@@ -19,7 +27,10 @@ class Band extends Component {
     super(props);
     const band = props.navigation.state.params.band;
     const isCreate = !band;
-    this.state = {bandName: band ? band.name : '', band, isCreate};
+    const bandName = band ? band.name : ''
+    const bandPicture = band ? band.picture : undefined
+
+    this.state = {bandName, band, bandPicture, isCreate};
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,7 +46,7 @@ class Band extends Component {
   onAddPressed() {
     if (this.state.bandName.length > 0) {
       Keyboard.dismiss();
-      this.props.addBand(this.state.bandName);
+      this.props.addBand(this.state.bandName, this.state.bandPicture);
     }
   }
 
@@ -52,6 +63,11 @@ class Band extends Component {
   }
 
   onImage() {
+    ImagePicker.showImagePicker(ImagePickerOptions, (response) => {
+      if (!response.didCancel && !response.error) {
+        this.setState({...this.state, bandPicture: response.uri})
+      }
+    });
   }
 
   addButton() {
@@ -63,8 +79,7 @@ class Band extends Component {
   }
 
   render() {
-    const {bandName, band, isCreate} = this.state;
-    const bandPicture = band ? band.picture : null
+    const {bandName, band, bandPicture, isCreate} = this.state;
     const title = isCreate ? 'New Band' : 'Edit Band';
     const rightView = isCreate ? this.addButton() : this.deleteButton();
 
@@ -77,7 +92,7 @@ class Band extends Component {
         </View>
         <View style={styles.textHolder}>
           <TextInput style={styles.textInput} placeholder="Band Name"
-            value={this.state.bandName}
+            value={bandName}
             onChangeText={bandName => this.setState({...this.state, bandName })}/>
         </View>
         {band ? (

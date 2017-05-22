@@ -14,5 +14,5 @@ export const ref = (path) => {
 };
 
 export const storageFile = (filePath) => {
-  return firebaseApp.storage().ref().child(filePath);
+  return firebaseApp.storage().ref(filePath);
 };

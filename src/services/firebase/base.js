@@ -24,6 +24,9 @@ export const service = (serviceName, mapper, callback) => {
     observeOnce: () => {
       databaseRef.once('value', observingMethod);
     },
+    update: (object) => {
+      return databaseRef.update(object);
+    },
     set: (object) => {
       return databaseRef.set(object);
     },
