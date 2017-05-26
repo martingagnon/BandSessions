@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {View, TouchableHighlight, Text, StyleSheet} from 'react-native';
 import SvgUri from 'react-native-svg-uri';
+import {LIST_ARROW_SVG} from 'constants/assets'
 import colors from 'components/colors';
 
 import {getTimeString} from 'services/utils';
@@ -16,7 +17,7 @@ export default class ListItem extends Component {
           <View style={styles.content}>
             <Text style={styles.sessionItemText}>{this.props.item.name}</Text>
             <Text style={styles.sessionTime}>{time}</Text>
-            <SvgUri style={styles.chevron} width="9" height="17" source={require('images/list-arrow.svg')} />
+            <SvgUri style={styles.chevron} width="9" height="17" svgXmlData={LIST_ARROW_SVG} />
           </View>
           <View style={styles.separator}></View>
         </View>

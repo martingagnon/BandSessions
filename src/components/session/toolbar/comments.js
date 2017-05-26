@@ -8,6 +8,7 @@ import {BOOKMARK_EMOJI} from 'constants/comment-emojis';
 
 import {View, StyleSheet} from 'react-native';
 import {Button} from 'nachos-ui';
+import colors from 'components/colors'
 
 class Comments extends Component {
   static navigationOptions = {
@@ -29,9 +30,9 @@ class Comments extends Component {
 
     return (
       <View style={styles.footer}>
-        <View style={styles.actionButton}><Button type="naked" style={buttonStyle} iconSize={30} iconName="md-thumbs-up" onPress={() => this.addThumbs('👍')}/></View>
-        <View style={styles.actionButton}><Button type="naked" style={buttonStyle} iconSize={30} iconName="md-musical-notes" onPress={() => this.addThumbs(BOOKMARK_EMOJI)}/></View>
-        <View style={styles.actionButton}><Button type="naked" style={buttonStyle} iconSize={30} iconName="md-add-circle" onPress={() => this.props.onAddComment()}/></View>
+        <View style={styles.actionButton}><Button type="naked" style={buttonStyle} iconColor={colors.barneyTwo} iconSize={30} iconName="md-thumbs-up" onPress={() => this.addThumbs('👍')}/></View>
+        <View style={styles.actionButton}><Button type="naked" style={buttonStyle} iconColor={colors.barneyTwo} iconSize={30} iconName="md-musical-notes" onPress={() => this.addThumbs(BOOKMARK_EMOJI)}/></View>
+        <View style={styles.actionButton}><Button type="naked" style={buttonStyle} iconColor={colors.barneyTwo} iconSize={30} iconName="md-add-circle" onPress={() => this.props.onAddComment()}/></View>
       </View>
     );
   }
@@ -45,9 +46,9 @@ Comments.propTypes = {
 
 const styles = StyleSheet.create({
   footer: {
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: 20,
     marginRight: 20
   },
   actionButton: {

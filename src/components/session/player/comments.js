@@ -26,7 +26,7 @@ class Comments extends Component {
   }
 
   createCommentElement(comment) {
-    const style = {...this.positionStyle(comment), shadowOffset: {width: 1, height: -1}, shadowRadius: 4, shadowColor: '#875c8b', shadowOpacity: 0.4};
+    const style = {...this.positionStyle(comment)};
     return <Text style={style} key={comment.id}>{comment.emoji}</Text>;
   }
 

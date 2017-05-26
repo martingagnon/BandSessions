@@ -12,6 +12,7 @@ import {Screen, Header, Content, Container, Loading} from 'ui';
 import Player from './player';
 import Comments from './comments';
 import Control from './toolbar/control';
+import ControlHolder from './control-holder'
 import CommentsToolbar from './toolbar/comments';
 
 class Session extends Component {
@@ -57,10 +58,12 @@ class Session extends Component {
           <Container>
             <Content>
               <Comments session={session} />
-              <CommentsToolbar onAddComment={() => this.addComment()} session={this.state.session} />
-              <Player session={session} audioPath={audioPath}/>
+              <ControlHolder>
+                <CommentsToolbar onAddComment={() => this.addComment()} session={this.state.session} />
+                <Player session={session} audioPath={audioPath}/>
+                <Control session={this.state.session} />
+              </ControlHolder>
             </Content>
-            <Control onAddComment={() => this.addComment()} session={this.state.session} />
           </Container>
         ) : (
           <Loading progress={progress}/>

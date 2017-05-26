@@ -45,9 +45,6 @@ class Player extends Component {
 
     return (
       <View>
-        <View style={styles.time}>
-          <Text style={styles.timeValue}>{getTimeString(currentTime)}</Text><Text style={styles.timeValue}>{getTimeString(playerDuration | 0)}</Text>
-        </View>
         <Comments session={this.props.session}/>
         <Slider value={currentTime}
           minimumValue={0}
@@ -55,6 +52,9 @@ class Player extends Component {
           onValueChange={(value) => this.sliderChanged(value)}
           onSlidingComplete={(value) => this.slidingComplete(value)}
           />
+          <View style={styles.time}>
+            <Text style={styles.timeValue}>{getTimeString(currentTime)}</Text><Text style={styles.timeValue}>{getTimeString(playerDuration | 0)}</Text>
+          </View>
       </View>
     );
   }
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   timeValue: {
     fontFamily: 'OpenSans',
     fontSize: 15,
-    color: colors.white
+    color: colors.barney
   }
 });
 

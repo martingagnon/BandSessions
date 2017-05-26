@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import * as PlayerActions from 'actions/player';
 import * as CommentsActions from 'actions/comments';
 
-import {BOOKMARK_EMOJI} from 'constants/comment-emojis';
 import PlayerStates from 'constants/player-states';
 
 import {View, StyleSheet} from 'react-native';
@@ -65,15 +64,14 @@ class Control extends Component {
     const playIconName = this.nextActionIsPlay() ? 'md-play' : 'md-pause';
 
     const buttonStyle = {height: 50, width: 75};
-    const commentButtonStyle = {height: 50, width: 160};
     const {previousComment, nextComment} = this.state;
 
     return (
       <View style={styles.footer}>
         <View style={styles.playHolder}>
-          <View style={styles.playerButton}><Button style={buttonStyle} type="naked" iconName="md-skip-backward" onPress={() => this.onPreviousComment()} disabled={!previousComment}/></View>
-          <View style={styles.playerButton}><Button style={buttonStyle} type="naked" iconName={playIconName} iconColor={colors.white} iconSize={50} onPress={() => this.togglePlayPause()}/></View>
-          <View style={styles.playerButton}><Button style={buttonStyle} type="naked" iconName="md-skip-forward" onPress={() => this.onNextComment()} disabled={!nextComment}/></View>
+          <View style={styles.playerButton}><Button style={buttonStyle} type="naked" iconColor={colors.barney} iconName="md-skip-backward" onPress={() => this.onPreviousComment()} disabled={!previousComment}/></View>
+          <View style={styles.playerButton}><Button style={buttonStyle} type="naked" iconColor={colors.barney} iconName={playIconName} iconSize={50} onPress={() => this.togglePlayPause()}/></View>
+          <View style={styles.playerButton}><Button style={buttonStyle} type="naked" iconColor={colors.barney} iconName="md-skip-forward" onPress={() => this.onNextComment()} disabled={!nextComment}/></View>
         </View>
       </View>
     );
@@ -89,7 +87,8 @@ Control.propTypes = {
 const styles = StyleSheet.create({
   footer: {
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: 10
   },
   playHolder: {
     flexDirection: 'row',
