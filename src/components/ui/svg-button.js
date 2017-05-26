@@ -11,7 +11,7 @@ export default class Row extends Component {
     return (
       <TouchableHighlight underlayColor={colors.clear} onPress={() => onPress()} style={this.props.style}>
         <View>
-          <SvgUri height={height.toString()} width={width.toString()} source={svg} />
+          <SvgUri height={height.toString()} width={width.toString()} svgXmlData={svg} />
         </View>
       </TouchableHighlight>
     );

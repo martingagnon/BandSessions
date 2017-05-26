@@ -2,17 +2,18 @@ import React, {Component} from 'react';
 
 import {View, Text, StyleSheet} from 'react-native';
 import {SVGButton} from 'ui';
+import {ICON_BACK_SVG, ICON_CLOSE_SVG} from 'constants/assets';
 import colors from 'components/colors';
 
 const BUTTON_SIZE = 18;
 
 export default class Header extends Component {
   renderGoBack() {
-    return <SVGButton height={BUTTON_SIZE} width={BUTTON_SIZE} svg={require('images/icn-back.svg')} onPress={this.props.onGoBack}/>;
+    return <SVGButton height={BUTTON_SIZE} width={BUTTON_SIZE} svg={ICON_BACK_SVG} onPress={this.props.onGoBack}/>;
   }
 
   renderClose() {
-    return <SVGButton style={styles.closeButton} height={BUTTON_SIZE} width={BUTTON_SIZE} svg={require('images/icn-close.svg')} onPress={this.props.onClose}/>;
+    return <SVGButton style={styles.closeButton} height={BUTTON_SIZE} width={BUTTON_SIZE} svg={ICON_CLOSE_SVG} onPress={this.props.onClose}/>;
   }
 
   render() {

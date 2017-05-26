@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 import {View, StyleSheet} from 'react-native';
 import Splash from 'ui/splash';
-import {Center} from 'ui';
 import * as CurrentUserActions from 'actions/current-user';
 
 import {LoginButton} from 'react-native-fbsdk';

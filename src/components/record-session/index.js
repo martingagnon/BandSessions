@@ -10,7 +10,7 @@ import KeepAwake from 'react-native-keep-awake';
 
 import {Text, View, StyleSheet} from 'react-native';
 import {Screen, Header, Center, SVGButton, Button} from 'ui';
-
+import {RECORD_BUTTON_SVG} from 'constants/assets';
 import colors from 'components/colors';
 
 import {getTimeString} from 'services/utils';
@@ -74,9 +74,9 @@ class RecordSession extends Component {
         <Center>
           <Text style={styles.timer}>{timeString}</Text>
           <View style={styles.controls}>
-            <SVGButton height={52} width={52} svg={require('images/btn-record-svg.svg')} onPress={() => this.deletePressed()}/>
-            <SVGButton height={100} width={100} svg={require('images/btn-record-svg.svg')} onPress={() => this.recordPressed()}/>
-            <SVGButton height={52} width={52} svg={require('images/btn-record-svg.svg')} onPress={() => this.bookmarkPressed()}/>
+            <SVGButton height={52} width={52} svg={RECORD_BUTTON_SVG} onPress={() => this.deletePressed()}/>
+            <SVGButton height={100} width={100} svg={RECORD_BUTTON_SVG} onPress={() => this.recordPressed()}/>
+            <SVGButton height={52} width={52} svg={RECORD_BUTTON_SVG} onPress={() => this.bookmarkPressed()}/>
           </View>
         </Center>
         <View style={styles.footer}>
