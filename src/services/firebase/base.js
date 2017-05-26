@@ -11,6 +11,12 @@ export const service = (serviceName, mapper, callback) => {
     callback(items);
   };
 
+  const singleObservingMethod = (child) => {
+    const items = [];
+    items.push(mapper(child));
+    callback(items);
+  };
+
   return {
     add: (object) => {
       return databaseRef.push(object).key;
@@ -20,9 +26,10 @@ export const service = (serviceName, mapper, callback) => {
     },
     stopObserving: () => {
       databaseRef.off('value', observingMethod);
+      databaseRef.off('value', singleObservingMethod);
     },
     observeOnce: () => {
-      databaseRef.once('value', observingMethod);
+      databaseRef.once('value', singleObservingMethod);
     },
     update: (object) => {
       return databaseRef.update(object);

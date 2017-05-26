@@ -5,7 +5,6 @@ import SvgUri from 'react-native-svg-uri';
 import colors from 'components/colors';
 
 export default class Row extends Component {
-
   render() {
     const {height, width, svg, onPress} = this.props;
 

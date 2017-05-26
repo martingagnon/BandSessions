@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import ImagePicker from 'react-native-image-picker';
 import * as Actions from 'actions/bands';
+import * as BandActions from 'actions/band';
 
 import {View, Text, TextInput, Keyboard, StyleSheet} from 'react-native';
 import {Screen, Header, Content, Button, NavigationButton} from 'ui';
@@ -51,7 +52,8 @@ class Band extends Component {
   }
 
   onDeletePressed() {
-    // Todo
+    this.props.deleteBand(this.state.band);
+    this.props.navigation.goBack();
   }
 
   invitePressed() {
@@ -59,6 +61,10 @@ class Band extends Component {
   }
 
   onGoBack() {
+    if (this.state.bandName !== this.state.band.name) {
+      this.props.updateBandName(this.state.band, this.state.bandName);
+    }
+
     this.props.navigation.goBack();
   }
 
@@ -66,6 +72,9 @@ class Band extends Component {
     ImagePicker.showImagePicker(ImagePickerOptions, (response) => {
       if (!response.didCancel && !response.error) {
         this.setState({...this.state, bandPicture: response.uri})
+        if (!this.state.isCreate) {
+          this.props.updateBandImage(this.state.band, response.uri);
+        }
       }
     });
   }
@@ -161,10 +170,13 @@ const styles = StyleSheet.create({
 });
 
 Band.propTypes = {
+  updateBandImage: PropTypes.func.isRequired,
+  updateBandName: PropTypes.func.isRequired,
+  deleteBand: PropTypes.func.isRequired,
   addBand: PropTypes.func.isRequired,
   newBand: PropTypes.func.isRequired
 };
 
 export default connect(
   state => (state.bands),
-  dispatch => bindActionCreators(Actions, dispatch))(Band);
+  dispatch => bindActionCreators(Object.assign(Actions, BandActions), dispatch))(Band);

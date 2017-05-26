@@ -21,10 +21,12 @@ export default class Screen extends Component {
 
     return (
       <View style={styles.screen} onLayout={(event) => this.onLayout(event)}>
-        <Image source={require('images/bkg-blurred.png')}
-          style={imageStyle} resizeMode="cover">
-          {this.props.children}
-        </Image>
+        {dimensions ? (
+          <Image source={require('images/bkg-blurred.png')}
+            style={imageStyle} resizeMode="cover">
+            {this.props.children}
+          </Image>
+        ) : (null)}
       </View>
     );
   }
