@@ -61,7 +61,7 @@ class Band extends Component {
   }
 
   onGoBack() {
-    if (this.state.bandName !== this.state.band.name) {
+    if (this.state.band && this.state.bandName !== this.state.band.name) {
       this.props.updateBandName(this.state.band, this.state.bandName);
     }
 
@@ -119,6 +119,7 @@ class Band extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   header: {
     height: 200,
