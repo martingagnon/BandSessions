@@ -11,5 +11,6 @@ export default {
   warmGrey: '#9b9b9b',
   paleGrey: '#f2f3f5',
   barneyTwo: '#9e1db9',
-  barney: '#9f1cb9'
+  barney: '#9f1cb9',
+  helitrope: '#df44ff'
 };

@@ -9,7 +9,7 @@ export default class RecordButton extends Component {
       <View style={this.props.style}>
         <TouchableHighlight underlayColor={colors.clear} onPress={() => this.props.onPress(this.props.item)}>
           <Image style={styles.button}
-            source={require('images/btn-record.png')}
+            source={require('images/btn-record-floating.png')}
           />
         </TouchableHighlight>
       </View>

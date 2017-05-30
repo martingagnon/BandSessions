@@ -2,9 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+import * as CurrentUserActions from 'actions/current-user';
+
 import {View, StyleSheet} from 'react-native';
 import Splash from 'ui/splash';
-import * as CurrentUserActions from 'actions/current-user';
+import Header from './header';
 
 import {LoginButton} from 'react-native-fbsdk';
 
@@ -21,16 +23,19 @@ class Login extends Component {
     return (
       <Splash>
         <View style={styles.screen}>
-          <LoginButton readPermissions={['email']}
-            style={styles.login}
-            onLoginFinished={
-              (error, result) => {
-                if (!error && !result.isCancelled) {
-                  this.doLoggedIn();
+          <Header/>
+          <View style={styles.loginHolder}>
+            <LoginButton readPermissions={['email']}
+              style={styles.login}
+              onLoginFinished={
+                (error, result) => {
+                  if (!error && !result.isCancelled) {
+                    this.doLoggedIn();
+                  }
                 }
-              }
-            }></LoginButton>
+              }></LoginButton>
           </View>
+        </View>
       </Splash>
     );
   }
@@ -44,8 +49,10 @@ Login.propTypes = {
 export const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  loginHolder: {
+    flexDirection: 'row'
   },
   login: {
     flex: 1,

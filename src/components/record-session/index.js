@@ -9,8 +9,8 @@ import {AudioUtils} from 'react-native-audio';
 import KeepAwake from 'react-native-keep-awake';
 
 import {Text, View, StyleSheet} from 'react-native';
-import {Screen, Header, Center, SVGButton, Button} from 'ui';
-import {RECORD_BUTTON_SVG} from 'constants/assets';
+import {Screen, Header, Center, SVGButton, Button, ImageButton} from 'ui';
+import {RECORD_BUTTON_SVG, TRASH_BUTTON_SVG, MARKER_BUTTON_SVG, PAUSE_BUTTON_SVG} from 'constants/assets';
 import colors from 'components/colors';
 
 import {getTimeString} from 'services/utils';
@@ -67,6 +67,7 @@ class RecordSession extends Component {
     const {recordingState, time} = this.props;
     const timeString = getTimeString(time);
     const showSaveButton = !(time === 0 || recordingState !== playerStates.paused);
+    const mainButtonSVG = recordingState === playerStates.recording ? require('images/btn-pause.png') : require('images/btn-record.png');
 
     return (
       <Screen>
@@ -74,9 +75,9 @@ class RecordSession extends Component {
         <Center>
           <Text style={styles.timer}>{timeString}</Text>
           <View style={styles.controls}>
-            <SVGButton height={52} width={52} svg={RECORD_BUTTON_SVG} onPress={() => this.deletePressed()}/>
-            <SVGButton height={100} width={100} svg={RECORD_BUTTON_SVG} onPress={() => this.recordPressed()}/>
-            <SVGButton height={52} width={52} svg={RECORD_BUTTON_SVG} onPress={() => this.bookmarkPressed()}/>
+            <ImageButton image={require('images/btn-trash.png')} onPress={() => this.deletePressed()}/>
+            <ImageButton image={mainButtonSVG} onPress={() => this.recordPressed()}/>
+            <ImageButton image={require('images/btn-marker.png')} onPress={() => this.bookmarkPressed()}/>
           </View>
         </Center>
         <View style={styles.footer}>

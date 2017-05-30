@@ -24,6 +24,7 @@ class AppWithNavigationState extends Component {
   }
 
   componentWillMount() {
+    StatusBar.setBarStyle('light-content', true);
     this.validateAccessToken();
   }
 
@@ -35,7 +36,6 @@ class AppWithNavigationState extends Component {
   appNavigator() {
     return (
       <View style={{flex: 1, backgroundColor: 'transparent'}}>
-        <StatusBar barStyle="light-content"/>
         <AppNavigator
           navigation={addNavigationHelpers({
             dispatch: this.props.dispatch,
