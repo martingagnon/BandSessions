@@ -20,11 +20,6 @@ export default class RecordButton extends Component {
 export const styles = StyleSheet.create({
   button: {
     height: 54,
-    width: 54,
-    shadowOffset: {width: 1, height: -1},
-    shadowRadius: 10,
-    shadowColor: colors.shadow,
-    shadowOpacity: 0.9,
-    borderRadius: 27
+    width: 54
   }
 });
