@@ -1,7 +1,6 @@
 package com.bandsessions;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
