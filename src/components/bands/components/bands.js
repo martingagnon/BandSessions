@@ -8,7 +8,7 @@ import * as BandsActions from 'actions/bands';
 import * as BandActions from 'actions/band';
 import {addItem} from './add-band-item';
 
-import {ListView, StyleSheet} from 'react-native';
+import {ListView, View, Image, StyleSheet} from 'react-native';
 import BandItem from './band-item';
 import AddBandItem from './add-band-item';
 
@@ -52,7 +52,12 @@ class Bands extends Component {
   render() {
     const dataSource = this.state.dataSource.cloneWithRows(this.props.bands.concat(addItem));
     return (
-      <ListView style={styles.bandList} horizontal={true} dataSource={dataSource} enableEmptySections={true} renderRow={(item) => this.renderItem(item)} />
+      <View>
+        <ListView style={styles.bandList} horizontal={true} dataSource={dataSource} enableEmptySections={true} renderRow={(item) => this.renderItem(item)} />
+        <View style={styles.separator}>
+          <Image style={styles.line} source={require('images/img-separator-baked.png')} />
+        </View>
+      </View>
     );
   }
 }
@@ -66,7 +71,15 @@ Bands.propTypes = {
 
 const styles = StyleSheet.create({
   bandList: {
-    height: 70
+    height: 100
+  },
+  separator: {
+    flexDirection: 'row'
+  },
+  line: {
+    marginLeft: 5,
+    marginRight: 5,
+    flex: 1
   }
 });
 
