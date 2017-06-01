@@ -14,10 +14,6 @@ import colors from 'components/colors';
 const LOADING_STATES = [TransferStates.pending, TransferStates.completed];
 
 class AddSession extends Component {
-  static navigationOptions = {
-    title: 'Save Session'
-  };
-
   constructor(props) {
     super(props);
     const {filePath, bandId, duration, bookmarks} = props.navigation.state.params;

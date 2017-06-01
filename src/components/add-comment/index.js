@@ -10,10 +10,6 @@ import {Button, Screen, Header} from 'ui';
 import colors from 'components/colors';
 
 class AddComment extends Component {
-  static navigationOptions = {
-    title: 'Add comment'
-  };
-
   constructor(props) {
     super(props);
     this.state = {session: props.navigation.state.params.session, currentTime: this.props.player.currentTime, comment: '', emotion: 0};

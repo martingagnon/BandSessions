@@ -17,15 +17,16 @@ export default class NavigationButton extends Component {
 export const styles = StyleSheet.create({
   actionButton: {
     height: 30,
-    width: 110,
+    width: 80,
     borderRadius: 100,
     backgroundColor: colors.barneyTwo,
     justifyContent: 'center',
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    marginTop: -4
   },
   actionButtonText: {
     alignSelf: 'center',
-    fontSize: 17,
+    fontSize: 13,
     fontFamily: 'OpenSans',
     fontWeight: 'bold',
     color: colors.white

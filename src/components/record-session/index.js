@@ -9,17 +9,12 @@ import {AudioUtils} from 'react-native-audio';
 import KeepAwake from 'react-native-keep-awake';
 
 import {Text, View, StyleSheet} from 'react-native';
-import {Screen, Header, Center, SVGButton, Button, ImageButton} from 'ui';
-import {RECORD_BUTTON_SVG, TRASH_BUTTON_SVG, MARKER_BUTTON_SVG, PAUSE_BUTTON_SVG} from 'constants/assets';
+import {Screen, Header, Center, Button, ImageButton} from 'ui';
 import colors from 'components/colors';
 
 import {getTimeString} from 'services/utils';
 
 class RecordSession extends Component {
-  static navigationOptions = {
-    title: 'Record'
-  };
-
   constructor(props) {
     super(props);
     this.state = {

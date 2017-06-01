@@ -16,10 +16,6 @@ import ControlHolder from './control-holder'
 import CommentsToolbar from './toolbar/comments';
 
 class Session extends Component {
-  static navigationOptions = {
-    title: ({ state }) => state.params.session.name.toString()
-  };
-
   constructor(props) {
     super(props);
 

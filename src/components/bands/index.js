@@ -54,7 +54,7 @@ class Bands extends Component {
           <Content>
             <View style={styles.members}>
               <Members band={band}/>
-              <BandSettings onPress={() => this.onBandSetting(band)}/>
+              <BandSettings style={styles.bandSettings} onPress={() => this.onBandSetting(band)}/>
             </View>
             <Sessions style={styles.sessions} band={band} onPress={(session) => this.onSessionSelected(session)}/>
             <Record style={styles.record} onPress={() => this.onRecordPressed()}/>
@@ -84,6 +84,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     right: 20
+  },
+  bandSettings: {
+    marginRight: 10
   }
 });
 

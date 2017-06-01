@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import {View, TouchableHighlight, Text, Image, StyleSheet} from 'react-native';
-import {DEFAULT_BAND_PICTURE} from 'constants/bands'
 
 import colors from 'components/colors.js';
 
@@ -9,14 +8,14 @@ export default class ListItem extends Component {
   render() {
     const selected = this.props.selected;
     const {band} = this.props;
-    const imageUri = band.picture ? band.picture : DEFAULT_BAND_PICTURE;
+    const imageUri = band.picture ? {uri: band.picture} : require('images/icn-band-placeholder-baked.png');
 
     return (
       <TouchableHighlight onPress={() => this.props.onPress(band)} underlayColor={colors.clear}>
         <View style={styles.bandItem}>
           <Image
             style={selected ? styles.selectedBandImage : styles.bandImage }
-            source={{uri: imageUri}}
+            source={imageUri}
           />
           <Text style={ selected ? styles.selectedBandItemText : styles.bandItemText}>
             {band.name}

@@ -28,8 +28,8 @@ class Band extends Component {
     super(props);
     const band = props.navigation.state.params.band;
     const isCreate = !band;
-    const bandName = band ? band.name : ''
-    const bandPicture = band ? band.picture : undefined
+    const bandName = band ? band.name : '';
+    const bandPicture = band ? band.picture : undefined;
 
     this.state = {bandName, band, bandPicture, isCreate};
   }
@@ -71,7 +71,7 @@ class Band extends Component {
   onImage() {
     ImagePicker.showImagePicker(ImagePickerOptions, (response) => {
       if (!response.didCancel && !response.error) {
-        this.setState({...this.state, bandPicture: response.uri})
+        this.setState({...this.state, bandPicture: response.uri});
         if (!this.state.isCreate) {
           this.props.updateBandImage(this.state.band, response.uri);
         }

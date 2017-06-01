@@ -15,10 +15,6 @@ import colors from 'components/colors';
 const SECONDS_COMMENT = 5;
 
 class Control extends Component {
-  static navigationOptions = {
-    title: ({ state }) => state.params.session.name.toString()
-  };
-
   constructor(props) {
     super(props);
     this.state = {};
